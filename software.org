@@ -1,0 +1,824 @@
+#+LANGUAGE: english
+#+PROPERTY: header-args :exports code :tangle software.sh
+#+STARTUP:  showeverything
+
+* List of GNU/Linux software
+** System
+*** ack
+#+begin_src sh
+#!/bin/bash
+sudo pacman -S ack
+#+end_src
+*** Archiving and compression
+#+begin_src sh
+sudo pacman -S arj
+sudo pacman -S bzip2
+sudo pacman -S cpio
+sudo pacman -S gzip
+sudo pacman -S lhasa
+sudo pacman -S lrzip
+sudo pacman -S lz4
+sudo pacman -S lzip
+sudo pacman -S lzop
+sudo pacman -S p7zip
+sudo pacman -S tar
+sudo pacman -S unace
+sudo pacman -S unarj
+sudo pacman -S unrar
+sudo pacman -S unzip
+sudo pacman -S xarchiver
+sudo pacman -S xz
+sudo pacman -S zip
+sudo pacman -S zlib
+sudo pacman -S zstd
+#+end_src
+*** asciiquarium
+#+begin_src sh
+sudo pacman -S asciiquarium
+#+end_src
+*** [[https://www.bleachbit.org/][BleachBit]]
+#+begin_src sh
+sudo pacman -S bleachbit
+#+end_src
+*** [[http://www.asty.org/cmatrix/][CMatrix]]
+#+begin_src sh
+sudo pacman -S cmatrix
+#+end_src
+*** [[https://github.com/sharkdp/fd][fd]]
+#+begin_src sh
+sudo pacman -S fd
+#+end_src
+*** [[https://github.com/adrianlopezroche/fdupes][fdupes]]
+#+begin_src sh
+sudo pacman -S fdupes
+#+end_src
+*** [[https://www.gnu.org/software/findutils/][Findutils]]
+#+begin_src sh
+sudo pacman -S findutils
+#+end_src
+*** [[https://www.gnu.org/software/gawk/][Gawk]]
+#+begin_src sh
+sudo pacman -S gawk
+#+end_src
+*** [[https://github.com/nicolargo/glances][Glances]]
+#+begin_src sh
+sudo pacman -S glances
+#+end_src
+*** [[https://www.gnu.org/software/coreutils/][GNU core utilities]]
+#+begin_src sh
+sudo pacman -S coreutils
+#+end_src
+*** [[https://www.gnu.org/software/diffutils][GNU Diffutils]]
+#+begin_src sh
+sudo pacman -S diffutils
+#+end_src
+*** [[https://www.gnu.org/software/grep/][GNU Grep]]
+#+begin_src sh
+sudo pacman -S grep
+#+end_src
+*** [[https://www.gnupg.org/][GnuPG]]
+#+begin_src sh
+sudo pacman -S gnupg
+#+end_src
+*** [[https://www.gnu.org/software/sed/][GNU sed]]
+#+begin_src sh
+sudo pacman -S sed
+#+end_src
+*** [[https://gparted.org/][GParted]]
+#+begin_src sh
+sudo pacman -S gparted
+#+end_src
+*** [[https://hisham.hm/htop/][htop]]
+#+begin_src sh
+sudo pacman -S htop
+sudo pacman -S lsof
+#+end_src
+*** Language checking
+**** [[http://aspell.net/][GNU Aspell]]
+#+begin_src sh
+sudo pacman -S aspell
+sudo pacman -S aspell-en
+sudo pacman -S aspell-ru
+#+end_src
+**** [[https://hunspell.github.io/][Hunspell]]
+#+begin_src sh
+sudo pacman -S hunspell
+sudo pacman -S hunspell-en_GB
+sudo pacman -S hunspell-en_US
+yay         -S hunspell-ru
+#+end_src
+**** [[https://www.gnu.org/software/ispell/][Ispell]]
+#+begin_src sh
+sudo pacman -S ispell
+#+end_src
+*** [[http://www.greenwoodsoftware.com/less][less]]
+#+begin_src sh
+sudo pacman -S less
+#+end_src
+*** [[https://www.nongnu.org/man-db/][man-db]]
+#+begin_src sh
+sudo pacman -S man-db
+sudo pacman -S man-pages
+#+end_src
+*** [[https://midnight-commander.org/][Midnight Commander]]
+#+begin_src sh
+sudo pacman -S mc
+#+end_src
+*** [[https://github.com/dylanaraps/neofetch][Neofetch]]
+#+begin_src sh
+sudo pacman -S catimg
+sudo pacman -S chafa
+sudo pacman -S neofetch
+#+end_src
+*** pv
+#+begin_src sh
+sudo pacman -S pv
+#+end_src
+*** [[https://www.qemu.org/][QEMU]]
+#+begin_src sh
+sudo pacman -S bridge-utils
+sudo pacman -S dmidecode
+sudo pacman -S dnsmasq
+sudo pacman -S ebtables
+sudo pacman -S edk2-ovmf
+sudo pacman -S iptables
+sudo pacman -S libvirt
+sudo pacman -S libvirt-storage-gluster
+sudo pacman -S libvirt-storage-iscsi-direct
+sudo pacman -S libvirt-storage-rbd
+sudo pacman -S lvm2
+sudo pacman -S open-iscsi
+sudo pacman -S openbsd-netcat
+sudo pacman -S qemu
+sudo pacman -S qemu-arch-extra
+sudo pacman -S qemu-block-gluster
+sudo pacman -S qemu-block-iscsi
+sudo pacman -S qemu-block-rbd
+sudo pacman -S qemu-guest-agent
+sudo pacman -S radvd
+sudo pacman -S samba
+sudo pacman -S vde2
+sudo pacman -S virt-manager
+sudo pacman -S virt-viewer
+#+end_src
+*** [[https://ranger.github.io/][ranger]]
+#+begin_src sh
+sudo pacman -S atool
+sudo pacman -S ffmpegthumbnailer
+sudo pacman -S highlight
+sudo pacman -S imlib2
+sudo pacman -S ranger
+sudo pacman -S ueberzug
+sudo pacman -S w3m
+
+if [ ! -d $HOME/.config/ranger/ ]; then
+  ranger --copy-config=all
+fi
+#+end_src
+*** [[http://jonls.dk/redshift/][Redshift]]
+#+begin_src sh
+sudo pacman -S geoclue
+sudo pacman -S redshift
+#+end_src
+*** [[https://github.com/BurntSushi/ripgrep][ripgrep]]
+#+begin_src sh
+sudo pacman -S ripgrep
+#+end_src
+*** [[https://rsync.samba.org/][rsync]]
+#+begin_src sh
+sudo pacman -S rsync
+#+end_src
+*** [[https://www.thregr.org/~wavexx/software/screenkey/][screenkey]]
+#+begin_src sh
+sudo pacman -S screenkey
+#+end_src
+*** sl
+#+begin_src sh
+sudo pacman -S sl
+#+end_src
+*** [[http://sebastien.godard.pagesperso-orange.fr/][sysstat]]
+#+begin_src sh
+sudo pacman -S sysstat
+#+end_src
+*** [[https://github.com/teejee2008/timeshift][Timeshift]]
+#+begin_src sh
+sudo pacman -S cronie
+yay         -S timeshift
+#+end_src
+*** [[https://github.com/raylee/tldr-sh-client][tldr-sh]]
+#+begin_src sh
+yay -S tldr-sh
+#+end_src
+*** tree
+#+begin_src sh
+sudo pacman -S tree
+#+end_src
+** DB
+*** [[https://www.postgresql.org/][PostgreSQL]]
+#+begin_src sh
+sudo pacman -S postgresql
+#+end_src
+**** [[https://www.pgadmin.org/][pgAdmin]]
+#+begin_src sh
+sudo pacman -S pgadmin4
+#+end_src
+*** [[https://www.sqlite.org/][SQLite]]
+#+begin_src sh
+sudo pacman -S sqlite
+#+end_src
+** Programming
+*** [[https://think-async.com/Asio/][Asio C++ Library]]
+#+begin_src sh
+sudo pacman -S asio
+#+end_src
+*** [[https://www.gnu.org/software/autoconf/][Autoconf]]
+#+begin_src sh
+sudo pacman -S autoconf
+#+end_src
+*** [[https://www.gnu.org/software/automake/][Automake]]
+#+begin_src sh
+sudo pacman -S automake
+#+end_src
+*** [[https://github.com/iovisor][bcc and bpf]]
+#+begin_src sh
+sudo pacman -S bcc
+sudo pacman -S bcc-tools
+sudo pacman -S bpf
+sudo pacman -S bpftrace
+sudo pacman -S python-bcc
+#+end_src
+*** [[https://www.openblas.net/][BLAS]]
+#+begin_src sh
+sudo pacman -S blas
+sudo pacman -S cblas
+#+end_src
+*** [[https://www.boost.org/][Boost]]
+#+begin_src sh
+sudo pacman -S boost
+#+end_src
+*** [[https://ccache.dev/][ccache]]
+#+begin_src sh
+sudo pacman -S ccache
+#+end_src
+*** [[https://heasarc.gsfc.nasa.gov/fitsio/][CFITSIO]]
+#+begin_src sh
+sudo pacman -S ccfits
+sudo pacman -S cfitsio
+#+end_src
+*** [[http://cimg.eu/][CImg]]
+#+begin_src sh
+sudo pacman -S cimg
+#+end_src
+*** [[https://www.cmake.org/][CMake]]
+#+begin_src sh
+sudo pacman -S cmake
+#+end_src
+*** Compiler construction tools
+#+begin_src sh
+sudo pacman -S bison
+sudo pacman -S byacc
+sudo pacman -S flex
+#+end_src
+*** [[https://ctags.io/][Ctags]]
+#+begin_src sh
+sudo pacman -S ctags
+#+end_src
+*** [[https://www.doxygen.nl/index.html][Doxygen]]
+#+begin_src sh
+sudo pacman -S doxygen
+#+end_src
+*** [[https://eigen.tuxfamily.org][Eigen]]
+#+begin_src sh
+sudo pacman -S eigen
+#+end_src
+*** [[https://sourceware.org/elfutils/][ELFUTILS]]
+#+begin_src sh
+sudo pacman -S elfutils
+#+end_src
+*** [[http://www.fftw.org/][FFTW]]
+#+begin_src sh
+sudo pacman -S fftw
+#+end_src
+*** [[https://fmt.dev/latest/index.html][{fmt}]]
+#+begin_src sh
+sudo pacman -S fmt
+#+end_src
+*** [[http://www.freepascal.org/][FPC]] and [[https://www.lazarus-ide.org/][Lazarus]]
+#+begin_src sh
+sudo pacman -S fpc
+sudo pacman -S fpc-src
+sudo pacman -S lazarus
+sudo pacman -S lazarus-gtk2
+#+end_src
+*** [[https://gcc.gnu.org][GCC]]
+#+begin_src sh
+sudo pacman -S gcc
+sudo pacman -S gcc-fortran
+#+end_src
+**** [[https://www.gnu.org/software/gdb/][GDB]]
+#+begin_src sh
+sudo pacman -S gdb
+#+end_src
+**** [[https://www.gnu.org/software/binutils/][GNU Binutils]]
+#+begin_src sh
+sudo pacman -S binutils
+#+end_src
+**** [[https://www.gnu.org/software/make][GNU Make]]
+#+begin_src sh
+sudo pacman -S make
+#+end_src
+*** [[https://www.gnu.org/software/global/][GNU GLOBAL]]
+#+begin_src sh
+sudo pacman -S global
+#+end_src
+*** [[https://www.gnu.org/software/time/][GNU Time]]
+#+begin_src sh
+sudo pacman -S time
+#+end_src
+*** [[https://github.com/google/googletest][GoogleTest]]
+#+begin_src sh
+sudo pacman -S gmock
+sudo pacman -S gtest
+#+end_src
+*** [[https://github.com/gperftools/gperftools][gperftools]]
+#+begin_src sh
+sudo pacman -S gperftools
+#+end_src
+*** [[https://www.graphviz.org/][Graphviz]]
+#+begin_src sh
+sudo pacman -S graphviz
+#+end_src
+*** [[https://grpc.io/][gRPC]]
+#+begin_src sh
+sudo pacman -S grpc
+#+end_src
+*** [[https://www.hdfgroup.org/hdf5][HDF5]]
+#+begin_src sh
+sudo pacman -S hdf5
+#+end_src
+*** Image Libraries
+#+begin_src sh
+sudo pacman -S djvulibre
+sudo pacman -S libheif
+sudo pacman -S libjpeg-turbo
+sudo pacman -S libpng
+sudo pacman -S libraw
+sudo pacman -S librsvg
+sudo pacman -S libtiff
+sudo pacman -S libtiff4
+sudo pacman -S libwebp
+sudo pacman -S libwmf
+sudo pacman -S openexr
+sudo pacman -S openjpeg2
+#+end_src
+*** [[https://github.com/nlohmann/json][JSON]]
+#+begin_src sh
+sudo pacman -S nlohmann-json
+#+end_src
+*** [[https://github.com/open-source-parsers/jsoncpp][JsonCpp]]
+#+begin_src sh
+sudo pacman -S jsoncpp
+#+end_src
+*** [[https://www.netlib.org/lapack][LAPACK]]
+#+begin_src sh
+sudo pacman -S lapack
+sudo pacman -S lapacke
+#+end_src
+*** [[http://pqxx.org/development/libpqxx/][libpqxx]]
+#+begin_src sh
+sudo pacman -S libpqxx
+#+end_src
+*** [[https://github.com/libuv/libuv][libuv]]
+#+begin_src sh
+sudo pacman -S libuv
+#+end_src
+*** LISP
+**** [[https://cisco.github.io/ChezScheme/][Chez Scheme]]
+#+begin_src sh
+yay -S chez-scheme
+#+end_src
+**** [[https://racket-lang.org/][DrRacket]]
+#+begin_src sh
+sudo pacman -S racket
+#+end_src
+**** [[http://www.sbcl.org/][SBCL]]
+#+begin_src sh
+sudo pacman -S sbcl
+#+end_src
+*** [[https://llvm.org/][LLVM]]
+#+begin_src sh
+sudo pacman -S llvm
+#+end_src
+**** [[https://clang.llvm.org/][Clang]]
+#+begin_src sh
+sudo pacman -S clang
+#+end_src
+**** [[https://lldb.llvm.org/][LLDB]]
+#+begin_src sh
+sudo pacman -S lldb
+#+end_src
+**** [[https://openmp.llvm.org/][OpenMP]]
+#+begin_src sh
+sudo pacman -S openmp
+#+end_src
+**** [[https://polly.llvm.org/][Polly]]
+#+begin_src sh
+sudo pacman -S polly
+#+end_src
+*** [[https://www.ltrace.org/][ltrace]]
+#+begin_src sh
+sudo pacman -S ltrace
+#+end_src
+*** [[https://www.nasm.us/][NASM]]
+#+begin_src sh
+sudo pacman -S nasm
+#+end_src
+*** [[https://invisible-island.net/ncurses/ncurses.html][Ncurses]]
+#+begin_src sh
+sudo pacman -S ncurses
+#+end_src
+*** [[https://www.unidata.ucar.edu/software/netcdf/][NetCDF]]
+#+begin_src sh
+sudo pacman -S netcdf
+sudo pacman -S netcdf-cxx
+sudo pacman -S netcdf-fortran
+#+end_src
+*** [[https://ninja-build.org/][Ninja]]
+#+begin_src sh
+sudo pacman -S ninja
+#+end_src
+*** [[https://nlopt.readthedocs.io/en/latest/][NLopt]]
+#+begin_src sh
+sudo pacman -S nlopt
+#+end_src
+*** [[https://opencv.org/][OpenCV]]
+#+begin_src sh
+sudo pacman -S opencv
+sudo pacman -S opencv-samples
+#+end_src
+*** OpenGL
+#+begin_src sh
+sudo pacman -S freeglut
+sudo pacman -S glew
+sudo pacman -S glfw-x11
+sudo pacman -S glm
+sudo pacman -S glu
+sudo pacman -S libx11
+sudo pacman -S libxext
+sudo pacman -S libxft
+sudo pacman -S libxmu
+sudo pacman -S libxpm
+sudo pacman -S mesa
+sudo pacman -S ogre
+sudo pacman -S opencsg
+sudo pacman -S virtualgl
+#+end_src
+*** [[https://openjdk.java.net/][OpenJDK]]
+#+begin_src sh
+sudo pacman -S jdk-openjdk
+sudo pacman -S jre-openjdk
+sudo pacman -S jre-openjdk-headless
+sudo pacman -S openjdk-doc
+sudo pacman -S openjdk-src
+#+end_src
+*** [[https://www.open-mpi.org][OpenMPI]]
+#+begin_src sh
+sudo pacman -S openmpi
+#+end_src
+*** [[http://openocd.org/][OpenOCD]]
+#+begin_src sh
+sudo pacman -S openocd
+#+end_src
+*** [[https://www.kernel.org/][perf]]
+#+begin_src sh
+sudo pacman -S perf
+#+end_src
+*** [[https://www.perl.org/][Perl]]
+#+begin_src sh
+sudo pacman -S perl
+sudo pacman -S perl-tidy
+#+end_src
+*** [[https://www.python.org/][Python]]
+#+begin_src sh
+sudo pacman -S python
+sudo pacman -S python-virtualenv
+#+end_src
+*** [[https://radare.org][radare2]]
+#+begin_src sh
+sudo pacman -S r2ghidra-dec
+sudo pacman -S radare2
+#+end_src
+*** [[https://rr-project.org/][rr]]
+#+begin_src sh
+yay -S rr
+#+end_src
+*** [[https://www.libsdl.org/][SDL2]]
+#+begin_src sh
+sudo pacman -S sdl2
+sudo pacman -S sdl2_gfx
+sudo pacman -S sdl2_image
+sudo pacman -S sdl2_mixer
+sudo pacman -S sdl2_net
+sudo pacman -S sdl2_ttf
+#+end_src
+*** [[https://www.sfml-dev.org/index.php][SFML]]
+#+begin_src sh
+sudo pacman -S sfml
+#+end_src
+*** [[https://www.shellcheck.net][ShellCheck]]
+#+begin_src sh
+sudo pacman -S shellcheck
+#+end_src
+*** [[https://strace.io/][strace]]
+#+begin_src sh
+sudo pacman -S strace
+#+end_src
+*** [[http://www.swig.org/][SWIG]]
+#+begin_src sh
+sudo pacman -S swig
+#+end_src
+*** [[https://www.tcl.tk/][Tcl/Tk]]
+#+begin_src sh
+sudo pacman -S tcl
+sudo pacman -S tk
+#+end_src
+*** [[http://valgrind.org/][Valgrind]]
+#+begin_src sh
+sudo pacman -S valgrind
+#+end_src
+*** [[https://github.com/VcDevel/Vc][vc]]
+#+begin_src sh
+sudo pacman -S vc
+#+end_src
+*** XML
+#+begin_src sh
+sudo pacman -S expat
+sudo pacman -S libxml++
+sudo pacman -S libxml2
+sudo pacman -S xerces-c
+#+end_src
+*** [[https://zealdocs.org/][Zeal]]
+#+begin_src sh
+yay -S zeal
+#+end_src
+** Science
+*** [[https://www.gnu.org/software/bc/][GNU bc]]
+#+begin_src sh
+sudo pacman -S bc
+#+end_src
+*** [[http://www.gnuplot.info][Gnuplot]]
+#+begin_src sh
+sudo pacman -S gnuplot
+#+end_src
+*** [[https://directory.fsf.org/wiki/Plotutils][GNU Plotutils]]
+#+begin_src sh
+sudo pacman -S plotutils
+#+end_src
+*** [[https://www.gnu.org/software/gsl/gsl.html][GSL]]
+#+begin_src sh
+sudo pacman -S gsl
+#+end_src
+*** [[http://maxima.sourceforge.net][Maxima]]
+#+begin_src sh
+sudo pacman -S maxima
+sudo pacman -S wxmaxima
+#+end_src
+*** [[https://github.com/tesseract-ocr/tesseract][Tesseract]]
+#+begin_src sh
+sudo pacman -S tesseract
+sudo pacman -S tesseract-data-eng
+sudo pacman -S tesseract-data-rus
+#+end_src
+** Office
+*** [[https://wiki.gnome.org/Apps/Evince][Evince]]
+#+begin_src sh
+sudo pacman -S evince
+#+end_src
+*** [[https://feh.finalrewind.org/][feh]]
+#+begin_src sh
+sudo pacman -S feh
+#+end_src
+*** [[https://johnfactotum.github.io/foliate/][Foliate]]
+#+begin_src sh
+sudo pacman -S foliate
+#+end_src
+*** [[https://www.ghostscript.com/][Ghostscript]]
+#+begin_src sh
+sudo pacman -S ghostscript
+#+end_src
+*** [[https://www.imagemagick.org/][ImageMagick]]
+#+begin_src sh
+sudo pacman -S imagemagick
+sudo pacman -S imagemagick-doc
+#+end_src
+*** [[https://keepassxc.org/][KeePassXC]]
+#+begin_src sh
+sudo pacman -S keepassxc
+#+end_src
+*** [[https://www.libreoffice.org/][LibreOffice]]
+#+begin_src sh
+sudo pacman -S libreoffice-still
+sudo pacman -S libreoffice-still-en-gb
+sudo pacman -S libreoffice-still-ru
+#+end_src
+*** [[https://www.lyx.org/][LyX]]
+#+begin_src sh
+sudo pacman -S lyx
+#+end_src
+*** Mozilla Firefox
+#+begin_src sh
+sudo pacman -S firefox
+sudo pacman -S firefox-i18n-en-us
+sudo pacman -S firefox-i18n-ru
+#+end_src
+*** [[http://pdfgrep.sourceforge.net/][pdfgrep]]
+#+begin_src sh
+sudo pacman -S pdfgrep
+#+end_src
+*** [[https://www.tug.org/texlive/][TeX Live]]
+#+begin_src sh
+sudo pacman -S biber
+sudo pacman -S texlive-bin
+sudo pacman -S texlive-core
+sudo pacman -S texlive-lang
+sudo pacman -S texlive-langextra
+sudo pacman -S texlive-most
+#+end_src
+*** [[https://www.mozilla.org/thunderbird/][Thunderbird]]
+#+begin_src sh
+sudo pacman -S thunderbird
+sudo pacman -S thunderbird-i18n-en-gb
+sudo pacman -S thunderbird-i18n-en-us
+sudo pacman -S thunderbird-i18n-ru
+#+end_src
+*** [[https://github.com/xournalpp/xournalpp][Xournal++]]
+#+begin_src sh
+sudo pacman -S xournalpp
+#+end_src
+** Design
+*** [[http://www.blender.org][Blender]]
+#+begin_src sh
+sudo pacman -S blender
+#+end_src
+*** [[https://www.gimp.org/][GIMP]]
+#+begin_src sh
+sudo pacman -S gimp
+sudo pacman -S gimp-help-en
+sudo pacman -S gimp-help-ru
+#+end_src
+*** [[https://inkscape.org/][Inkscape]]
+#+begin_src sh
+sudo pacman -S inkscape
+#+end_src
+*** [[https://www.rawtherapee.com/][RawTherapee]]
+#+begin_src sh
+sudo pacman -S rawtherapee
+#+end_src
+** Multimedia
+*** [[https://www.audacityteam.org/][Audacity]]
+#+begin_src sh
+sudo pacman -S audacity
+#+end_src
+*** [[https://cmus.github.io/][cmus]]
+#+begin_src sh
+sudo pacman -S cmus
+#+end_src
+*** [[http://fy.chalmers.se/~appro/linux/DVD+RW/][dvd+rw-tools]]
+#+begin_src sh
+sudo pacman -S dvd+rw-tools
+#+end_src
+*** [[https://wiki.gnome.org/Apps/EasyTAG][EasyTAG]]
+#+begin_src sh
+sudo pacman -S easytag
+#+end_src
+*** [[https://ffmpeg.org/][FFmpeg]]
+#+begin_src sh
+sudo pacman -S ffmpeg
+#+end_src
+*** [[http://www.mplayerhq.hu/design7/news.html][MPlayer]]
+#+begin_src sh
+sudo pacman -S mplayer
+#+end_src
+*** [[https://mpv.io/][mpv]]
+#+begin_src sh
+sudo pacman -S mpv
+#+end_src
+*** [[https://obsproject.com][OBS Studio]]
+#+begin_src sh
+sudo pacman -S obs-studio
+#+end_src
+*** [[https://soundconverter.org/][SoundConverter]]
+#+begin_src sh
+sudo pacman -S soundconverter
+#+end_src
+*** [[https://ytdl-org.github.io/youtube-dl/][youtube-dl]]
+#+begin_src sh
+sudo pacman -S youtube-dl
+#+end_src
+** Web
+*** [[https://www.gnutls.org/][GnuTLS]]
+#+begin_src sh
+sudo pacman -S gnutls
+#+end_src
+*** [[https://github.com/vanhauser-thc/thc-hydra][hydra]]
+#+begin_src sh
+sudo pacman -S hydra
+#+end_src
+*** [[http://www.skbuff.net/iputils/][iputils]]
+#+begin_src sh
+sudo pacman -S iputils
+#+end_src
+*** [[http://atterer.org/jigdo/][jigdo]]
+#+begin_src sh
+yay -S jigdo
+#+end_src
+*** [[https://www.openwall.com/john/][John the Ripper]] and [[https://hashcat.net/hashcat/][hashcat]]
+#+begin_src sh
+sudo pacman -S hashcat
+sudo pacman -S hashcat-utils
+sudo pacman -S hcxkeys
+sudo pacman -S hcxtools
+sudo pacman -S john
+#+end_src
+*** [[https://nmap.org/][Nmap]]
+#+begin_src sh
+sudo pacman -S nmap
+#+end_src
+*** [[https://www.openssh.com/portable.html][OpenSSH]]
+#+begin_src sh
+sudo pacman -S openssh
+#+end_src
+*** [[https://www.openssl.org][OpenSSL]]
+#+begin_src sh
+sudo pacman -S openssl
+#+end_src
+*** [[https://openvpn.net/index.php/open-source.html][OpenVPN]]
+#+begin_src sh
+sudo pacman -S openvpn
+#+end_src
+*** [[https://www.remmina.org/][Remmina]]
+#+begin_src sh
+sudo pacman -S freerdp
+sudo pacman -S libsecret
+sudo pacman -S libvncserver
+sudo pacman -S libxkbfile
+sudo pacman -S nxproxy
+sudo pacman -S remmina
+sudo pacman -S telepathy-glib
+sudo pacman -S xorg-server-xephyr
+#+end_src
+*** [[https://www.spice-space.org/][SPICE]]
+#+begin_src sh
+sudo pacman -S spice
+sudo pacman -S spice-gtk
+#+end_src
+*** [[https://www.tcpdump.org/index.html][tcpdump]]
+#+begin_src sh
+sudo pacman -S tcpdump
+#+end_src
+*** [[https://desktop.telegram.org/][Telegram Desktop]]
+#+begin_src sh
+sudo pacman -S telegram-desktop
+#+end_src
+*** [[http://www.transmissionbt.com/][Transmission]]
+#+begin_src sh
+sudo pacman -S transmission-cli
+sudo pacman -S transmission-gtk
+#+end_src
+*** [[https://www.wireshark.org/][Wireshark]]
+#+begin_src sh
+sudo pacman -S wireshark-cli
+sudo pacman -S wireshark-qt
+#+end_src
+** Games
+*** [[https://www.openttd.org][OpenTTD]]
+#+begin_src sh
+sudo pacman -S openttd
+sudo pacman -S openttd-opengfx
+sudo pacman -S openttd-opensfx
+#+end_src
+*** [[http://www.wesnoth.org/][The Battle for Wesnoth]]
+#+begin_src sh
+sudo pacman -S wesnoth
+#+end_src
+
+* Clean
+#+begin_src sh
+sudo paccache  -rk1
+sudo pacman    -Rns $(pacman -Qtdq)
+sudo pacman    -Sc
+sudo pacman    -Syu
+yay -Yc && yay -Sc && yay -Syu
+sudo updatedb && yay -Ps
+#+end_src
+
+* Enable normal user account to use KVM
+#+begin_src sh
+sudo systemctl enable libvirtd.service
+sudo systemctl start  libvirtd.service
+echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
+echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
+sudo usermod -aG libvirt $(whoami)
+newgrp libvirt
+sudo systemctl restart libvirtd.service
+#+end_src

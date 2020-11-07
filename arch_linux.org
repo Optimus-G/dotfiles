@@ -1,0 +1,485 @@
+#+TITLE: Arch Linux
+
+#+LANGUAGE: english
+#+PROPERTY: header-args :exports code
+#+STARTUP:  showeverything
+
+* Installation Guide
+** Verify the boot mode
+#+begin_src sh :tangle no
+ls /sys/firmware/efi/efivars
+#+end_src
+** Connect to the internet
+#+begin_src sh :tangle no
+ping -c 5 archlinux.org
+#+end_src
+** Update the system clock
+#+begin_src sh :tangle no
+timedatectl set-ntp true
+#+end_src
+** Partition the disks
+#+begin_src sh :tangle no
+fdisk
+mkfs.ext4
+mkfs.fat -F32
+mkswap
+mount
+swapon
+#+end_src
+** Install essential packages
+#+begin_src sh :tangle no
+pacstrap /mnt amd-ucode
+pacstrap /mnt base
+pacstrap /mnt base-devel
+pacstrap /mnt linux-firmware
+pacstrap /mnt linux-lts
+pacstrap /mnt linux-lts-docs
+pacstrap /mnt linux-lts-headers
+pacstrap /mnt linux-tools
+pacstrap /mnt r8168-lts
+
+pacstrap /mnt git
+pacstrap /mnt subversion
+#+end_src
+** Fstab
+#+begin_src sh :tangle no
+genfstab -U /mnt >> /mnt/etc/fstab
+#+end_src
+** Chroot
+#+begin_src sh :tangle no
+arch-chroot /mnt
+git clone https://github.com/karlkorp/dotfiles.git /tmp/dotfiles
+#+end_src
+** Time zone
+#+begin_src sh :tangle pre_installation.sh
+#!/bin/bash
+echo "HOST NAME:"
+read -r hostname
+
+echo "USER NAME:"
+read -r username
+
+if [ -z "$hostname" ] || [ -z "$username" ]; then
+  echo "ERROR!" && return
+fi
+
+ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc
+#+end_src
+** Localization
+#+begin_src sh :tangle pre_installation.sh
+echo "en_US ISO-8859-1"  >> /etc/locale.gen
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "KEYMAP=us"         >> /etc/vconsole.conf
+echo "FONT=cyr-sun16"    >> /etc/vconsole.conf
+echo "LANG=ru_RU.UTF-8"  >> /etc/locale.conf
+#+end_src
+** Network configuration
+#+begin_src sh :tangle pre_installation.sh
+echo "$hostname"                                 >> /etc/hostname
+echo "127.0.0.1 localhost"                       >> /etc/hosts
+echo "::1       localhost"                       >> /etc/hosts
+echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
+#+end_src
+** Initramfs
+#+begin_src sh :tangle pre_installation.sh
+mkinitcpio -P
+#+end_src
+** Root password
+#+begin_src sh :tangle pre_installation.sh
+echo "SET THE ROOT PASSWORD"
+passwd
+#+end_src
+** New user
+#+begin_src sh :tangle pre_installation.sh
+echo "NEW USER: $username"
+useradd -m -s /bin/bash "$username"
+usermod -aG audio,disk,kvm,lp,optical,scanner,storage,video,wheel "$username"
+passwd "$username"
+pacman -S sudo
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+#+end_src
+** Core
+#+begin_src sh :tangle pre_installation.sh
+pacman -S acpi
+pacman -S acpid
+pacman -S avahi
+pacman -S bash-completion
+pacman -S btrfs-progs
+pacman -S dbus
+pacman -S dhcpcd
+pacman -S dialog
+pacman -S dosfstools
+pacman -S efibootmgr
+pacman -S exfat-utils
+pacman -S f2fs-tools
+pacman -S gpart
+pacman -S grub
+pacman -S inetutils
+pacman -S iproute2
+pacman -S iw
+pacman -S iwd
+pacman -S jfsutils
+pacman -S mkinitcpio
+pacman -S mlocate
+pacman -S mtools
+pacman -S nano
+pacman -S netctl openresolv
+pacman -S network-manager-applet
+pacman -S network-manager-sstp
+pacman -S networkmanager
+pacman -S networkmanager-openvpn
+pacman -S networkmanager-pptp
+pacman -S networkmanager-vpnc
+pacman -S nfs-utils
+pacman -S nilfs-utils
+pacman -S ntfs-3g
+pacman -S ntp
+pacman -S os-prober
+pacman -S pacman-contrib
+pacman -S parted
+pacman -S plocate
+pacman -S polkit
+pacman -S reiserfsprogs
+pacman -S rp-pppoe
+pacman -S udftools
+pacman -S util-linux
+pacman -S which
+pacman -S wireless_tools
+pacman -S wpa_supplicant
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
+grub-mkconfig -o /boot/grub/grub.cfg
+
+exit
+#+end_src
+** End of installation
+#+begin_src sh :tangle no
+umount -l /mnt
+reboot
+#+end_src
+** Network manager
+#+begin_src sh :tangle no
+# if Wi-Fi: nmtui
+sudo systemctl start  NetworkManager
+sudo systemctl enable NetworkManager
+
+sudo systemctl start  dhcpcd.service
+sudo systemctl enable dhcpcd.service
+
+ping -c 5 archlinux.org
+git clone https://github.com/karlkorp/dotfiles.git $HOME/dotfiles
+#+end_src
+** Yay
+#+begin_src sh :tangle post_installation.sh
+#!/bin/bash
+echo "SYSTEM TYPE: main/test"
+read -r system_type
+if [ -z "$system_type" ] || [ "$system_type" != "main" ]; then
+  system_type="test"
+fi
+echo "SYSTEM TYPE: $system_type"
+
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd .. && rm -rf yay/
+#+end_src
+** [[https://github.com/redhat-performance/tuned][Tuned]]
+#+begin_src sh :tangle post_installation.sh
+yay -S tuned
+sudo systemctl start  tuned
+sudo systemctl enable tuned
+if [ "$system_type" = "test" ]; then
+  tuned-adm profile virtual-guest # for QEMU/KVM
+else
+  tuned-adm profile desktop
+fi
+#+end_src
+** Fonts
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S adobe-source-code-pro-fonts
+sudo pacman -S adobe-source-sans-pro-fonts
+sudo pacman -S adobe-source-serif-pro-fonts
+sudo pacman -S cantarell-fonts
+sudo pacman -S freetype2
+sudo pacman -S gnu-free-fonts
+sudo pacman -S noto-fonts
+sudo pacman -S noto-fonts-extra
+sudo pacman -S pango
+sudo pacman -S ttf-anonymous-pro
+sudo pacman -S ttf-carlito
+sudo pacman -S ttf-dejavu
+sudo pacman -S ttf-droid
+sudo pacman -S ttf-fira-code
+sudo pacman -S ttf-font-awesome
+sudo pacman -S ttf-jetbrains-mono
+sudo pacman -S ttf-liberation
+sudo pacman -S ttf-linux-libertine
+sudo pacman -S ttf-opensans
+sudo pacman -S ttf-roboto
+sudo pacman -S ttf-roboto-mono
+#+end_src
+** Drivers
+*** [[http://www.bluez.org/][BlueZ]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S bluez
+sudo pacman -S bluez-utils
+#+end_src
+*** [[https://www.cups.org/][CUPS]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S bluez-cups
+sudo pacman -S cups
+sudo pacman -S cups-pdf
+sudo systemctl start  org.cups.cupsd.service
+sudo systemctl enable org.cups.cupsd.service
+#+end_src
+*** Graphics driver [NVIDIA]
+#+begin_src sh :tangle post_installation.sh
+if [ "$system_type" = "test" ]; then
+  sudo pacman -S xf86-video-fbdev # for QEMU/KVM
+else
+  sudo pacman -S nvidia-lts
+  sudo pacman -S nvidia-utils
+  sudo pacman -S opencl-nvidia
+  sudo pacman -S xf86-video-nouveau
+fi
+#+end_src
+*** [[https://wiki.gnome.org/Projects/gvfs][GVfs]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S gvfs
+sudo pacman -S gvfs-afc
+sudo pacman -S gvfs-goa
+sudo pacman -S gvfs-google
+sudo pacman -S gvfs-gphoto2
+sudo pacman -S gvfs-mtp
+sudo pacman -S gvfs-nfs
+sudo pacman -S gvfs-smb
+#+end_src
+*** [[https://jackaudio.org/][JACK]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S jack
+#+end_src
+*** [[https://www.khronos.org/opencl/][OpenCL]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S ocl-icd
+sudo pacman -S opencl-clhpp
+sudo pacman -S opencl-headers
+sudo pacman -S opencl-mesa
+#+end_src
+** [[https://www.x.org/wiki/][X Window System]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S xf86-input-synaptics
+sudo pacman -S xorg
+sudo pacman -S xorg-docs
+sudo pacman -S xorg-fonts-cyrillic
+sudo pacman -S xorg-server
+sudo pacman -S xorg-setxkbmap
+sudo pacman -S xorg-xdm
+sudo pacman -S xorg-xinit
+sudo pacman -S xorg-xmodmap
+sudo pacman -S xorg-xrandr
+#+end_src
+** [[https://www.xfce.org/][Xfce]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S catfish
+sudo pacman -S scrot
+sudo pacman -S xcursor-simpleandsoft
+sudo pacman -S xcursor-themes
+sudo pacman -S xfce4
+sudo pacman -S xfce4-goodies
+yay         -S mugshot
+#+end_src
+** [[https://github.com/canonical/lightdm][LightDM]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S lightdm
+sudo pacman -S lightdm-gtk-greeter
+sudo pacman -S lightdm-gtk-greeter-settings
+sudo pacman -S numlockx
+echo "greeter-setup-script=/usr/bin/numlockx on" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo systemctl enable lightdm.service
+#+end_src
+** xdg
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S xdg-user-dirs
+sudo pacman -S xdg-utils
+xdg-user-dirs-update
+#+end_src
+** Themes
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S adapta-gtk-theme
+sudo pacman -S adwaita-icon-theme
+sudo pacman -S arc-gtk-theme
+sudo pacman -S arc-icon-theme
+sudo pacman -S arc-solid-gtk-theme
+sudo pacman -S archlinux-wallpaper
+sudo pacman -S materia-gtk-theme
+sudo pacman -S papirus-icon-theme
+sudo pacman -S xscreensaver
+yay         -S ocs-url
+#+end_src
+** [[https://github.com/tmux/tmux/wiki][tmux]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S tmux
+#+end_src
+** [[https://www.gnu.org/software/emacs/][GNU Emacs]] and [[https://www.vim.org/][Vim]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S ecb
+sudo pacman -S emacs
+sudo pacman -S vim
+sudo pacman -S vim-spell-en
+sudo pacman -S vim-spell-ru
+#+end_src
+** [[https://sourceforge.net/projects/qt5ct/][qt5ct]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S qt5-base
+sudo pacman -S qt5ct
+yay         -S qt5-styleplugins
+echo "export QT_QPA_PLATFORMTHEME=qt5ct"    >> $HOME/.profile
+echo "export QT_AUTO_SCREEN_SCALE_FACTOR=0" >> $HOME/.profile
+#+end_src
+** Audio and video codecs
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S a52dec
+sudo pacman -S celt
+sudo pacman -S faac
+sudo pacman -S faad2
+sudo pacman -S flac
+sudo pacman -S jasper
+sudo pacman -S lame
+sudo pacman -S libao
+sudo pacman -S libdca
+sudo pacman -S libdv
+sudo pacman -S libmad
+sudo pacman -S libmp4v2
+sudo pacman -S libmpcdec
+sudo pacman -S libmpeg2
+sudo pacman -S libogg
+sudo pacman -S libtheora
+sudo pacman -S libvorbis
+sudo pacman -S libxv
+sudo pacman -S opencore-amr
+sudo pacman -S opus
+sudo pacman -S schroedinger
+sudo pacman -S speex
+sudo pacman -S wavpack
+sudo pacman -S x264
+sudo pacman -S xvidcore
+#+end_src
+** [[https://alsa-project.org/wiki/Main_Page][ALSA]] and [[https://www.freedesktop.org/wiki/Software/PulseAudio/][PulseAudio]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S alsa-lib
+sudo pacman -S alsa-plugins
+sudo pacman -S alsa-utils
+sudo pacman -S pavucontrol
+sudo pacman -S pulseaudio
+sudo pacman -S pulseaudio-alsa
+sudo pacman -S pulseaudio-bluetooth
+sudo pacman -S pulseaudio-equalizer
+sudo pacman -S pulseaudio-jack
+#+end_src
+** [[https://gstreamer.freedesktop.org/][GStreamer]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S gst-editing-services
+sudo pacman -S gst-libav
+sudo pacman -S gst-plugin-gtk
+sudo pacman -S gst-plugin-opencv
+sudo pacman -S gst-plugin-qmlgl
+sudo pacman -S gst-plugins-bad
+sudo pacman -S gst-plugins-bad-libs
+sudo pacman -S gst-plugins-base
+sudo pacman -S gst-plugins-base-libs
+sudo pacman -S gst-plugins-espeak
+sudo pacman -S gst-plugins-good
+sudo pacman -S gst-plugins-ugly
+sudo pacman -S gstreamer
+sudo pacman -S gstreamermm
+#+end_src
+** Sound theme
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S libcanberra
+sudo pacman -S libcanberra-gstreamer
+sudo pacman -S libcanberra-pulse
+sudo pacman -S sound-theme-freedesktop
+yay         -S sound-theme-smooth
+#+end_src
+** [[https://curl.haxx.se][curl]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S curl
+#+end_src
+** [[https://www.gnu.org/software/wget/wget.html][GNU Wget]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S wget
+#+end_src
+** Keyboard
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S xsel
+sudo pacman -S xclip
+localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
+#+end_src
+** .xinitrc
+#+begin_src sh :tangle post_installation.sh
+echo "xrdb -merge .Xresources" >> $HOME/.xinitrc
+echo "exec         startxfce4" >> $HOME/.xinitrc
+#+end_src
+** .Xresources
+#+begin_src sh :tangle post_installation.sh
+echo "Xft.antialias: true"       >> $HOME/.Xresources
+echo "Xft.autohint:  false"      >> $HOME/.Xresources
+echo "Xft.dpi:       96"         >> $HOME/.Xresources
+echo "Xft.hinting:   true"       >> $HOME/.Xresources
+echo "Xft.hintstyle: hintslight" >> $HOME/.Xresources
+echo "Xft.lcdfilter: lcddefault" >> $HOME/.Xresources
+echo "Xft.rgba:      rgb"        >> $HOME/.Xresources
+#+end_src
+** .inputrc
+#+begin_src sh :tangle post_installation.sh
+echo "\$include /etc/inputrc"                     >> $HOME/.inputrc
+echo "set bell-style                        none" >> $HOME/.inputrc
+echo "set bind-tty-special-chars              on" >> $HOME/.inputrc
+echo "set blink-matching-paren                on" >> $HOME/.inputrc
+echo "set colored-stats                       on" >> $HOME/.inputrc
+echo "set completion-ignore-case              on" >> $HOME/.inputrc
+echo "set completion-prefix-display-length     5" >> $HOME/.inputrc
+echo "set completion-query-items              10" >> $HOME/.inputrc
+echo "set echo-control-characters            off" >> $HOME/.inputrc
+echo "set editing-mode                     emacs" >> $HOME/.inputrc
+echo "set horizontal-scroll-mode              on" >> $HOME/.inputrc
+echo "set mark-directories                    on" >> $HOME/.inputrc
+echo "set mark-modified-lines                 on" >> $HOME/.inputrc
+echo "set mark-symlinked-directories          on" >> $HOME/.inputrc
+echo "set match-hidden-files                  on" >> $HOME/.inputrc
+echo "set show-all-if-ambiguous               on" >> $HOME/.inputrc
+echo "set show-all-if-unmodified              on" >> $HOME/.inputrc
+echo "set visible-stats                       on" >> $HOME/.inputrc
+#+end_src
+** Configure
+#+begin_src sh :tangle post_installation.sh
+git config --global user.name  "karlkorp"
+git config --global user.email "lispgod@gmail.com"
+
+mkdir -p $HOME/.icons
+mkdir -p $HOME/.themes
+
+cp $HOME/dotfiles/.bashrc    $HOME
+cp $HOME/dotfiles/.emacs     $HOME
+cp $HOME/dotfiles/.tmux.conf $HOME
+cp $HOME/dotfiles/.vimrc     $HOME
+
+sudo systemctl enable fstrim.timer
+
+if [ -d /data ]; then
+  sudo chown "$USER":"$USER" /data
+
+  mkdir -p /data/projects
+  mkdir -p /data/qemu
+  mkdir -p /data/torrents
+fi
+
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+reboot
+#+end_src
