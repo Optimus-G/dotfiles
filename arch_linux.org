@@ -209,18 +209,20 @@ sudo pacman -S gnu-free-fonts
 sudo pacman -S noto-fonts
 sudo pacman -S noto-fonts-extra
 sudo pacman -S pango
+sudo pacman -S terminus-font
 sudo pacman -S ttf-anonymous-pro
 sudo pacman -S ttf-carlito
 sudo pacman -S ttf-dejavu
 sudo pacman -S ttf-droid
+sudo pacman -S ttf-fantasque-sans-mono
 sudo pacman -S ttf-fira-code
 sudo pacman -S ttf-font-awesome
 sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
 sudo pacman -S ttf-opensans
-sudo pacman -S ttf-roboto
-sudo pacman -S ttf-roboto-mono
+sudo pacman -S woff-fira-code
+sudo pacman -S woff2-fira-code
 #+end_src
 ** Drivers
 *** [[http://www.bluez.org/][BlueZ]]
