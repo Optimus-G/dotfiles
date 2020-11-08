@@ -47,11 +47,16 @@ sudo pacman -S woff-fira-code
 sudo pacman -S woff2-fira-code
 
 sudo pacman -S bluez
+sudo pacman -S bluez-cups
 sudo pacman -S bluez-utils
 
-sudo pacman -S bluez-cups
 sudo pacman -S cups
 sudo pacman -S cups-pdf
+sudo pacman -S cups-pk-helper
+sudo pacman -S foomatic-db-gutenprint-ppds
+sudo pacman -S gutenprint
+sudo pacman -S simple-scan
+sudo pacman -S system-config-printer
 sudo systemctl start  org.cups.cupsd.service
 sudo systemctl enable org.cups.cupsd.service
 
