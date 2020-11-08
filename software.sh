@@ -23,6 +23,7 @@ sudo pacman -S zlib
 sudo pacman -S zstd
 
 sudo pacman -S asciiquarium
+sudo pacman -S sl
 
 sudo pacman -S bleachbit
 
@@ -119,15 +120,12 @@ sudo pacman -S redshift
 
 sudo pacman -S ripgrep
 
-sudo pacman -S rsync
-
 sudo pacman -S screenkey
-
-sudo pacman -S sl
 
 sudo pacman -S sysstat
 
 sudo pacman -S cronie
+sudo pacman -S rsync
 yay         -S timeshift
 
 yay -S tldr-sh
@@ -179,6 +177,8 @@ sudo pacman -S eigen
 sudo pacman -S elfutils
 
 sudo pacman -S fftw
+
+sudo pacman -S fltk
 
 sudo pacman -S fmt
 
@@ -332,6 +332,8 @@ sudo pacman -S expat
 sudo pacman -S libxml++
 sudo pacman -S libxml2
 sudo pacman -S xerces-c
+
+sudo pacman -S z3
 
 yay -S zeal
 

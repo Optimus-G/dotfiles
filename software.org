@@ -32,9 +32,10 @@ sudo pacman -S zip
 sudo pacman -S zlib
 sudo pacman -S zstd
 #+end_src
-*** asciiquarium
+*** asciiquarium and sl
 #+begin_src sh
 sudo pacman -S asciiquarium
+sudo pacman -S sl
 #+end_src
 *** [[https://www.bleachbit.org/][BleachBit]]
 #+begin_src sh
@@ -184,25 +185,18 @@ sudo pacman -S redshift
 #+begin_src sh
 sudo pacman -S ripgrep
 #+end_src
-*** [[https://rsync.samba.org/][rsync]]
-#+begin_src sh
-sudo pacman -S rsync
-#+end_src
 *** [[https://www.thregr.org/~wavexx/software/screenkey/][screenkey]]
 #+begin_src sh
 sudo pacman -S screenkey
-#+end_src
-*** sl
-#+begin_src sh
-sudo pacman -S sl
 #+end_src
 *** [[http://sebastien.godard.pagesperso-orange.fr/][sysstat]]
 #+begin_src sh
 sudo pacman -S sysstat
 #+end_src
-*** [[https://github.com/teejee2008/timeshift][Timeshift]]
+*** [[https://github.com/teejee2008/timeshift][Timeshift]] and [[https://rsync.samba.org/][rsync]]
 #+begin_src sh
 sudo pacman -S cronie
+sudo pacman -S rsync
 yay         -S timeshift
 #+end_src
 *** [[https://github.com/raylee/tldr-sh-client][tldr-sh]]
@@ -298,6 +292,10 @@ sudo pacman -S elfutils
 *** [[http://www.fftw.org/][FFTW]]
 #+begin_src sh
 sudo pacman -S fftw
+#+end_src
+*** [[https://www.fltk.org/index.php][FLTK]]
+#+begin_src sh
+sudo pacman -S fltk
 #+end_src
 *** [[https://fmt.dev/latest/index.html][{fmt}]]
 #+begin_src sh
@@ -556,6 +554,10 @@ sudo pacman -S expat
 sudo pacman -S libxml++
 sudo pacman -S libxml2
 sudo pacman -S xerces-c
+#+end_src
+*** [[https://github.com/Z3Prover/z3][Z3]]
+#+begin_src sh
+sudo pacman -S z3
 #+end_src
 *** [[https://zealdocs.org/][Zeal]]
 #+begin_src sh
