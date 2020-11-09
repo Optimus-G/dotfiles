@@ -6,6 +6,7 @@ sudo pacman -S bzip2
 sudo pacman -S cpio
 sudo pacman -S gzip
 sudo pacman -S lhasa
+sudo pacman -S libarchive
 sudo pacman -S lrzip
 sudo pacman -S lz4
 sudo pacman -S lzip
@@ -103,18 +104,6 @@ sudo pacman -S vde2
 sudo pacman -S virt-manager
 sudo pacman -S virt-viewer
 
-sudo pacman -S atool
-sudo pacman -S ffmpegthumbnailer
-sudo pacman -S highlight
-sudo pacman -S imlib2
-sudo pacman -S ranger
-sudo pacman -S ueberzug
-sudo pacman -S w3m
-
-if [ ! -d $HOME/.config/ranger/ ]; then
-  ranger --copy-config=all
-fi
-
 sudo pacman -S geoclue
 sudo pacman -S redshift
 
@@ -150,9 +139,6 @@ sudo pacman -S bpf
 sudo pacman -S bpftrace
 sudo pacman -S python-bcc
 
-sudo pacman -S blas
-sudo pacman -S cblas
-
 sudo pacman -S boost
 
 sudo pacman -S ccache
@@ -171,14 +157,13 @@ sudo pacman -S flex
 sudo pacman -S ctags
 
 sudo pacman -S doxygen
+sudo pacman -S doxygen-docs
 
 sudo pacman -S eigen
 
 sudo pacman -S elfutils
 
 sudo pacman -S fftw
-
-sudo pacman -S fltk
 
 sudo pacman -S fmt
 
@@ -196,6 +181,8 @@ sudo pacman -S binutils
 
 sudo pacman -S make
 
+sudo pacman -S jemalloc
+
 sudo pacman -S global
 
 sudo pacman -S time
@@ -207,8 +194,6 @@ sudo pacman -S gperftools
 
 sudo pacman -S graphviz
 
-sudo pacman -S grpc
-
 sudo pacman -S hdf5
 
 sudo pacman -S djvulibre
@@ -219,16 +204,23 @@ sudo pacman -S libraw
 sudo pacman -S librsvg
 sudo pacman -S libtiff
 sudo pacman -S libtiff4
+sudo pacman -S libvips
 sudo pacman -S libwebp
 sudo pacman -S libwmf
 sudo pacman -S openexr
+sudo pacman -S openimagedenoise
+sudo pacman -S openimageio
 sudo pacman -S openjpeg2
 
 sudo pacman -S nlohmann-json
 
 sudo pacman -S jsoncpp
+sudo pacman -S jsoncpp-doc
 
+sudo pacman -S blas
+sudo pacman -S cblas
 sudo pacman -S lapack
+sudo pacman -S lapack-doc
 sudo pacman -S lapacke
 
 sudo pacman -S libpqxx
@@ -251,8 +243,6 @@ sudo pacman -S openmp
 
 sudo pacman -S polly
 
-sudo pacman -S ltrace
-
 sudo pacman -S nasm
 
 sudo pacman -S ncurses
@@ -263,10 +253,9 @@ sudo pacman -S netcdf-fortran
 
 sudo pacman -S ninja
 
-sudo pacman -S nlopt
-
 sudo pacman -S opencv
 sudo pacman -S opencv-samples
+sudo pacman -S vtk
 
 sudo pacman -S freeglut
 sudo pacman -S glew
@@ -280,7 +269,6 @@ sudo pacman -S libxmu
 sudo pacman -S libxpm
 sudo pacman -S mesa
 sudo pacman -S ogre
-sudo pacman -S opencsg
 sudo pacman -S virtualgl
 
 sudo pacman -S jdk-openjdk
@@ -295,10 +283,8 @@ sudo pacman -S openocd
 
 sudo pacman -S perf
 
-sudo pacman -S perl
-sudo pacman -S perl-tidy
-
 sudo pacman -S python
+sudo pacman -S python-docs
 sudo pacman -S python-virtualenv
 
 sudo pacman -S r2ghidra-dec
@@ -313,6 +299,7 @@ sudo pacman -S sdl2_mixer
 sudo pacman -S sdl2_net
 sudo pacman -S sdl2_ttf
 
+sudo pacman -S csfml
 sudo pacman -S sfml
 
 sudo pacman -S shellcheck
@@ -330,7 +317,9 @@ sudo pacman -S vc
 
 sudo pacman -S expat
 sudo pacman -S libxml++
+sudo pacman -S libxml++-docs
 sudo pacman -S libxml2
+sudo pacman -S pugixml
 sudo pacman -S xerces-c
 
 sudo pacman -S z3
@@ -340,8 +329,6 @@ yay -S zeal
 sudo pacman -S bc
 
 sudo pacman -S gnuplot
-
-sudo pacman -S plotutils
 
 sudo pacman -S gsl
 
@@ -375,8 +362,6 @@ sudo pacman -S firefox
 sudo pacman -S firefox-i18n-en-us
 sudo pacman -S firefox-i18n-ru
 
-sudo pacman -S pdfgrep
-
 sudo pacman -S biber
 sudo pacman -S texlive-bin
 sudo pacman -S texlive-core
@@ -399,7 +384,7 @@ sudo pacman -S gimp-help-ru
 
 sudo pacman -S inkscape
 
-sudo pacman -S rawtherapee
+sudo pacman -S darktable
 
 sudo pacman -S audacity
 
@@ -411,21 +396,17 @@ sudo pacman -S easytag
 
 sudo pacman -S ffmpeg
 
-sudo pacman -S mplayer
-
 sudo pacman -S mpv
 
 sudo pacman -S obs-studio
 
 sudo pacman -S soundconverter
 
-sudo pacman -S youtube-dl
+sudo pacman -S vlc
 
 sudo pacman -S gnutls
 
 sudo pacman -S hydra
-
-sudo pacman -S iputils
 
 yay -S jigdo
 

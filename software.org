@@ -16,6 +16,7 @@ sudo pacman -S bzip2
 sudo pacman -S cpio
 sudo pacman -S gzip
 sudo pacman -S lhasa
+sudo pacman -S libarchive
 sudo pacman -S lrzip
 sudo pacman -S lz4
 sudo pacman -S lzip
@@ -162,20 +163,6 @@ sudo pacman -S vde2
 sudo pacman -S virt-manager
 sudo pacman -S virt-viewer
 #+end_src
-*** [[https://ranger.github.io/][ranger]]
-#+begin_src sh
-sudo pacman -S atool
-sudo pacman -S ffmpegthumbnailer
-sudo pacman -S highlight
-sudo pacman -S imlib2
-sudo pacman -S ranger
-sudo pacman -S ueberzug
-sudo pacman -S w3m
-
-if [ ! -d $HOME/.config/ranger/ ]; then
-  ranger --copy-config=all
-fi
-#+end_src
 *** [[http://jonls.dk/redshift/][Redshift]]
 #+begin_src sh
 sudo pacman -S geoclue
@@ -241,11 +228,6 @@ sudo pacman -S bpf
 sudo pacman -S bpftrace
 sudo pacman -S python-bcc
 #+end_src
-*** [[https://www.openblas.net/][BLAS]]
-#+begin_src sh
-sudo pacman -S blas
-sudo pacman -S cblas
-#+end_src
 *** [[https://www.boost.org/][Boost]]
 #+begin_src sh
 sudo pacman -S boost
@@ -280,6 +262,7 @@ sudo pacman -S ctags
 *** [[https://www.doxygen.nl/index.html][Doxygen]]
 #+begin_src sh
 sudo pacman -S doxygen
+sudo pacman -S doxygen-docs
 #+end_src
 *** [[https://eigen.tuxfamily.org][Eigen]]
 #+begin_src sh
@@ -292,10 +275,6 @@ sudo pacman -S elfutils
 *** [[http://www.fftw.org/][FFTW]]
 #+begin_src sh
 sudo pacman -S fftw
-#+end_src
-*** [[https://www.fltk.org/index.php][FLTK]]
-#+begin_src sh
-sudo pacman -S fltk
 #+end_src
 *** [[https://fmt.dev/latest/index.html][{fmt}]]
 #+begin_src sh
@@ -325,6 +304,10 @@ sudo pacman -S binutils
 #+begin_src sh
 sudo pacman -S make
 #+end_src
+*** [[https://github.com/jemalloc/jemalloc][jemalloc]]
+#+begin_src sh
+sudo pacman -S jemalloc
+#+end_src
 *** [[https://www.gnu.org/software/global/][GNU GLOBAL]]
 #+begin_src sh
 sudo pacman -S global
@@ -346,10 +329,6 @@ sudo pacman -S gperftools
 #+begin_src sh
 sudo pacman -S graphviz
 #+end_src
-*** [[https://grpc.io/][gRPC]]
-#+begin_src sh
-sudo pacman -S grpc
-#+end_src
 *** [[https://www.hdfgroup.org/hdf5][HDF5]]
 #+begin_src sh
 sudo pacman -S hdf5
@@ -364,9 +343,12 @@ sudo pacman -S libraw
 sudo pacman -S librsvg
 sudo pacman -S libtiff
 sudo pacman -S libtiff4
+sudo pacman -S libvips
 sudo pacman -S libwebp
 sudo pacman -S libwmf
 sudo pacman -S openexr
+sudo pacman -S openimagedenoise
+sudo pacman -S openimageio
 sudo pacman -S openjpeg2
 #+end_src
 *** [[https://github.com/nlohmann/json][JSON]]
@@ -376,10 +358,14 @@ sudo pacman -S nlohmann-json
 *** [[https://github.com/open-source-parsers/jsoncpp][JsonCpp]]
 #+begin_src sh
 sudo pacman -S jsoncpp
+sudo pacman -S jsoncpp-doc
 #+end_src
 *** [[https://www.netlib.org/lapack][LAPACK]]
 #+begin_src sh
+sudo pacman -S blas
+sudo pacman -S cblas
 sudo pacman -S lapack
+sudo pacman -S lapack-doc
 sudo pacman -S lapacke
 #+end_src
 *** [[http://pqxx.org/development/libpqxx/][libpqxx]]
@@ -423,10 +409,6 @@ sudo pacman -S openmp
 #+begin_src sh
 sudo pacman -S polly
 #+end_src
-*** [[https://www.ltrace.org/][ltrace]]
-#+begin_src sh
-sudo pacman -S ltrace
-#+end_src
 *** [[https://www.nasm.us/][NASM]]
 #+begin_src sh
 sudo pacman -S nasm
@@ -445,14 +427,11 @@ sudo pacman -S netcdf-fortran
 #+begin_src sh
 sudo pacman -S ninja
 #+end_src
-*** [[https://nlopt.readthedocs.io/en/latest/][NLopt]]
-#+begin_src sh
-sudo pacman -S nlopt
-#+end_src
 *** [[https://opencv.org/][OpenCV]]
 #+begin_src sh
 sudo pacman -S opencv
 sudo pacman -S opencv-samples
+sudo pacman -S vtk
 #+end_src
 *** OpenGL
 #+begin_src sh
@@ -468,7 +447,6 @@ sudo pacman -S libxmu
 sudo pacman -S libxpm
 sudo pacman -S mesa
 sudo pacman -S ogre
-sudo pacman -S opencsg
 sudo pacman -S virtualgl
 #+end_src
 *** [[https://openjdk.java.net/][OpenJDK]]
@@ -491,14 +469,10 @@ sudo pacman -S openocd
 #+begin_src sh
 sudo pacman -S perf
 #+end_src
-*** [[https://www.perl.org/][Perl]]
-#+begin_src sh
-sudo pacman -S perl
-sudo pacman -S perl-tidy
-#+end_src
 *** [[https://www.python.org/][Python]]
 #+begin_src sh
 sudo pacman -S python
+sudo pacman -S python-docs
 sudo pacman -S python-virtualenv
 #+end_src
 *** [[https://radare.org][radare2]]
@@ -521,6 +495,7 @@ sudo pacman -S sdl2_ttf
 #+end_src
 *** [[https://www.sfml-dev.org/index.php][SFML]]
 #+begin_src sh
+sudo pacman -S csfml
 sudo pacman -S sfml
 #+end_src
 *** [[https://www.shellcheck.net][ShellCheck]]
@@ -552,7 +527,9 @@ sudo pacman -S vc
 #+begin_src sh
 sudo pacman -S expat
 sudo pacman -S libxml++
+sudo pacman -S libxml++-docs
 sudo pacman -S libxml2
+sudo pacman -S pugixml
 sudo pacman -S xerces-c
 #+end_src
 *** [[https://github.com/Z3Prover/z3][Z3]]
@@ -571,10 +548,6 @@ sudo pacman -S bc
 *** [[http://www.gnuplot.info][Gnuplot]]
 #+begin_src sh
 sudo pacman -S gnuplot
-#+end_src
-*** [[https://directory.fsf.org/wiki/Plotutils][GNU Plotutils]]
-#+begin_src sh
-sudo pacman -S plotutils
 #+end_src
 *** [[https://www.gnu.org/software/gsl/gsl.html][GSL]]
 #+begin_src sh
@@ -633,10 +606,6 @@ sudo pacman -S firefox
 sudo pacman -S firefox-i18n-en-us
 sudo pacman -S firefox-i18n-ru
 #+end_src
-*** [[http://pdfgrep.sourceforge.net/][pdfgrep]]
-#+begin_src sh
-sudo pacman -S pdfgrep
-#+end_src
 *** [[https://www.tug.org/texlive/][TeX Live]]
 #+begin_src sh
 sudo pacman -S biber
@@ -672,9 +641,9 @@ sudo pacman -S gimp-help-ru
 #+begin_src sh
 sudo pacman -S inkscape
 #+end_src
-*** [[https://www.rawtherapee.com/][RawTherapee]]
+*** [[https://www.darktable.org/][darktable]]
 #+begin_src sh
-sudo pacman -S rawtherapee
+sudo pacman -S darktable
 #+end_src
 ** Multimedia
 *** [[https://www.audacityteam.org/][Audacity]]
@@ -697,10 +666,6 @@ sudo pacman -S easytag
 #+begin_src sh
 sudo pacman -S ffmpeg
 #+end_src
-*** [[http://www.mplayerhq.hu/design7/news.html][MPlayer]]
-#+begin_src sh
-sudo pacman -S mplayer
-#+end_src
 *** [[https://mpv.io/][mpv]]
 #+begin_src sh
 sudo pacman -S mpv
@@ -713,9 +678,9 @@ sudo pacman -S obs-studio
 #+begin_src sh
 sudo pacman -S soundconverter
 #+end_src
-*** [[https://ytdl-org.github.io/youtube-dl/][youtube-dl]]
+*** [[https://www.videolan.org/vlc/][VLC media player]]
 #+begin_src sh
-sudo pacman -S youtube-dl
+sudo pacman -S vlc
 #+end_src
 ** Web
 *** [[https://www.gnutls.org/][GnuTLS]]
@@ -725,10 +690,6 @@ sudo pacman -S gnutls
 *** [[https://github.com/vanhauser-thc/thc-hydra][hydra]]
 #+begin_src sh
 sudo pacman -S hydra
-#+end_src
-*** [[http://www.skbuff.net/iputils/][iputils]]
-#+begin_src sh
-sudo pacman -S iputils
 #+end_src
 *** [[http://atterer.org/jigdo/][jigdo]]
 #+begin_src sh

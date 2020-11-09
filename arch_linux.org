@@ -369,6 +369,7 @@ sudo pacman -S libogg
 sudo pacman -S libtheora
 sudo pacman -S libvorbis
 sudo pacman -S libxv
+sudo pacman -S openal
 sudo pacman -S opencore-amr
 sudo pacman -S opus
 sudo pacman -S schroedinger

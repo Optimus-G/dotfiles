@@ -4,14 +4,12 @@ if [ -f /usr/share/bash-completion/bash_completion ]; then
   . /usr/share/bash-completion/bash_completion
 fi
 
-set -o emacs
+set -o vi
 PROMPT_DIRTRIM=2
 
 alias ..="cd .."
 alias .2="cd ../.."
 alias .3="cd ../../.."
-alias .4="cd ../../../.."
-alias .5="cd ../../../../.."
 alias .="pwd"
 alias aac="asciiquarium && clear"
 alias addall="git add ."
@@ -28,9 +26,7 @@ alias du="du -ach | sort -h"
 alias e="emacs"
 alias egrep="egrep --color=auto"
 alias enw="emacs -nw"
-alias ff="find . -type f -iname"
 alias fgrep="fgrep --color=auto"
-alias fm="ranger"
 alias free="free -mt"
 alias grep="grep --color=auto"
 alias h="history"
@@ -51,7 +47,6 @@ alias ps="ps auxf"
 alias push="git push origin main"
 alias reload="source $HOME/.bashrc"
 alias rm="rm -Iv"
-alias sc="systemctl"
 alias sl="sl && clear"
 alias status="git status"
 alias t="tree"
