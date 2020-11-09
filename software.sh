@@ -386,9 +386,9 @@ sudo pacman -S gimp-help-ru
 
 sudo pacman -S inkscape
 
-sudo pacman -S cmus
-
 sudo pacman -S audacity
+
+sudo pacman -S cmus
 
 sudo pacman -S dvd+rw-tools
 
