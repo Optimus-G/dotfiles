@@ -277,6 +277,7 @@ sudo pacman -S ocl-icd
 sudo pacman -S opencl-clhpp
 sudo pacman -S opencl-headers
 sudo pacman -S opencl-mesa
+sudo pacman -S pocl
 #+end_src
 ** [[https://www.x.org/wiki/][X Window System]]
 #+begin_src sh :tangle post_installation.sh

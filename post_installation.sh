@@ -84,6 +84,7 @@ sudo pacman -S ocl-icd
 sudo pacman -S opencl-clhpp
 sudo pacman -S opencl-headers
 sudo pacman -S opencl-mesa
+sudo pacman -S pocl
 
 sudo pacman -S xf86-input-synaptics
 sudo pacman -S xorg
