@@ -646,13 +646,13 @@ sudo pacman -S gimp-help-ru
 sudo pacman -S inkscape
 #+end_src
 ** Multimedia
+*** [[https://audacious-media-player.org/][Audacious]] and [[https://cmus.github.io/][cmus]]
+#+begin_src sh
+sudo pacman -S cmus
+#+end_src
 *** [[https://www.audacityteam.org/][Audacity]]
 #+begin_src sh
 sudo pacman -S audacity
-#+end_src
-*** [[https://cmus.github.io/][cmus]]
-#+begin_src sh
-sudo pacman -S cmus
 #+end_src
 *** [[http://fy.chalmers.se/~appro/linux/DVD+RW/][dvd+rw-tools]]
 #+begin_src sh
