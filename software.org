@@ -304,10 +304,6 @@ sudo pacman -S binutils
 #+begin_src sh
 sudo pacman -S make
 #+end_src
-*** [[https://github.com/jemalloc/jemalloc][jemalloc]]
-#+begin_src sh
-sudo pacman -S jemalloc
-#+end_src
 *** [[https://www.gnu.org/software/global/][GNU GLOBAL]]
 #+begin_src sh
 sudo pacman -S global
@@ -350,6 +346,10 @@ sudo pacman -S openexr
 sudo pacman -S openimagedenoise
 sudo pacman -S openimageio
 sudo pacman -S openjpeg2
+#+end_src
+*** [[https://github.com/jemalloc/jemalloc][jemalloc]]
+#+begin_src sh
+sudo pacman -S jemalloc
 #+end_src
 *** [[https://github.com/nlohmann/json][JSON]]
 #+begin_src sh
@@ -631,6 +631,10 @@ sudo pacman -S xournalpp
 #+begin_src sh
 sudo pacman -S blender
 #+end_src
+*** [[https://www.darktable.org/][darktable]]
+#+begin_src sh
+sudo pacman -S darktable
+#+end_src
 *** [[https://www.gimp.org/][GIMP]]
 #+begin_src sh
 sudo pacman -S gimp
@@ -640,10 +644,6 @@ sudo pacman -S gimp-help-ru
 *** [[https://inkscape.org/][Inkscape]]
 #+begin_src sh
 sudo pacman -S inkscape
-#+end_src
-*** [[https://www.darktable.org/][darktable]]
-#+begin_src sh
-sudo pacman -S darktable
 #+end_src
 ** Multimedia
 *** [[https://www.audacityteam.org/][Audacity]]

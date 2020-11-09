@@ -181,8 +181,6 @@ sudo pacman -S binutils
 
 sudo pacman -S make
 
-sudo pacman -S jemalloc
-
 sudo pacman -S global
 
 sudo pacman -S time
@@ -211,6 +209,8 @@ sudo pacman -S openexr
 sudo pacman -S openimagedenoise
 sudo pacman -S openimageio
 sudo pacman -S openjpeg2
+
+sudo pacman -S jemalloc
 
 sudo pacman -S nlohmann-json
 
@@ -378,13 +378,13 @@ sudo pacman -S xournalpp
 
 sudo pacman -S blender
 
+sudo pacman -S darktable
+
 sudo pacman -S gimp
 sudo pacman -S gimp-help-en
 sudo pacman -S gimp-help-ru
 
 sudo pacman -S inkscape
-
-sudo pacman -S darktable
 
 sudo pacman -S audacity
 
