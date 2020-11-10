@@ -404,6 +404,9 @@ sudo pacman -S soundconverter
 
 sudo pacman -S vlc
 
+sudo pacman -S firewalld
+sudo pacman -S nftables
+
 sudo pacman -S gnutls
 
 sudo pacman -S hydra
@@ -418,7 +421,9 @@ sudo pacman -S john
 
 sudo pacman -S nmap
 
+sudo pacman -S ipset
 sudo pacman -S openssh
+sudo pacman -S sshguard
 
 sudo pacman -S openssl
 
