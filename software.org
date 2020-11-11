@@ -276,6 +276,12 @@ sudo pacman -S elfutils
 #+begin_src sh
 sudo pacman -S fftw
 #+end_src
+*** [[https://www.fltk.org/][FLTK]]
+#+begin_src sh
+sudo pacman -S fltk
+sudo pacman -S fltk-docs
+sudo pacman -S fltk-examples
+#+end_src
 *** [[https://fmt.dev/latest/index.html][{fmt}]]
 #+begin_src sh
 sudo pacman -S fmt
