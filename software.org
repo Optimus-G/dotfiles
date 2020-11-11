@@ -629,6 +629,7 @@ sudo pacman -S xournalpp
 ** Design
 *** [[http://www.blender.org][Blender]]
 #+begin_src sh
+sudo pacman -S cuda
 sudo pacman -S blender
 #+end_src
 *** [[https://www.darktable.org/][darktable]]

@@ -376,6 +376,7 @@ sudo pacman -S thunderbird-i18n-ru
 
 sudo pacman -S xournalpp
 
+sudo pacman -S cuda
 sudo pacman -S blender
 
 sudo pacman -S darktable
