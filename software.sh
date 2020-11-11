@@ -165,10 +165,6 @@ sudo pacman -S elfutils
 
 sudo pacman -S fftw
 
-sudo pacman -S fltk
-sudo pacman -S fltk-docs
-sudo pacman -S fltk-examples
-
 sudo pacman -S fmt
 
 sudo pacman -S fpc
