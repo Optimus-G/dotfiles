@@ -1,16 +1,8 @@
 set nocompatible
 scriptencoding utf-8
-
-let g:airline_theme                                 = "minimalist"
-let g:mapleader                                     = " "
-let g:syntastic_aggregate_errors                    = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_clangd_args                               = ["-log=verbose", "-pretty"]
-let g:ycm_clangd_binary_path                        = exepath("clangd")
-let g:ycm_clangd_uses_ycmd_caching                  = 0
+let g:mapleader = " "
 
 call plug#begin("$HOME/.vim/plugged")
-
 Plug 'airblade/vim-gitgutter'
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
@@ -26,7 +18,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clangd-completer' }
-
 call plug#end()
 
 filetype               on
@@ -46,6 +37,15 @@ if !empty(glob("$HOME/.vim/plugged"))
   nnoremap <leader>gt :YcmCompleter GoTo<CR>
   nnoremap <leader>rr :YcmCompleter RefactorRename<Space>
   nnoremap ?? :Rg!<CR>
+  let g:airline_theme                                 = "minimalist"
+  let g:syntastic_aggregate_errors                    = 1
+  let g:ycm_add_preview_to_completeopt                = 1
+  let g:ycm_autoclose_preview_window_after_completion = 1
+  let g:ycm_clangd_args                               = ["-log=verbose", "-pretty"]
+  let g:ycm_clangd_uses_ycmd_caching                  = 0
+  let g:ycm_collect_identifiers_from_tags_files       = 1
+  let g:ycm_max_num_candidates                        = 10
+  let g:ycm_min_num_of_chars_for_completion           = 5
 endif
 
 set autochdir
