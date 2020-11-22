@@ -4,7 +4,7 @@ if [ -f /usr/share/bash-completion/bash_completion ]; then
   . /usr/share/bash-completion/bash_completion
 fi
 
-set -o vi
+set -o emacs
 PROMPT_DIRTRIM=2
 
 alias ..="cd .."

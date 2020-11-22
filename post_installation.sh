@@ -66,7 +66,6 @@ else
   sudo pacman -S nvidia-lts
   sudo pacman -S nvidia-utils
   sudo pacman -S opencl-nvidia
-  sudo pacman -S xf86-video-nouveau
 fi
 
 sudo pacman -S gvfs

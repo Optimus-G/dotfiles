@@ -389,9 +389,8 @@
 
 (add-hook 'c-mode-common-hook 'c-common-mode )
 (add-hook 'fundamental-mode   'ruler-mode    )
+(add-hook 'makefile-mode-hook '(lambda () (setq-default indent-tabs-mode t)) )
 (add-hook 'text-mode-hook     'ruler-mode    )
-(add-hook 'makefile-mode-hook
-          '(lambda () (setq-default indent-tabs-mode t)) )
 
 (cond
  ((executable-find "hunspell")
@@ -446,10 +445,11 @@
 (if (require 'minions nil :noerror)
     (minions-mode))
 
-(install-package 'alect-themes)
+(install-package 'alect-themes  )
+(install-package 'gruvbox-theme )
 (when (and (display-graphic-p)
-           (package-installed-p 'alect-themes))
-  (load-theme 'alect-black t nil))
+           (package-installed-p 'gruvbox-theme))
+  (load-theme 'gruvbox t nil))
 
 (install-package 'markdown-mode )
 (install-package 'org           )
