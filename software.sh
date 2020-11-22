@@ -127,6 +127,8 @@ sudo pacman -S pgadmin4
 
 sudo pacman -S sqlite
 
+sudo pacman -S unixodbc
+
 sudo pacman -S asio
 
 sudo pacman -S autoconf

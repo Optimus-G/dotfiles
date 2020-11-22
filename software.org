@@ -207,6 +207,10 @@ sudo pacman -S pgadmin4
 #+begin_src sh
 sudo pacman -S sqlite
 #+end_src
+*** [[http://www.unixodbc.org/][unixODBC]]
+#+begin_src sh
+sudo pacman -S unixodbc
+#+end_src
 ** Programming
 *** [[https://think-async.com/Asio/][Asio C++ Library]]
 #+begin_src sh
