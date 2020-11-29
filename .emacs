@@ -249,8 +249,8 @@
   (fringe-mode       )
   (setq-default cursor-type 'box)
   (if (member "Fantasque Sans Mono" (font-family-list))
-      (set-frame-font "Fantasque Sans Mono 16" t t)
-    (set-frame-font "DejaVu Sans Mono 14" t t))
+      (set-frame-font "Fantasque Sans Mono 18" t t)
+    (set-frame-font "DejaVu Sans Mono 16" t t))
   (add-to-list 'default-frame-alist '(height .  30) )
   (add-to-list 'default-frame-alist '(width  . 120) )
   (setq-default indicate-buffer-boundaries '(( bottom . left )
@@ -387,10 +387,9 @@
 (if (file-exists-p bookmark-default-file)
     (bookmark-load bookmark-default-file t))
 
-(add-hook 'c-mode-common-hook 'c-common-mode )
-(add-hook 'fundamental-mode   'ruler-mode    )
-(add-hook 'makefile-mode-hook '(lambda () (setq-default indent-tabs-mode t)) )
-(add-hook 'text-mode-hook     'ruler-mode    )
+(add-hook 'c-mode-common-hook 'c-common-mode)
+(add-hook 'makefile-mode-hook
+          '(lambda () (setq-default indent-tabs-mode t)) )
 
 (cond
  ((executable-find "hunspell")
@@ -439,7 +438,8 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"    ) t )
 (add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/"      ) t )
 (package-initialize)
-(unless package-archive-contents (ignore-errors (package-refresh-contents)))
+(unless package-archive-contents
+  (ignore-errors (package-refresh-contents)))
 
 (install-package 'minions)
 (if (require 'minions nil :noerror)
