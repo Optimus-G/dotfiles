@@ -330,6 +330,8 @@ yay -S zeal
 
 sudo pacman -S bc
 
+sudo pacman -S octave
+
 sudo pacman -S gnuplot
 
 sudo pacman -S gsl

@@ -549,6 +549,10 @@ yay -S zeal
 #+begin_src sh
 sudo pacman -S bc
 #+end_src
+*** [[https://www.gnu.org/software/octave/index][GNU Octave]]
+#+begin_src sh
+sudo pacman -S octave
+#+end_src
 *** [[http://www.gnuplot.info][Gnuplot]]
 #+begin_src sh
 sudo pacman -S gnuplot
