@@ -448,8 +448,8 @@
 (install-package 'alect-themes  )
 (install-package 'gruvbox-theme )
 (when (and (display-graphic-p)
-           (package-installed-p 'gruvbox-theme))
-  (load-theme 'gruvbox t nil))
+           (package-installed-p 'alect-themes))
+  (load-theme 'alect-light-alt t nil))
 
 (install-package 'markdown-mode )
 (install-package 'org           )
