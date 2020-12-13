@@ -445,8 +445,7 @@
 (if (require 'minions nil :noerror)
     (minions-mode))
 
-(install-package 'alect-themes  )
-(install-package 'gruvbox-theme )
+(install-package 'alect-themes)
 (when (and (display-graphic-p)
            (package-installed-p 'alect-themes))
   (load-theme 'alect-light-alt t nil))
@@ -590,6 +589,7 @@
     (setq-default lsp-eldoc-render-all             t   )
     (setq-default lsp-enable-file-watchers         nil )
     (setq-default lsp-enable-symbol-highlighting   nil )
+    (setq-default lsp-headerline-breadcrumb-enable t   )
     (setq-default lsp-modeline-code-actions-enable nil )
     (setq-default lsp-modeline-diagnostics-enable  nil )
     (setq-default lsp-progress-via-spinner         nil )
