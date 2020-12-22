@@ -4,11 +4,9 @@ let g:mapleader = " "
 
 call plug#begin("$HOME/.vim/plugged")
 Plug 'airblade/vim-gitgutter'
-Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -25,13 +23,15 @@ filetype plugin        on
 filetype plugin indent on
 syntax                 on
 
+colorscheme default
+highlight Normal ctermbg=None
+highlight Pmenu ctermbg=gray
+
 language messages POSIX
 
 runtime macros/matchit.vim
 
 if !empty(glob("$HOME/.vim/plugged"))
-  colorscheme gruvbox
-  highlight Normal ctermbg=None
   nnoremap // :BLines!<CR>
   nnoremap <leader>fi :YcmCompleter FixIt<CR>
   nnoremap <leader>gt :YcmCompleter GoTo<CR>
