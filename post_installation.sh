@@ -99,7 +99,9 @@ sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 
 sudo pacman -S breeze-grub
+sudo pacman -S cronie
 sudo pacman -S packagekit-qt5
+sudo pacman -S phonon-qt5-gstreamer
 
 for i in {1..5}
 do

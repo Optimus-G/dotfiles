@@ -289,6 +289,7 @@ sudo pacman -S qtcreator
 
 sudo pacman -S r2ghidra-dec
 sudo pacman -S radare2
+sudo pacman -S radare2-cutter
 
 yay -S rr
 
@@ -392,6 +393,8 @@ sudo pacman -S gimp-help-en
 sudo pacman -S gimp-help-ru
 
 sudo pacman -S inkscape
+
+sudo pacman -S krita
 
 sudo pacman -S audacity
 

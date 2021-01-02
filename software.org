@@ -481,6 +481,7 @@ sudo pacman -S qtcreator
 #+begin_src sh
 sudo pacman -S r2ghidra-dec
 sudo pacman -S radare2
+sudo pacman -S radare2-cutter
 #+end_src
 *** [[https://rr-project.org/][rr]]
 #+begin_src sh
@@ -657,6 +658,10 @@ sudo pacman -S gimp-help-ru
 *** [[https://inkscape.org/][Inkscape]]
 #+begin_src sh
 sudo pacman -S inkscape
+#+end_src
+*** [[https://krita.org/en/][Krita]]
+#+begin_src sh
+sudo pacman -S krita
 #+end_src
 ** Multimedia
 *** [[https://www.audacityteam.org/][Audacity]]
