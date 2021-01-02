@@ -12,6 +12,7 @@ sudo pacman -S ack
 *** Archiving and compression
 #+begin_src sh
 sudo pacman -S arj
+sudo pacman -S ark
 sudo pacman -S bzip2
 sudo pacman -S cpio
 sudo pacman -S gzip
@@ -24,10 +25,10 @@ sudo pacman -S lzop
 sudo pacman -S p7zip
 sudo pacman -S tar
 sudo pacman -S unace
+sudo pacman -S unarchiver
 sudo pacman -S unarj
 sudo pacman -S unrar
 sudo pacman -S unzip
-sudo pacman -S xarchiver
 sudo pacman -S xz
 sudo pacman -S zip
 sudo pacman -S zlib
@@ -85,10 +86,6 @@ sudo pacman -S gnupg
 *** [[https://www.gnu.org/software/sed/][GNU sed]]
 #+begin_src sh
 sudo pacman -S sed
-#+end_src
-*** [[https://gparted.org/][GParted]]
-#+begin_src sh
-sudo pacman -S gparted
 #+end_src
 *** [[https://hisham.hm/htop/][htop]]
 #+begin_src sh
@@ -162,11 +159,6 @@ sudo pacman -S samba
 sudo pacman -S vde2
 sudo pacman -S virt-manager
 sudo pacman -S virt-viewer
-#+end_src
-*** [[http://jonls.dk/redshift/][Redshift]]
-#+begin_src sh
-sudo pacman -S geoclue
-sudo pacman -S redshift
 #+end_src
 *** [[https://github.com/BurntSushi/ripgrep][ripgrep]]
 #+begin_src sh
@@ -259,6 +251,10 @@ sudo pacman -S bison
 sudo pacman -S byacc
 sudo pacman -S flex
 #+end_src
+*** [[http://cppcheck.sourceforge.net/][Cppcheck]]
+#+begin_src sh
+sudo pacman -S cppcheck
+#+end_src
 *** [[https://ctags.io/][Ctags]]
 #+begin_src sh
 sudo pacman -S ctags
@@ -284,12 +280,10 @@ sudo pacman -S fftw
 #+begin_src sh
 sudo pacman -S fmt
 #+end_src
-*** [[http://www.freepascal.org/][FPC]] and [[https://www.lazarus-ide.org/][Lazarus]]
+*** [[http://www.freepascal.org/][FPC]]
 #+begin_src sh
 sudo pacman -S fpc
 sudo pacman -S fpc-src
-sudo pacman -S lazarus
-sudo pacman -S lazarus-gtk2
 #+end_src
 *** [[https://gcc.gnu.org][GCC]]
 #+begin_src sh
@@ -479,6 +473,10 @@ sudo pacman -S python
 sudo pacman -S python-docs
 sudo pacman -S python-virtualenv
 #+end_src
+*** [[https://www.qt.io/product/development-tools][Qt Creator]]
+#+begin_src sh
+sudo pacman -S qtcreator
+#+end_src
 *** [[https://radare.org][radare2]]
 #+begin_src sh
 sudo pacman -S r2ghidra-dec
@@ -573,21 +571,19 @@ sudo pacman -S tesseract-data-eng
 sudo pacman -S tesseract-data-rus
 #+end_src
 ** Office
-*** [[https://wiki.gnome.org/Apps/Evince][Evince]]
+*** [[https://calibre-ebook.com/][calibre]]
 #+begin_src sh
-sudo pacman -S evince
-#+end_src
-*** [[https://feh.finalrewind.org/][feh]]
-#+begin_src sh
-sudo pacman -S feh
-#+end_src
-*** [[https://johnfactotum.github.io/foliate/][Foliate]]
-#+begin_src sh
-sudo pacman -S foliate
+sudo pacman -S calibre
 #+end_src
 *** [[https://www.ghostscript.com/][Ghostscript]]
 #+begin_src sh
 sudo pacman -S ghostscript
+#+end_src
+*** [[https://apps.kde.org/en/gwenview][Gwenview]]
+#+begin_src sh
+sudo pacman -S gwenview
+sudo pacman -S kimageformats
+sudo pacman -S qt5-imageformats
 #+end_src
 *** [[https://www.imagemagick.org/][ImageMagick]]
 #+begin_src sh
@@ -613,6 +609,14 @@ sudo pacman -S lyx
 sudo pacman -S firefox
 sudo pacman -S firefox-i18n-en-us
 sudo pacman -S firefox-i18n-ru
+#+end_src
+*** [[https://apps.kde.org/en/okular][Okular]]
+#+begin_src sh
+sudo pacman -S okular
+#+end_src
+*** [[https://apps.kde.org/en/spectacle][Spectacle]]
+#+begin_src sh
+sudo pacman -S spectacle
 #+end_src
 *** [[https://www.tug.org/texlive/][TeX Live]]
 #+begin_src sh
@@ -675,6 +679,10 @@ sudo pacman -S easytag
 #+begin_src sh
 sudo pacman -S ffmpeg
 #+end_src
+*** [[https://kdenlive.org/en/][Kdenlive]]
+#+begin_src sh
+sudo pacman -S kdenlive
+#+end_src
 *** [[https://mpv.io/][mpv]]
 #+begin_src sh
 sudo pacman -S mpv
@@ -683,9 +691,9 @@ sudo pacman -S mpv
 #+begin_src sh
 sudo pacman -S obs-studio
 #+end_src
-*** [[https://soundconverter.org/][SoundConverter]]
+*** [[https://www.linux-apps.com/p/1126634][soundKonverter]]
 #+begin_src sh
-sudo pacman -S soundconverter
+sudo pacman -S soundkonverter
 #+end_src
 *** [[https://www.videolan.org/vlc/][VLC media player]]
 #+begin_src sh
@@ -716,6 +724,10 @@ sudo pacman -S hashcat-utils
 sudo pacman -S hcxkeys
 sudo pacman -S hcxtools
 sudo pacman -S john
+#+end_src
+*** [[https://www.kde.org/applications/internet/ktorrent/][KTorrent]]
+#+begin_src sh
+sudo pacman -S ktorrent
 #+end_src
 *** [[https://nmap.org/][Nmap]]
 #+begin_src sh
@@ -749,7 +761,6 @@ sudo pacman -S xorg-server-xephyr
 *** [[https://www.spice-space.org/][SPICE]]
 #+begin_src sh
 sudo pacman -S spice
-sudo pacman -S spice-gtk
 #+end_src
 *** [[https://www.tcpdump.org/index.html][tcpdump]]
 #+begin_src sh
@@ -758,11 +769,6 @@ sudo pacman -S tcpdump
 *** [[https://desktop.telegram.org/][Telegram Desktop]]
 #+begin_src sh
 sudo pacman -S telegram-desktop
-#+end_src
-*** [[http://www.transmissionbt.com/][Transmission]]
-#+begin_src sh
-sudo pacman -S transmission-cli
-sudo pacman -S transmission-gtk
 #+end_src
 *** [[https://www.wireshark.org/][Wireshark]]
 #+begin_src sh

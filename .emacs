@@ -247,9 +247,10 @@
   (blink-cursor-mode )
   (display-time      )
   (fringe-mode       )
-  (load-theme 'leuven t nil)
   (setq-default cursor-type 'box)
-  (cond ((member "Fantasque Sans Mono" (font-family-list))
+  (cond ((member "Hermit" (font-family-list))
+         (set-frame-font "Hermit 14" t t))
+        ((member "Fantasque Sans Mono" (font-family-list))
          (set-frame-font "Fantasque Sans Mono 18" t t))
         ((member "JetBrains Mono" (font-family-list))
          (set-frame-font "Jetbrains Mono 14" t t))
@@ -446,9 +447,17 @@
 (unless package-archive-contents
   (ignore-errors (package-refresh-contents)))
 
-(install-package 'minions)
-(if (require 'minions nil :noerror)
-    (minions-mode))
+(install-package 'spaceline)
+(if (require 'spaceline-config)
+    (spaceline-spacemacs-theme))
+
+(install-package 'doom-themes)
+(when (package-installed-p 'doom-themes)
+  (doom-themes-org-config         )
+  (doom-themes-visual-bell-config )
+  (setq-default doom-themes-enable-bold   t )
+  (setq-default doom-themes-enable-italic t )
+  (load-theme 'doom-sourcerer t nil))
 
 (install-package 'markdown-mode )
 (install-package 'org           )
@@ -594,6 +603,7 @@
     (setq-default lsp-modeline-diagnostics-enable  nil )
     (setq-default lsp-progress-via-spinner         nil )
     (setq-default lsp-semantic-highlighting        t   )
+    (setq-default lsp-semantic-tokens-enable       t   )
     (define-key lsp-mode-map (kbd "M-<return>") 'lsp-rename) ))
 (unless (package-installed-p 'lsp-mode) (use-cedet-semantic))
 

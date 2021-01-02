@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "SYSTEM TYPE: main/test"
+echo "SYSTEM TYPE: main/test (default)"
 read -r system_type
 if [ -z "$system_type" ] || [ "$system_type" != "main" ]; then
   system_type="test"
@@ -28,6 +28,7 @@ sudo pacman -S freetype2
 sudo pacman -S gnu-free-fonts
 sudo pacman -S noto-fonts
 sudo pacman -S noto-fonts-extra
+sudo pacman -S otf-hermit
 sudo pacman -S pango
 sudo pacman -S terminus-font
 sudo pacman -S ttf-anonymous-pro
@@ -55,7 +56,8 @@ sudo pacman -S cups-pdf
 sudo pacman -S cups-pk-helper
 sudo pacman -S foomatic-db-gutenprint-ppds
 sudo pacman -S gutenprint
-sudo pacman -S simple-scan
+sudo pacman -S print-manager
+sudo pacman -S skanlite
 sudo pacman -S system-config-printer
 sudo systemctl start  org.cups.cupsd.service
 sudo systemctl enable org.cups.cupsd.service
@@ -96,35 +98,34 @@ sudo pacman -S xorg-xinit
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 
-sudo pacman -S catfish
-sudo pacman -S scrot
-sudo pacman -S xcursor-simpleandsoft
-sudo pacman -S xcursor-themes
-sudo pacman -S xfce4
-sudo pacman -S xfce4-goodies
-yay         -S mugshot
+sudo pacman -S breeze-grub
+sudo pacman -S packagekit-qt5
 
-sudo pacman -S lightdm
-sudo pacman -S lightdm-gtk-greeter
-sudo pacman -S lightdm-gtk-greeter-settings
-sudo pacman -S numlockx
-echo "greeter-setup-script=/usr/bin/numlockx on" | sudo tee -a /etc/lightdm/lightdm.conf
-sudo systemctl enable lightdm.service
+for i in {1..5}
+do
+  echo "$i KDE Plasma installation ..."
+  sudo pacman -S plasma-meta
+  sudo pacman -S kde-system-meta
+done
+
+sudo pacman -S dolphin
+sudo pacman -S dolphin-plugins
+sudo pacman -S kate
+sudo pacman -S konsole
+sudo pacman -S krunner
+
+sudo pacman -S sddm
+sudo pacman -S sddm-kcm
+sudo systemctl enable sddm.service
 
 sudo pacman -S xdg-user-dirs
 sudo pacman -S xdg-utils
 xdg-user-dirs-update
 
-sudo pacman -S adapta-gtk-theme
-sudo pacman -S adwaita-icon-theme
-sudo pacman -S arc-gtk-theme
-sudo pacman -S arc-icon-theme
-sudo pacman -S arc-solid-gtk-theme
 sudo pacman -S archlinux-wallpaper
+sudo pacman -S materia-kde
 sudo pacman -S materia-gtk-theme
 sudo pacman -S papirus-icon-theme
-sudo pacman -S xscreensaver
-yay         -S ocs-url
 
 sudo pacman -S tmux
 
@@ -135,10 +136,13 @@ sudo pacman -S vim-spell-en
 sudo pacman -S vim-spell-ru
 
 sudo pacman -S qt5-base
-sudo pacman -S qt5ct
-yay         -S qt5-styleplugins
-echo "export QT_QPA_PLATFORMTHEME=qt5ct"    >> $HOME/.profile
-echo "export QT_AUTO_SCREEN_SCALE_FACTOR=0" >> $HOME/.profile
+sudo pacman -S qt5-doc
+sudo pacman -S qt5-examples
+sudo pacman -S qt5-tools
+sudo pacman -S qt6-base
+sudo pacman -S qt6-doc
+sudo pacman -S qt6-examples
+sudo pacman -S qt6-tools
 
 sudo pacman -S a52dec
 sudo pacman -S celt
@@ -170,7 +174,6 @@ sudo pacman -S xvidcore
 sudo pacman -S alsa-lib
 sudo pacman -S alsa-plugins
 sudo pacman -S alsa-utils
-sudo pacman -S pavucontrol
 sudo pacman -S pulseaudio
 sudo pacman -S pulseaudio-alsa
 sudo pacman -S pulseaudio-bluetooth
@@ -192,22 +195,17 @@ sudo pacman -S gst-plugins-ugly
 sudo pacman -S gstreamer
 sudo pacman -S gstreamermm
 
-sudo pacman -S libcanberra
-sudo pacman -S libcanberra-gstreamer
-sudo pacman -S libcanberra-pulse
-sudo pacman -S sound-theme-freedesktop
-yay         -S sound-theme-smooth
-
 sudo pacman -S curl
 
 sudo pacman -S wget
 
 sudo pacman -S xsel
 sudo pacman -S xclip
-localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 
-echo "xrdb -merge .Xresources" >> $HOME/.xinitrc
-echo "exec         startxfce4" >> $HOME/.xinitrc
+# localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
+
+echo "xrdb -merge .Xresources"      >> $HOME/.xinitrc
+echo "exec         startplasma-x11" >> $HOME/.xinitrc
 
 echo "Xft.antialias: true"       >> $HOME/.Xresources
 echo "Xft.autohint:  false"      >> $HOME/.Xresources
@@ -239,6 +237,7 @@ echo "set visible-stats                       on" >> $HOME/.inputrc
 git config --global user.name  "karlkorp"
 git config --global user.email "lispgod@gmail.com"
 
+mkdir -p $HOME/.fonts
 mkdir -p $HOME/.icons
 mkdir -p $HOME/.themes
 
@@ -256,6 +255,15 @@ if [ -d /data ]; then
   mkdir -p /data/qemu
   mkdir -p /data/torrents
 fi
+
+rm -rf $HOME/.cache/kde*
+rm -rf $HOME/.cache/plasma*
+rm -rf $HOME/.config/kde*
+rm -rf $HOME/.config/plasma*
+rm -rf $HOME/.kde*
+rm -rf $HOME/.local/share/aurorae*
+rm -rf $HOME/.local/share/kde*
+rm -rf $HOME/.local/share/plasma*
 
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

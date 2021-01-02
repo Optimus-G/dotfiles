@@ -2,6 +2,7 @@
 sudo pacman -S ack
 
 sudo pacman -S arj
+sudo pacman -S ark
 sudo pacman -S bzip2
 sudo pacman -S cpio
 sudo pacman -S gzip
@@ -14,10 +15,10 @@ sudo pacman -S lzop
 sudo pacman -S p7zip
 sudo pacman -S tar
 sudo pacman -S unace
+sudo pacman -S unarchiver
 sudo pacman -S unarj
 sudo pacman -S unrar
 sudo pacman -S unzip
-sudo pacman -S xarchiver
 sudo pacman -S xz
 sudo pacman -S zip
 sudo pacman -S zlib
@@ -49,8 +50,6 @@ sudo pacman -S grep
 sudo pacman -S gnupg
 
 sudo pacman -S sed
-
-sudo pacman -S gparted
 
 sudo pacman -S htop
 sudo pacman -S lsof
@@ -104,9 +103,6 @@ sudo pacman -S vde2
 sudo pacman -S virt-manager
 sudo pacman -S virt-viewer
 
-sudo pacman -S geoclue
-sudo pacman -S redshift
-
 sudo pacman -S ripgrep
 
 sudo pacman -S screenkey
@@ -156,6 +152,8 @@ sudo pacman -S bison
 sudo pacman -S byacc
 sudo pacman -S flex
 
+sudo pacman -S cppcheck
+
 sudo pacman -S ctags
 
 sudo pacman -S doxygen
@@ -171,8 +169,6 @@ sudo pacman -S fmt
 
 sudo pacman -S fpc
 sudo pacman -S fpc-src
-sudo pacman -S lazarus
-sudo pacman -S lazarus-gtk2
 
 sudo pacman -S gcc
 sudo pacman -S gcc-fortran
@@ -289,6 +285,8 @@ sudo pacman -S python
 sudo pacman -S python-docs
 sudo pacman -S python-virtualenv
 
+sudo pacman -S qtcreator
+
 sudo pacman -S r2ghidra-dec
 sudo pacman -S radare2
 
@@ -343,13 +341,13 @@ sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
 sudo pacman -S tesseract-data-rus
 
-sudo pacman -S evince
-
-sudo pacman -S feh
-
-sudo pacman -S foliate
+sudo pacman -S calibre
 
 sudo pacman -S ghostscript
+
+sudo pacman -S gwenview
+sudo pacman -S kimageformats
+sudo pacman -S qt5-imageformats
 
 sudo pacman -S imagemagick
 sudo pacman -S imagemagick-doc
@@ -365,6 +363,10 @@ sudo pacman -S lyx
 sudo pacman -S firefox
 sudo pacman -S firefox-i18n-en-us
 sudo pacman -S firefox-i18n-ru
+
+sudo pacman -S okular
+
+sudo pacman -S spectacle
 
 sudo pacman -S biber
 sudo pacman -S texlive-bin
@@ -401,11 +403,13 @@ sudo pacman -S easytag
 
 sudo pacman -S ffmpeg
 
+sudo pacman -S kdenlive
+
 sudo pacman -S mpv
 
 sudo pacman -S obs-studio
 
-sudo pacman -S soundconverter
+sudo pacman -S soundkonverter
 
 sudo pacman -S vlc
 
@@ -423,6 +427,8 @@ sudo pacman -S hashcat-utils
 sudo pacman -S hcxkeys
 sudo pacman -S hcxtools
 sudo pacman -S john
+
+sudo pacman -S ktorrent
 
 sudo pacman -S nmap
 
@@ -444,14 +450,10 @@ sudo pacman -S telepathy-glib
 sudo pacman -S xorg-server-xephyr
 
 sudo pacman -S spice
-sudo pacman -S spice-gtk
 
 sudo pacman -S tcpdump
 
 sudo pacman -S telegram-desktop
-
-sudo pacman -S transmission-cli
-sudo pacman -S transmission-gtk
 
 sudo pacman -S wireshark-cli
 sudo pacman -S wireshark-qt

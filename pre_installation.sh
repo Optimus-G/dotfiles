@@ -61,11 +61,11 @@ pacman -S mlocate
 pacman -S mtools
 pacman -S nano
 pacman -S netctl openresolv
-pacman -S network-manager-applet
 pacman -S network-manager-sstp
 pacman -S networkmanager
 pacman -S networkmanager-openvpn
 pacman -S networkmanager-pptp
+pacman -S networkmanager-qt
 pacman -S networkmanager-vpnc
 pacman -S nfs-utils
 pacman -S nilfs-utils
