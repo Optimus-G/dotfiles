@@ -691,9 +691,9 @@ sudo pacman -S mpv
 #+begin_src sh
 sudo pacman -S obs-studio
 #+end_src
-*** [[https://www.linux-apps.com/p/1126634][soundKonverter]]
+*** [[https://soundconverter.org/][SoundConverter]]
 #+begin_src sh
-sudo pacman -S soundkonverter
+sudo pacman -S soundconverter
 #+end_src
 *** [[https://www.videolan.org/vlc/][VLC media player]]
 #+begin_src sh

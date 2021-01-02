@@ -409,7 +409,7 @@ sudo pacman -S mpv
 
 sudo pacman -S obs-studio
 
-sudo pacman -S soundkonverter
+sudo pacman -S soundconverter
 
 sudo pacman -S vlc
 
