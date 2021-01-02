@@ -111,6 +111,7 @@ done
 sudo pacman -S dolphin
 sudo pacman -S dolphin-plugins
 sudo pacman -S kate
+sudo pacman -S kcron
 sudo pacman -S kdeconnect
 sudo pacman -S konsole
 sudo pacman -S krunner
