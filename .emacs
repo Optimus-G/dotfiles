@@ -344,8 +344,7 @@
                 (equal major-mode 'python-mode         )
                 (equal major-mode 'makefile-gmake-mode ))
       (indent-region (point-min) (point-max)) ))
-  (save-buffer)
-  nil)
+  (save-buffer) nil)
 
 (defun fr ()
   "Format region: delete duplicate lines and sort lines."
@@ -447,17 +446,13 @@
 (unless package-archive-contents
   (ignore-errors (package-refresh-contents)))
 
+(install-package 'alect-themes)
+(if (package-installed-p 'alect-themes)
+    (load-theme 'alect-light t nil))
+
 (install-package 'spaceline)
 (if (require 'spaceline-config)
-    (spaceline-spacemacs-theme))
-
-(install-package 'doom-themes)
-(when (package-installed-p 'doom-themes)
-  (doom-themes-org-config         )
-  (doom-themes-visual-bell-config )
-  (setq-default doom-themes-enable-bold   t )
-  (setq-default doom-themes-enable-italic t )
-  (load-theme 'doom-sourcerer t nil))
+    (spaceline-emacs-theme))
 
 (install-package 'markdown-mode )
 (install-package 'org           )
