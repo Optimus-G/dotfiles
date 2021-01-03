@@ -98,14 +98,18 @@ sudo pacman -S xorg-xinit
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 
+sudo pacman -S breeze
 sudo pacman -S breeze-grub
 sudo pacman -S cronie
+sudo pacman -S oxygen
 sudo pacman -S packagekit-qt5
 sudo pacman -S phonon-qt5-gstreamer
 
 for i in {1..5}
 do
+  echo "=============================="
   echo "$i KDE Plasma installation ..."
+  echo "=============================="
   sudo pacman -S plasma-meta
   sudo pacman -S kde-system-meta
 done
