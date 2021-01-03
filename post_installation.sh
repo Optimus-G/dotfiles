@@ -42,8 +42,6 @@ sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
 sudo pacman -S ttf-opensans
-sudo pacman -S ttf-roboto
-sudo pacman -S ttf-roboto-mono
 sudo pacman -S woff-fira-code
 sudo pacman -S woff2-fira-code
 
