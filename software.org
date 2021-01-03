@@ -668,10 +668,6 @@ sudo pacman -S audacity
 #+begin_src sh
 sudo pacman -S cmus
 #+end_src
-*** [[http://fy.chalmers.se/~appro/linux/DVD+RW/][dvd+rw-tools]]
-#+begin_src sh
-sudo pacman -S dvd+rw-tools
-#+end_src
 *** [[https://wiki.gnome.org/Apps/EasyTAG][EasyTAG]]
 #+begin_src sh
 sudo pacman -S easytag
