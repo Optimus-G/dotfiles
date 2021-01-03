@@ -119,8 +119,6 @@ sudo pacman -S tree
 
 sudo pacman -S postgresql
 
-sudo pacman -S pgadmin4
-
 sudo pacman -S sqlite
 
 sudo pacman -S unixodbc

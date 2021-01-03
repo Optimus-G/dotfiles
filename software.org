@@ -191,10 +191,6 @@ sudo pacman -S tree
 #+begin_src sh
 sudo pacman -S postgresql
 #+end_src
-**** [[https://www.pgadmin.org/][pgAdmin]]
-#+begin_src sh
-sudo pacman -S pgadmin4
-#+end_src
 *** [[https://www.sqlite.org/][SQLite]]
 #+begin_src sh
 sudo pacman -S sqlite
