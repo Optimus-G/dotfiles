@@ -177,6 +177,8 @@ sudo pacman -S binutils
 
 sudo pacman -S make
 
+sudo pacman -S gmp
+
 sudo pacman -S global
 
 sudo pacman -S time
@@ -278,6 +280,9 @@ sudo pacman -S openmpi
 sudo pacman -S openocd
 
 sudo pacman -S perf
+
+yay -S petsc
+yay -S slepc
 
 sudo pacman -S python
 sudo pacman -S python-docs

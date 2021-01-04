@@ -298,6 +298,10 @@ sudo pacman -S binutils
 #+begin_src sh
 sudo pacman -S make
 #+end_src
+*** [[https://gmplib.org/][GMP]]
+#+begin_src sh
+sudo pacman -S gmp
+#+end_src
 *** [[https://www.gnu.org/software/global/][GNU GLOBAL]]
 #+begin_src sh
 sudo pacman -S global
@@ -462,6 +466,11 @@ sudo pacman -S openocd
 *** [[https://www.kernel.org/][perf]]
 #+begin_src sh
 sudo pacman -S perf
+#+end_src
+*** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
+#+begin_src sh
+yay -S petsc
+yay -S slepc
 #+end_src
 *** [[https://www.python.org/][Python]]
 #+begin_src sh

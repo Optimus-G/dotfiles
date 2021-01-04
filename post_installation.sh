@@ -11,15 +11,6 @@ cd yay
 makepkg -si
 cd .. && rm -rf yay/
 
-yay -S tuned
-sudo systemctl start  tuned
-sudo systemctl enable tuned
-if [ "$system_type" = "test" ]; then
-  tuned-adm profile virtual-guest # for QEMU/KVM
-else
-  tuned-adm profile desktop
-fi
-
 sudo pacman -S adobe-source-code-pro-fonts
 sudo pacman -S adobe-source-sans-pro-fonts
 sudo pacman -S adobe-source-serif-pro-fonts
@@ -42,8 +33,6 @@ sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
 sudo pacman -S ttf-opensans
-sudo pacman -S woff-fira-code
-sudo pacman -S woff2-fira-code
 
 sudo pacman -S bluez
 sudo pacman -S bluez-cups
@@ -129,8 +118,8 @@ sudo pacman -S xdg-utils
 xdg-user-dirs-update
 
 sudo pacman -S archlinux-wallpaper
-sudo pacman -S materia-kde
 sudo pacman -S materia-gtk-theme
+sudo pacman -S materia-kde
 sudo pacman -S papirus-icon-theme
 
 sudo pacman -S tmux

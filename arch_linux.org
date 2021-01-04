@@ -187,17 +187,6 @@ cd yay
 makepkg -si
 cd .. && rm -rf yay/
 #+end_src
-** [[https://github.com/redhat-performance/tuned][Tuned]]
-#+begin_src sh :tangle post_installation.sh
-yay -S tuned
-sudo systemctl start  tuned
-sudo systemctl enable tuned
-if [ "$system_type" = "test" ]; then
-  tuned-adm profile virtual-guest # for QEMU/KVM
-else
-  tuned-adm profile desktop
-fi
-#+end_src
 ** Fonts
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S adobe-source-code-pro-fonts
@@ -222,8 +211,6 @@ sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
 sudo pacman -S ttf-opensans
-sudo pacman -S woff-fira-code
-sudo pacman -S woff2-fira-code
 #+end_src
 ** Drivers
 *** [[http://www.bluez.org/][BlueZ]]
@@ -330,8 +317,8 @@ xdg-user-dirs-update
 ** Themes
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S archlinux-wallpaper
-sudo pacman -S materia-kde
 sudo pacman -S materia-gtk-theme
+sudo pacman -S materia-kde
 sudo pacman -S papirus-icon-theme
 #+end_src
 ** [[https://github.com/tmux/tmux/wiki][tmux]]
