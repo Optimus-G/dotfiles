@@ -139,9 +139,6 @@ sudo pacman -S boost
 
 sudo pacman -S ccache
 
-sudo pacman -S ccfits
-sudo pacman -S cfitsio
-
 sudo pacman -S cimg
 
 sudo pacman -S cmake
@@ -156,8 +153,6 @@ sudo pacman -S ctags
 
 sudo pacman -S doxygen
 sudo pacman -S doxygen-docs
-
-sudo pacman -S eigen
 
 sudo pacman -S elfutils
 
@@ -177,8 +172,6 @@ sudo pacman -S binutils
 
 sudo pacman -S make
 
-sudo pacman -S gmp
-
 sudo pacman -S global
 
 sudo pacman -S time
@@ -189,8 +182,6 @@ sudo pacman -S gtest
 sudo pacman -S gperftools
 
 sudo pacman -S graphviz
-
-sudo pacman -S hdf5
 
 sudo pacman -S djvulibre
 sudo pacman -S libheif
@@ -215,12 +206,6 @@ sudo pacman -S nlohmann-json
 sudo pacman -S jsoncpp
 sudo pacman -S jsoncpp-doc
 
-sudo pacman -S blas
-sudo pacman -S cblas
-sudo pacman -S lapack
-sudo pacman -S lapack-doc
-sudo pacman -S lapacke
-
 sudo pacman -S libpqxx
 
 sudo pacman -S libuv
@@ -244,10 +229,6 @@ sudo pacman -S polly
 sudo pacman -S nasm
 
 sudo pacman -S ncurses
-
-sudo pacman -S netcdf
-sudo pacman -S netcdf-cxx
-sudo pacman -S netcdf-fortran
 
 sudo pacman -S ninja
 
@@ -280,9 +261,6 @@ sudo pacman -S openmpi
 sudo pacman -S openocd
 
 sudo pacman -S perf
-
-yay -S petsc
-yay -S slepc
 
 sudo pacman -S python
 sudo pacman -S python-docs
@@ -330,6 +308,13 @@ sudo pacman -S z3
 
 yay -S zeal
 
+sudo pacman -S ccfits
+sudo pacman -S cfitsio
+
+sudo pacman -S eigen
+
+sudo pacman -S gmp
+
 sudo pacman -S bc
 
 sudo pacman -S octave
@@ -338,8 +323,27 @@ sudo pacman -S gnuplot
 
 sudo pacman -S gsl
 
+sudo pacman -S blas
+sudo pacman -S cblas
+sudo pacman -S lapack
+sudo pacman -S lapack-doc
+sudo pacman -S lapacke
+
+sudo pacman -S blas
+sudo pacman -S cblas
+sudo pacman -S lapack
+sudo pacman -S lapack-doc
+sudo pacman -S lapacke
+
 sudo pacman -S maxima
 sudo pacman -S wxmaxima
+
+sudo pacman -S netcdf
+sudo pacman -S netcdf-cxx
+sudo pacman -S netcdf-fortran
+
+yay -S petsc
+yay -S slepc
 
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng

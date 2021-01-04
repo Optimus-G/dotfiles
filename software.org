@@ -228,11 +228,6 @@ sudo pacman -S boost
 #+begin_src sh
 sudo pacman -S ccache
 #+end_src
-*** [[https://heasarc.gsfc.nasa.gov/fitsio/][CFITSIO]]
-#+begin_src sh
-sudo pacman -S ccfits
-sudo pacman -S cfitsio
-#+end_src
 *** [[http://cimg.eu/][CImg]]
 #+begin_src sh
 sudo pacman -S cimg
@@ -259,10 +254,6 @@ sudo pacman -S ctags
 #+begin_src sh
 sudo pacman -S doxygen
 sudo pacman -S doxygen-docs
-#+end_src
-*** [[https://eigen.tuxfamily.org][Eigen]]
-#+begin_src sh
-sudo pacman -S eigen
 #+end_src
 *** [[https://sourceware.org/elfutils/][ELFUTILS]]
 #+begin_src sh
@@ -298,10 +289,6 @@ sudo pacman -S binutils
 #+begin_src sh
 sudo pacman -S make
 #+end_src
-*** [[https://gmplib.org/][GMP]]
-#+begin_src sh
-sudo pacman -S gmp
-#+end_src
 *** [[https://www.gnu.org/software/global/][GNU GLOBAL]]
 #+begin_src sh
 sudo pacman -S global
@@ -322,10 +309,6 @@ sudo pacman -S gperftools
 *** [[https://www.graphviz.org/][Graphviz]]
 #+begin_src sh
 sudo pacman -S graphviz
-#+end_src
-*** [[https://www.hdfgroup.org/hdf5][HDF5]]
-#+begin_src sh
-sudo pacman -S hdf5
 #+end_src
 *** Image Libraries
 #+begin_src sh
@@ -357,14 +340,6 @@ sudo pacman -S nlohmann-json
 #+begin_src sh
 sudo pacman -S jsoncpp
 sudo pacman -S jsoncpp-doc
-#+end_src
-*** [[https://www.netlib.org/lapack][LAPACK]]
-#+begin_src sh
-sudo pacman -S blas
-sudo pacman -S cblas
-sudo pacman -S lapack
-sudo pacman -S lapack-doc
-sudo pacman -S lapacke
 #+end_src
 *** [[http://pqxx.org/development/libpqxx/][libpqxx]]
 #+begin_src sh
@@ -415,12 +390,6 @@ sudo pacman -S nasm
 #+begin_src sh
 sudo pacman -S ncurses
 #+end_src
-*** [[https://www.unidata.ucar.edu/software/netcdf/][NetCDF]]
-#+begin_src sh
-sudo pacman -S netcdf
-sudo pacman -S netcdf-cxx
-sudo pacman -S netcdf-fortran
-#+end_src
 *** [[https://ninja-build.org/][Ninja]]
 #+begin_src sh
 sudo pacman -S ninja
@@ -466,11 +435,6 @@ sudo pacman -S openocd
 *** [[https://www.kernel.org/][perf]]
 #+begin_src sh
 sudo pacman -S perf
-#+end_src
-*** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
-#+begin_src sh
-yay -S petsc
-yay -S slepc
 #+end_src
 *** [[https://www.python.org/][Python]]
 #+begin_src sh
@@ -549,6 +513,19 @@ sudo pacman -S z3
 yay -S zeal
 #+end_src
 ** Science
+*** [[https://heasarc.gsfc.nasa.gov/fitsio/][CFITSIO]]
+#+begin_src sh
+sudo pacman -S ccfits
+sudo pacman -S cfitsio
+#+end_src
+*** [[https://eigen.tuxfamily.org][Eigen]]
+#+begin_src sh
+sudo pacman -S eigen
+#+end_src
+*** [[https://gmplib.org/][GMP]]
+#+begin_src sh
+sudo pacman -S gmp
+#+end_src
 *** [[https://www.gnu.org/software/bc/][GNU bc]]
 #+begin_src sh
 sudo pacman -S bc
@@ -565,10 +542,37 @@ sudo pacman -S gnuplot
 #+begin_src sh
 sudo pacman -S gsl
 #+end_src
+*** [[https://www.netlib.org/lapack][LAPACK]]
+#+begin_src sh
+sudo pacman -S blas
+sudo pacman -S cblas
+sudo pacman -S lapack
+sudo pacman -S lapack-doc
+sudo pacman -S lapacke
+#+end_src
+*** [[https://www.netlib.org/lapack][LAPACK]]
+#+begin_src sh
+sudo pacman -S blas
+sudo pacman -S cblas
+sudo pacman -S lapack
+sudo pacman -S lapack-doc
+sudo pacman -S lapacke
+#+end_src
 *** [[http://maxima.sourceforge.net][Maxima]]
 #+begin_src sh
 sudo pacman -S maxima
 sudo pacman -S wxmaxima
+#+end_src
+*** [[https://www.unidata.ucar.edu/software/netcdf/][NetCDF]]
+#+begin_src sh
+sudo pacman -S netcdf
+sudo pacman -S netcdf-cxx
+sudo pacman -S netcdf-fortran
+#+end_src
+*** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
+#+begin_src sh
+yay -S petsc
+yay -S slepc
 #+end_src
 *** [[https://github.com/tesseract-ocr/tesseract][Tesseract]]
 #+begin_src sh
