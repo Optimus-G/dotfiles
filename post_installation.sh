@@ -43,6 +43,7 @@ sudo pacman -S cups-pdf
 sudo pacman -S cups-pk-helper
 sudo pacman -S foomatic-db-gutenprint-ppds
 sudo pacman -S gutenprint
+sudo pacman -S pappl
 sudo pacman -S print-manager
 sudo pacman -S skanlite
 sudo pacman -S system-config-printer
