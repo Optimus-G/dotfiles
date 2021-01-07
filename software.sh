@@ -125,6 +125,11 @@ sudo pacman -S sqlite
 
 sudo pacman -S unixodbc
 
+sudo pacman -S aarch64-linux-gnu-binutils
+sudo pacman -S aarch64-linux-gnu-gcc
+sudo pacman -S aarch64-linux-gnu-gdb
+sudo pacman -S aarch64-linux-gnu-glibc
+
 sudo pacman -S asio
 
 sudo pacman -S autoconf

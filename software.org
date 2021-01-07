@@ -204,6 +204,13 @@ sudo pacman -S sqlite
 sudo pacman -S unixodbc
 #+end_src
 ** Programming
+*** [[https://www.arm.com/][ARM64]]
+#+begin_src sh
+sudo pacman -S aarch64-linux-gnu-binutils
+sudo pacman -S aarch64-linux-gnu-gcc
+sudo pacman -S aarch64-linux-gnu-gdb
+sudo pacman -S aarch64-linux-gnu-glibc
+#+end_src
 *** [[https://think-async.com/Asio/][Asio C++ Library]]
 #+begin_src sh
 sudo pacman -S asio
