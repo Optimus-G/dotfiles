@@ -110,6 +110,10 @@ yay         -S hunspell-ru
 #+begin_src sh
 sudo pacman -S ispell
 #+end_src
+**** [[https://www.languagetool.org/][LanguageTool]]
+#+begin_src sh
+sudo pacman -S languagetool
+#+end_src
 *** [[http://www.greenwoodsoftware.com/less][less]]
 #+begin_src sh
 sudo pacman -S less
@@ -550,14 +554,6 @@ sudo pacman -S lapack
 sudo pacman -S lapack-doc
 sudo pacman -S lapacke
 #+end_src
-*** [[https://www.netlib.org/lapack][LAPACK]]
-#+begin_src sh
-sudo pacman -S blas
-sudo pacman -S cblas
-sudo pacman -S lapack
-sudo pacman -S lapack-doc
-sudo pacman -S lapacke
-#+end_src
 *** [[http://maxima.sourceforge.net][Maxima]]
 #+begin_src sh
 sudo pacman -S maxima
@@ -619,6 +615,7 @@ sudo pacman -S lyx
 sudo pacman -S firefox
 sudo pacman -S firefox-i18n-en-us
 sudo pacman -S firefox-i18n-ru
+sudo pacman -S plasma-browser-integration
 #+end_src
 *** [[https://apps.kde.org/en/okular][Okular]]
 #+begin_src sh
@@ -677,9 +674,9 @@ sudo pacman -S krita
 #+begin_src sh
 sudo pacman -S audacity
 #+end_src
-*** [[https://cmus.github.io/][cmus]]
+*** [[https://www.clementine-player.org/][Clementine]]
 #+begin_src sh
-sudo pacman -S cmus
+sudo pacman -S clementine
 #+end_src
 *** [[https://wiki.gnome.org/Apps/EasyTAG][EasyTAG]]
 #+begin_src sh

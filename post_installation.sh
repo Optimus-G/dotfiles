@@ -68,13 +68,16 @@ sudo pacman -S gvfs-smb
 
 sudo pacman -S jack
 
+sudo pacman -S libinput
+sudo pacman -S xf86-input-libinput
+sudo pacman -S xf86-input-synaptics
+
 sudo pacman -S ocl-icd
 sudo pacman -S opencl-clhpp
 sudo pacman -S opencl-headers
 sudo pacman -S opencl-mesa
 sudo pacman -S pocl
 
-sudo pacman -S xf86-input-synaptics
 sudo pacman -S xorg
 sudo pacman -S xorg-docs
 sudo pacman -S xorg-fonts-cyrillic
@@ -113,6 +116,8 @@ sudo pacman -S sddm
 sudo pacman -S sddm-kcm
 sudo systemctl enable sddm.service
 
+sudo pacman -S xdg-desktop-portal
+sudo pacman -S xdg-desktop-portal-kde
 sudo pacman -S xdg-user-dirs
 sudo pacman -S xdg-utils
 xdg-user-dirs-update
@@ -196,7 +201,6 @@ sudo pacman -S wget
 
 sudo pacman -S xsel
 sudo pacman -S xclip
-
 # localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 
 echo "xrdb -merge .Xresources"      >> $HOME/.xinitrc
@@ -251,6 +255,7 @@ if [ -d /data ]; then
   mkdir -p /data/torrents
 fi
 
+rm -f  $HOME/.gtkrc*
 rm -rf $HOME/.cache/kde*
 rm -rf $HOME/.cache/plasma*
 rm -rf $HOME/.config/kde*
@@ -260,7 +265,12 @@ rm -rf $HOME/.local/share/aurorae*
 rm -rf $HOME/.local/share/kde*
 rm -rf $HOME/.local/share/plasma*
 
+echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-reboot
+echo    "Configuration was done !   "
+read -p "Press 'enter' to reboot... "
+
+sleep 5 && reboot

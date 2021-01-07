@@ -17,15 +17,19 @@ ping -c 5 archlinux.org
 #+begin_src sh :tangle no
 timedatectl set-ntp true
 #+end_src
-** Partition the disks
-#+begin_src sh :tangle no
-fdisk
-mkfs.ext4
-mkfs.fat -F32
-mkswap
-mount
-swapon
-#+end_src
+** Partition the disks (fdisk)
+| NUMBER | DISK | MOUNT POINT | PARTITION SIZE | FILE SYSTEM | COMMANDS             |
+|--------+------+-------------+----------------+-------------+----------------------|
+|      1 | NVME | /           | +100G          | ext4        | mkfs.ext4, mount     |
+|        |      | /boot       | +1G            | ext4        | mkfs.ext4, mount     |
+|        |      | /boot/efi   | +512M          | FAT32       | mkfs.fat -F32, mount |
+|        |      | SWAP        | +8G            | swap        | mkswap, swapon       |
+|--------+------+-------------+----------------+-------------+----------------------|
+|      2 | SSD  | /home       | +100G          | ext4        | mkfs.ext4, mount     |
+|        |      | /var        | +32G           | ext4        | mkfs.ext4, mount     |
+|--------+------+-------------+----------------+-------------+----------------------|
+|      3 | HDD  | /backup     | +100G          | ext4        | mkfs.ext4, mount     |
+|        |      | /data       | +...G          | ext4        | mkfs.ext4, mount     |
 ** Install essential packages
 #+begin_src sh :tangle no
 pacstrap /mnt amd-ucode
@@ -153,7 +157,9 @@ pacman -S wpa_supplicant
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-exit
+echo    "Base installation was finished ! "
+read -p "Press 'enter' to reboot...       "
+sleep 5 && exit
 #+end_src
 ** End of installation
 #+begin_src sh :tangle no
@@ -257,6 +263,12 @@ sudo pacman -S gvfs-smb
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S jack
 #+end_src
+*** [[https://www.freedesktop.org/wiki/Software/libinput/][libinput]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S libinput
+sudo pacman -S xf86-input-libinput
+sudo pacman -S xf86-input-synaptics
+#+end_src
 *** [[https://www.khronos.org/opencl/][OpenCL]]
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S ocl-icd
@@ -267,7 +279,6 @@ sudo pacman -S pocl
 #+end_src
 ** [[https://www.x.org/wiki/][X Window System]]
 #+begin_src sh :tangle post_installation.sh
-sudo pacman -S xf86-input-synaptics
 sudo pacman -S xorg
 sudo pacman -S xorg-docs
 sudo pacman -S xorg-fonts-cyrillic
@@ -310,6 +321,8 @@ sudo systemctl enable sddm.service
 #+end_src
 ** xdg
 #+begin_src sh :tangle post_installation.sh
+sudo pacman -S xdg-desktop-portal
+sudo pacman -S xdg-desktop-portal-kde
 sudo pacman -S xdg-user-dirs
 sudo pacman -S xdg-utils
 xdg-user-dirs-update
@@ -413,7 +426,6 @@ sudo pacman -S wget
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S xsel
 sudo pacman -S xclip
-
 # localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 #+end_src
 ** .xinitrc
@@ -476,6 +488,7 @@ if [ -d /data ]; then
   mkdir -p /data/torrents
 fi
 
+rm -f  $HOME/.gtkrc*
 rm -rf $HOME/.cache/kde*
 rm -rf $HOME/.cache/plasma*
 rm -rf $HOME/.config/kde*
@@ -485,8 +498,13 @@ rm -rf $HOME/.local/share/aurorae*
 rm -rf $HOME/.local/share/kde*
 rm -rf $HOME/.local/share/plasma*
 
+echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-reboot
+echo    "Configuration was done !   "
+read -p "Press 'enter' to reboot... "
+
+sleep 5 && reboot
 #+end_src

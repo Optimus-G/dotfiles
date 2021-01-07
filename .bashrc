@@ -22,6 +22,7 @@ alias commit="git commit -m"
 alias cp="cp -v"
 alias cv="vim $HOME/.vimrc"
 alias df="df -Tha --total | column -t"
+alias diff="diff --color=auto"
 alias du="du -ach | sort -h"
 alias e="emacs"
 alias egrep="egrep --color=auto"
@@ -31,6 +32,7 @@ alias free="free -mt"
 alias grep="grep --color=auto"
 alias h="history"
 alias hacker="clear && cat /dev/urandom | hexdump -C | pv -qL 10"
+alias ip="ip -color=auto"
 alias j="jobs -l"
 alias l="less"
 alias la="ls -lah --color=auto"
@@ -76,7 +78,7 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE=".:..:c:h:x:cd:la:ll:ls"
 export HISTSIZE=10240
 export PROMPT_COMMAND="history -a"
-export PS1=$'\n\w \U27A4 '
+export PS1=$'\n\w \e[0;32m$(tput bold)\U2C96 \e[m'
 export TERM=xterm-256color
 export VISUAL="$EDITOR"
 

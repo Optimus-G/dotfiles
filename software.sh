@@ -65,6 +65,8 @@ yay         -S hunspell-ru
 
 sudo pacman -S ispell
 
+sudo pacman -S languagetool
+
 sudo pacman -S less
 
 sudo pacman -S man-db
@@ -329,12 +331,6 @@ sudo pacman -S lapack
 sudo pacman -S lapack-doc
 sudo pacman -S lapacke
 
-sudo pacman -S blas
-sudo pacman -S cblas
-sudo pacman -S lapack
-sudo pacman -S lapack-doc
-sudo pacman -S lapacke
-
 sudo pacman -S maxima
 sudo pacman -S wxmaxima
 
@@ -371,6 +367,7 @@ sudo pacman -S lyx
 sudo pacman -S firefox
 sudo pacman -S firefox-i18n-en-us
 sudo pacman -S firefox-i18n-ru
+sudo pacman -S plasma-browser-integration
 
 sudo pacman -S okular
 
@@ -405,7 +402,7 @@ sudo pacman -S krita
 
 sudo pacman -S audacity
 
-sudo pacman -S cmus
+sudo pacman -S clementine
 
 sudo pacman -S easytag
 
