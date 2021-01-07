@@ -271,7 +271,6 @@ echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-echo    "Configuration was done !   "
-read -p "Press 'enter' to reboot... "
-
+echo    "Configuration was done!"
+read -p "Press 'enter' to reboot..."
 sleep 5 && reboot

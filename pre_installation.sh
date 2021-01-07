@@ -87,6 +87,6 @@ pacman -S wpa_supplicant
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo    "Base installation was finished ! "
-read -p "Press 'enter' to reboot...       "
+echo    "Base installation was finished!"
+read -p "Press 'enter' to reboot..."
 sleep 5 && exit
