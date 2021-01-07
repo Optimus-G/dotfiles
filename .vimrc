@@ -23,12 +23,8 @@ filetype plugin        on
 filetype plugin indent on
 syntax                 on
 
-colorscheme default
-highlight Normal ctermbg=None
-highlight Pmenu ctermbg=gray
-
+colorscheme industry
 language messages POSIX
-
 runtime macros/matchit.vim
 
 if !empty(glob("$HOME/.vim/plugged"))
