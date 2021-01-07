@@ -23,10 +23,10 @@ timedatectl set-ntp true
 |      1 | NVME | /           | +100G          | ext4        | mkfs.ext4, mount     |
 |        |      | /boot       | +1G            | ext4        | mkfs.ext4, mount     |
 |        |      | /boot/efi   | +512M          | FAT32       | mkfs.fat -F32, mount |
-|        |      | SWAP        | +8G            | swap        | mkswap, swapon       |
 |--------+------+-------------+----------------+-------------+----------------------|
 |      2 | SSD  | /home       | +100G          | ext4        | mkfs.ext4, mount     |
 |        |      | /var        | +32G           | ext4        | mkfs.ext4, mount     |
+|        |      | SWAP        | +8G            | swap        | mkswap, swapon       |
 |--------+------+-------------+----------------+-------------+----------------------|
 |      3 | HDD  | /backup     | +100G          | ext4        | mkfs.ext4, mount     |
 |        |      | /data       | +...G          | ext4        | mkfs.ext4, mount     |
