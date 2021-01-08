@@ -78,7 +78,7 @@ export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE=".:..:c:h:x:cd:la:ll:ls"
 export HISTSIZE=10240
 export PROMPT_COMMAND="history -a"
-export PS1=$'\n\w \e[0;32m$(tput bold)\U2C96 \e[m'
+export PS1=$'\n\w $(tput bold)\U2C96 '
 export TERM=xterm-256color
 export VISUAL="$EDITOR"
 
