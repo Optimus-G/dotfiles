@@ -1,12 +1,15 @@
 set nocompatible
 scriptencoding utf-8
 let g:mapleader = " "
+language messages POSIX
+runtime macros/matchit.vim
 
 call plug#begin("$HOME/.vim/plugged")
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'morhetz/gruvbox'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -23,11 +26,8 @@ filetype plugin        on
 filetype plugin indent on
 syntax                 on
 
-colorscheme industry
-language messages POSIX
-runtime macros/matchit.vim
-
 if !empty(glob("$HOME/.vim/plugged"))
+  colorscheme gruvbox
   nnoremap // :BLines!<CR>
   nnoremap <leader>fi :YcmCompleter FixIt<CR>
   nnoremap <leader>gt :YcmCompleter GoTo<CR>
