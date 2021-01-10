@@ -281,6 +281,8 @@ sudo pacman -S radare2-cutter
 
 yay -S rr
 
+sudo pacman -S sdcc
+
 sudo pacman -S sdl2
 sudo pacman -S sdl2_gfx
 sudo pacman -S sdl2_image
@@ -299,6 +301,9 @@ sudo pacman -S swig
 
 sudo pacman -S tcl
 sudo pacman -S tk
+
+sudo pacman -S avr-gcc
+sudo pacman -S avr-libc
 
 sudo pacman -S valgrind
 

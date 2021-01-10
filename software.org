@@ -467,6 +467,10 @@ sudo pacman -S radare2-cutter
 #+begin_src sh
 yay -S rr
 #+end_src
+*** [[http://sdcc.sourceforge.net/][SDCC]]
+#+begin_src sh
+sudo pacman -S sdcc
+#+end_src
 *** [[https://www.libsdl.org/][SDL2]]
 #+begin_src sh
 sudo pacman -S sdl2
@@ -497,6 +501,11 @@ sudo pacman -S swig
 #+begin_src sh
 sudo pacman -S tcl
 sudo pacman -S tk
+#+end_src
+*** [[https://gcc.gnu.org/][The GNU AVR Compiler Collection]]
+#+begin_src sh
+sudo pacman -S avr-gcc
+sudo pacman -S avr-libc
 #+end_src
 *** [[http://valgrind.org/][Valgrind]]
 #+begin_src sh
