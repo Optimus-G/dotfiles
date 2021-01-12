@@ -210,6 +210,10 @@ sudo pacman -S aarch64-linux-gnu-binutils
 sudo pacman -S aarch64-linux-gnu-gcc
 sudo pacman -S aarch64-linux-gnu-gdb
 sudo pacman -S aarch64-linux-gnu-glibc
+sudo pacman -S arm-none-eabi-binutils
+sudo pacman -S arm-none-eabi-gcc
+sudo pacman -S arm-none-eabi-gdb
+sudo pacman -S arm-none-eabi-newlib
 #+end_src
 *** [[https://think-async.com/Asio/][Asio C++ Library]]
 #+begin_src sh
@@ -488,6 +492,10 @@ sudo pacman -S sfml
 *** [[https://www.shellcheck.net][ShellCheck]]
 #+begin_src sh
 sudo pacman -S shellcheck
+#+end_src
+*** [[https://github.com/texane/stlink][stlink]]
+#+begin_src sh
+sudo pacman -S stlink
 #+end_src
 *** [[https://strace.io/][strace]]
 #+begin_src sh
