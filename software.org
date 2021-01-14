@@ -760,10 +760,6 @@ sudo pacman -S hcxkeys
 sudo pacman -S hcxtools
 sudo pacman -S john
 #+end_src
-*** [[https://www.kde.org/applications/internet/ktorrent/][KTorrent]]
-#+begin_src sh
-sudo pacman -S ktorrent
-#+end_src
 *** [[https://nmap.org/][Nmap]]
 #+begin_src sh
 sudo pacman -S nmap
@@ -781,6 +777,11 @@ sudo pacman -S openssl
 *** [[https://openvpn.net/index.php/open-source.html][OpenVPN]]
 #+begin_src sh
 sudo pacman -S openvpn
+#+end_src
+*** [[https://www.qbittorrent.org/][qBittorrent]]
+#+begin_src sh
+sudo pacman -S qbittorrent
+sudo pacman -S qbittorrent-nox
 #+end_src
 *** [[https://www.remmina.org/][Remmina]]
 #+begin_src sh

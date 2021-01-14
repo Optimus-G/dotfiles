@@ -451,8 +451,6 @@ sudo pacman -S hcxkeys
 sudo pacman -S hcxtools
 sudo pacman -S john
 
-sudo pacman -S ktorrent
-
 sudo pacman -S nmap
 
 sudo pacman -S ipset
@@ -462,6 +460,9 @@ sudo pacman -S sshguard
 sudo pacman -S openssl
 
 sudo pacman -S openvpn
+
+sudo pacman -S qbittorrent
+sudo pacman -S qbittorrent-nox
 
 sudo pacman -S freerdp
 sudo pacman -S libsecret
