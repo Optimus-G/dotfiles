@@ -512,8 +512,11 @@ sudo pacman -S tk
 #+end_src
 *** [[https://gcc.gnu.org/][The GNU AVR Compiler Collection]]
 #+begin_src sh
+sudo pacman -S avr-binutils
 sudo pacman -S avr-gcc
+sudo pacman -S avr-gdb
 sudo pacman -S avr-libc
+sudo pacman -S avrdude
 #+end_src
 *** [[http://valgrind.org/][Valgrind]]
 #+begin_src sh

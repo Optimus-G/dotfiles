@@ -308,8 +308,11 @@ sudo pacman -S swig
 sudo pacman -S tcl
 sudo pacman -S tk
 
+sudo pacman -S avr-binutils
 sudo pacman -S avr-gcc
+sudo pacman -S avr-gdb
 sudo pacman -S avr-libc
+sudo pacman -S avrdude
 
 sudo pacman -S valgrind
 
