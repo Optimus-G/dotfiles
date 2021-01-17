@@ -125,15 +125,6 @@ sudo pacman -S sqlite
 
 sudo pacman -S unixodbc
 
-sudo pacman -S aarch64-linux-gnu-binutils
-sudo pacman -S aarch64-linux-gnu-gcc
-sudo pacman -S aarch64-linux-gnu-gdb
-sudo pacman -S aarch64-linux-gnu-glibc
-sudo pacman -S arm-none-eabi-binutils
-sudo pacman -S arm-none-eabi-gcc
-sudo pacman -S arm-none-eabi-gdb
-sudo pacman -S arm-none-eabi-newlib
-
 sudo pacman -S asio
 
 sudo pacman -S autoconf
@@ -237,6 +228,25 @@ sudo pacman -S openmp
 
 sudo pacman -S polly
 
+sudo pacman -S aarch64-linux-gnu-binutils
+sudo pacman -S aarch64-linux-gnu-gcc
+sudo pacman -S aarch64-linux-gnu-gdb
+sudo pacman -S aarch64-linux-gnu-glibc
+sudo pacman -S arm-none-eabi-binutils
+sudo pacman -S arm-none-eabi-gcc
+sudo pacman -S arm-none-eabi-gdb
+sudo pacman -S arm-none-eabi-newlib
+
+sudo pacman -S avr-binutils
+sudo pacman -S avr-gcc
+sudo pacman -S avr-gdb
+sudo pacman -S avr-libc
+sudo pacman -S avrdude
+
+sudo pacman -S gpsim
+sudo pacman -S gputils
+sudo pacman -S sdcc
+
 sudo pacman -S nasm
 
 sudo pacman -S ncurses
@@ -285,8 +295,6 @@ sudo pacman -S radare2-cutter
 
 yay -S rr
 
-sudo pacman -S sdcc
-
 sudo pacman -S sdl2
 sudo pacman -S sdl2_gfx
 sudo pacman -S sdl2_image
@@ -307,12 +315,6 @@ sudo pacman -S swig
 
 sudo pacman -S tcl
 sudo pacman -S tk
-
-sudo pacman -S avr-binutils
-sudo pacman -S avr-gcc
-sudo pacman -S avr-gdb
-sudo pacman -S avr-libc
-sudo pacman -S avrdude
 
 sudo pacman -S valgrind
 

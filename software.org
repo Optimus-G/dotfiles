@@ -204,17 +204,6 @@ sudo pacman -S sqlite
 sudo pacman -S unixodbc
 #+end_src
 ** Programming
-*** [[https://www.arm.com/][ARM64]]
-#+begin_src sh
-sudo pacman -S aarch64-linux-gnu-binutils
-sudo pacman -S aarch64-linux-gnu-gcc
-sudo pacman -S aarch64-linux-gnu-gdb
-sudo pacman -S aarch64-linux-gnu-glibc
-sudo pacman -S arm-none-eabi-binutils
-sudo pacman -S arm-none-eabi-gcc
-sudo pacman -S arm-none-eabi-gdb
-sudo pacman -S arm-none-eabi-newlib
-#+end_src
 *** [[https://think-async.com/Asio/][Asio C++ Library]]
 #+begin_src sh
 sudo pacman -S asio
@@ -397,6 +386,32 @@ sudo pacman -S openmp
 #+begin_src sh
 sudo pacman -S polly
 #+end_src
+*** Microcontrollers
+**** [[https://www.arm.com/][ARM64]]
+#+begin_src sh
+sudo pacman -S aarch64-linux-gnu-binutils
+sudo pacman -S aarch64-linux-gnu-gcc
+sudo pacman -S aarch64-linux-gnu-gdb
+sudo pacman -S aarch64-linux-gnu-glibc
+sudo pacman -S arm-none-eabi-binutils
+sudo pacman -S arm-none-eabi-gcc
+sudo pacman -S arm-none-eabi-gdb
+sudo pacman -S arm-none-eabi-newlib
+#+end_src
+**** [[https://en.wikipedia.org/wiki/AVR_microcontrollers][AVR]]
+#+begin_src sh
+sudo pacman -S avr-binutils
+sudo pacman -S avr-gcc
+sudo pacman -S avr-gdb
+sudo pacman -S avr-libc
+sudo pacman -S avrdude
+#+end_src
+**** [[https://en.wikipedia.org/wiki/PIC_microcontrollers][PIC]]
+#+begin_src sh
+sudo pacman -S gpsim
+sudo pacman -S gputils
+sudo pacman -S sdcc
+#+end_src
 *** [[https://www.nasm.us/][NASM]]
 #+begin_src sh
 sudo pacman -S nasm
@@ -471,10 +486,6 @@ sudo pacman -S radare2-cutter
 #+begin_src sh
 yay -S rr
 #+end_src
-*** [[http://sdcc.sourceforge.net/][SDCC]]
-#+begin_src sh
-sudo pacman -S sdcc
-#+end_src
 *** [[https://www.libsdl.org/][SDL2]]
 #+begin_src sh
 sudo pacman -S sdl2
@@ -509,14 +520,6 @@ sudo pacman -S swig
 #+begin_src sh
 sudo pacman -S tcl
 sudo pacman -S tk
-#+end_src
-*** [[https://gcc.gnu.org/][The GNU AVR Compiler Collection]]
-#+begin_src sh
-sudo pacman -S avr-binutils
-sudo pacman -S avr-gcc
-sudo pacman -S avr-gdb
-sudo pacman -S avr-libc
-sudo pacman -S avrdude
 #+end_src
 *** [[http://valgrind.org/][Valgrind]]
 #+begin_src sh
