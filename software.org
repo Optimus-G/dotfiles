@@ -831,12 +831,16 @@ sudo pacman -S wesnoth
 
 * Clean
 #+begin_src sh
-sudo paccache  -rk1
+sudo paccache  -rk0
 sudo pacman    -Rns $(pacman -Qtdq)
-sudo pacman    -Sc
+sudo pacman    -Scc
 sudo pacman    -Syu
-yay -Yc && yay -Sc && yay -Syu
-sudo updatedb && yay -Ps
+if [ -f /usr/bin/yay ]; then
+  yay -Yc
+  yay -Sc && yay -Syu
+  yay -Ps
+fi
+sudo updatedb
 #+end_src
 
 * Enable normal user account to use KVM

@@ -47,8 +47,9 @@ sudo pacman -S pappl
 sudo pacman -S print-manager
 sudo pacman -S skanlite
 sudo pacman -S system-config-printer
-sudo systemctl start  org.cups.cupsd.service
+
 sudo systemctl enable org.cups.cupsd.service
+sudo systemctl start  org.cups.cupsd.service
 
 if [ "$system_type" = "test" ]; then
   sudo pacman -S xf86-video-fbdev # for QEMU/KVM
@@ -247,6 +248,9 @@ cp $HOME/dotfiles/.tmux.conf $HOME
 cp $HOME/dotfiles/.vimrc     $HOME
 
 sudo systemctl enable fstrim.timer
+
+sudo systemctl enable paccache.timer
+sudo systemctl start  paccache.timer
 
 if [ -d /data ]; then
   sudo chown "$USER":"$USER" /data

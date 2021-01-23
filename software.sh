@@ -493,9 +493,9 @@ sudo pacman -S openttd-opensfx
 
 sudo pacman -S wesnoth
 
-sudo paccache  -rk1
+sudo paccache  -rk0
 sudo pacman    -Rns $(pacman -Qtdq)
-sudo pacman    -Sc
+sudo pacman    -Scc
 sudo pacman    -Syu
 yay -Yc && yay -Sc && yay -Syu
 sudo updatedb && yay -Ps
