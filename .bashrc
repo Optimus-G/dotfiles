@@ -98,6 +98,19 @@ if [ -f "$HOME/.fzf.bash" ]; then
   fi
 fi
 
+upgrade_and_clean () {
+  sudo paccache -rk1
+  sudo pacman -Rns $(pacman -Qtdq)
+  sudo pacman -Scc
+  sudo pacman -Syu
+  if [ -f /usr/bin/yay ]; then
+    yay -Yc
+    yay -Sc && yay -Syu
+    yay -Ps
+  fi
+  sudo updatedb
+}
+
 extract () {
   archive=$1
   if [ -f "$archive" ]; then
