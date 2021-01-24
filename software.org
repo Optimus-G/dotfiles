@@ -619,6 +619,10 @@ sudo pacman -S tesseract-data-rus
 #+begin_src sh
 sudo pacman -S calibre
 #+end_src
+*** [[https://github.com/flameshot-org/flameshot][Flameshot]]
+#+begin_src sh
+sudo pacman -S flameshot
+#+end_src
 *** [[https://www.ghostscript.com/][Ghostscript]]
 #+begin_src sh
 sudo pacman -S ghostscript

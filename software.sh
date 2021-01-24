@@ -372,6 +372,8 @@ sudo pacman -S tesseract-data-rus
 
 sudo pacman -S calibre
 
+sudo pacman -S flameshot
+
 sudo pacman -S ghostscript
 
 sudo pacman -S gwenview
