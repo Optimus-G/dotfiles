@@ -243,9 +243,15 @@ sudo pacman -S avr-gdb
 sudo pacman -S avr-libc
 sudo pacman -S avrdude
 
+sudo pacman -S openocd
+
 sudo pacman -S gpsim
 sudo pacman -S gputils
 sudo pacman -S sdcc
+
+sudo pacman -S stlink
+
+sudo pacman -S urjtag
 
 sudo pacman -S nasm
 
@@ -279,8 +285,6 @@ sudo pacman -S openjdk-src
 
 sudo pacman -S openmpi
 
-sudo pacman -S openocd
-
 sudo pacman -S perf
 
 sudo pacman -S python
@@ -306,8 +310,6 @@ sudo pacman -S csfml
 sudo pacman -S sfml
 
 sudo pacman -S shellcheck
-
-sudo pacman -S stlink
 
 sudo pacman -S strace
 
@@ -497,8 +499,12 @@ sudo paccache  -rk0
 sudo pacman    -Rns $(pacman -Qtdq)
 sudo pacman    -Scc
 sudo pacman    -Syu
-yay -Yc && yay -Sc && yay -Syu
-sudo updatedb && yay -Ps
+if [ -f /usr/bin/yay ]; then
+  yay -Yc
+  yay -Sc && yay -Syu
+  yay -Ps
+fi
+sudo updatedb
 
 sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service

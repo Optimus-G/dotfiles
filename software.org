@@ -406,11 +406,23 @@ sudo pacman -S avr-gdb
 sudo pacman -S avr-libc
 sudo pacman -S avrdude
 #+end_src
+**** [[http://openocd.org/][OpenOCD]]
+#+begin_src sh
+sudo pacman -S openocd
+#+end_src
 **** [[https://en.wikipedia.org/wiki/PIC_microcontrollers][PIC]]
 #+begin_src sh
 sudo pacman -S gpsim
 sudo pacman -S gputils
 sudo pacman -S sdcc
+#+end_src
+**** [[https://github.com/texane/stlink][stlink]]
+#+begin_src sh
+sudo pacman -S stlink
+#+end_src
+**** [[http://openocd.org/][UrJTAG]]
+#+begin_src sh
+sudo pacman -S urjtag
 #+end_src
 *** [[https://www.nasm.us/][NASM]]
 #+begin_src sh
@@ -458,10 +470,6 @@ sudo pacman -S openjdk-src
 #+begin_src sh
 sudo pacman -S openmpi
 #+end_src
-*** [[http://openocd.org/][OpenOCD]]
-#+begin_src sh
-sudo pacman -S openocd
-#+end_src
 *** [[https://www.kernel.org/][perf]]
 #+begin_src sh
 sudo pacman -S perf
@@ -503,10 +511,6 @@ sudo pacman -S sfml
 *** [[https://www.shellcheck.net][ShellCheck]]
 #+begin_src sh
 sudo pacman -S shellcheck
-#+end_src
-*** [[https://github.com/texane/stlink][stlink]]
-#+begin_src sh
-sudo pacman -S stlink
 #+end_src
 *** [[https://strace.io/][strace]]
 #+begin_src sh
