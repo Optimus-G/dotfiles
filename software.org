@@ -406,6 +406,10 @@ sudo pacman -S avr-gdb
 sudo pacman -S avr-libc
 sudo pacman -S avrdude
 #+end_src
+**** [[https://i2c.wiki.kernel.org/index.php/I2C_Tools][I2C Tools]]
+#+begin_src sh
+sudo pacman -S i2c-tools
+#+end_src
 **** [[http://openocd.org/][OpenOCD]]
 #+begin_src sh
 sudo pacman -S openocd

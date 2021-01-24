@@ -243,6 +243,8 @@ sudo pacman -S avr-gdb
 sudo pacman -S avr-libc
 sudo pacman -S avrdude
 
+sudo pacman -S i2c-tools
+
 sudo pacman -S openocd
 
 sudo pacman -S gpsim
