@@ -39,6 +39,10 @@ sudo pacman -S zstd
 sudo pacman -S asciiquarium
 sudo pacman -S sl
 #+end_src
+*** [[https://github.com/sharkdp/bat][bat]]
+#+begin_src sh
+sudo pacman -S bat
+#+end_src
 *** [[https://www.bleachbit.org/][BleachBit]]
 #+begin_src sh
 sudo pacman -S bleachbit
@@ -104,7 +108,7 @@ sudo pacman -S aspell-ru
 sudo pacman -S hunspell
 sudo pacman -S hunspell-en_GB
 sudo pacman -S hunspell-en_US
-yay         -S hunspell-ru
+paru           hunspell-ru
 #+end_src
 **** [[https://www.gnu.org/software/ispell/][Ispell]]
 #+begin_src sh
@@ -180,11 +184,11 @@ sudo pacman -S sysstat
 #+begin_src sh
 sudo pacman -S cronie
 sudo pacman -S rsync
-yay         -S timeshift
+paru           timeshift
 #+end_src
 *** [[https://github.com/raylee/tldr-sh-client][tldr-sh]]
 #+begin_src sh
-yay -S tldr-sh
+paru tldr-sh
 #+end_src
 *** tree
 #+begin_src sh
@@ -356,7 +360,7 @@ sudo pacman -S libuv
 *** LISP
 **** [[https://cisco.github.io/ChezScheme/][Chez Scheme]]
 #+begin_src sh
-yay -S chez-scheme
+paru chez-scheme
 #+end_src
 **** [[https://racket-lang.org/][DrRacket]]
 #+begin_src sh
@@ -496,7 +500,7 @@ sudo pacman -S radare2-cutter
 #+end_src
 *** [[https://rr-project.org/][rr]]
 #+begin_src sh
-yay -S rr
+paru rr
 #+end_src
 *** [[https://www.libsdl.org/][SDL2]]
 #+begin_src sh
@@ -552,7 +556,7 @@ sudo pacman -S z3
 #+end_src
 *** [[https://zealdocs.org/][Zeal]]
 #+begin_src sh
-yay -S zeal
+paru zeal
 #+end_src
 ** Science
 *** [[https://heasarc.gsfc.nasa.gov/fitsio/][CFITSIO]]
@@ -605,8 +609,8 @@ sudo pacman -S netcdf-fortran
 #+end_src
 *** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
 #+begin_src sh
-yay -S petsc
-yay -S slepc
+paru petsc
+paru slepc
 #+end_src
 *** [[https://github.com/tesseract-ocr/tesseract][Tesseract]]
 #+begin_src sh
@@ -768,7 +772,7 @@ sudo pacman -S hydra
 #+end_src
 *** [[http://atterer.org/jigdo/][jigdo]]
 #+begin_src sh
-yay -S jigdo
+paru jigdo
 #+end_src
 *** [[https://www.openwall.com/john/][John the Ripper]] and [[https://hashcat.net/hashcat/][hashcat]]
 #+begin_src sh
@@ -847,10 +851,9 @@ sudo paccache  -rk0
 sudo pacman    -Rns $(pacman -Qtdq)
 sudo pacman    -Scc
 sudo pacman    -Syu
-if [ -f /usr/bin/yay ]; then
-  yay -Yc
-  yay -Sc && yay -Syu
-  yay -Ps
+if [ -f /usr/bin/paru ]; then
+  paru -Sua
+  paru -c && paru -Sc
 fi
 sudo updatedb
 #+end_src

@@ -27,6 +27,8 @@ sudo pacman -S zstd
 sudo pacman -S asciiquarium
 sudo pacman -S sl
 
+sudo pacman -S bat
+
 sudo pacman -S bleachbit
 
 sudo pacman -S cmatrix
@@ -61,7 +63,7 @@ sudo pacman -S aspell-ru
 sudo pacman -S hunspell
 sudo pacman -S hunspell-en_GB
 sudo pacman -S hunspell-en_US
-yay         -S hunspell-ru
+paru           hunspell-ru
 
 sudo pacman -S ispell
 
@@ -113,9 +115,9 @@ sudo pacman -S sysstat
 
 sudo pacman -S cronie
 sudo pacman -S rsync
-yay         -S timeshift
+paru           timeshift
 
-yay -S tldr-sh
+paru tldr-sh
 
 sudo pacman -S tree
 
@@ -212,7 +214,7 @@ sudo pacman -S libpqxx
 
 sudo pacman -S libuv
 
-yay -S chez-scheme
+paru chez-scheme
 
 sudo pacman -S racket
 
@@ -299,7 +301,7 @@ sudo pacman -S r2ghidra-dec
 sudo pacman -S radare2
 sudo pacman -S radare2-cutter
 
-yay -S rr
+paru rr
 
 sudo pacman -S sdl2
 sudo pacman -S sdl2_gfx
@@ -333,7 +335,7 @@ sudo pacman -S xerces-c
 
 sudo pacman -S z3
 
-yay -S zeal
+paru zeal
 
 sudo pacman -S ccfits
 sudo pacman -S cfitsio
@@ -363,8 +365,8 @@ sudo pacman -S netcdf
 sudo pacman -S netcdf-cxx
 sudo pacman -S netcdf-fortran
 
-yay -S petsc
-yay -S slepc
+paru petsc
+paru slepc
 
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
@@ -454,7 +456,7 @@ sudo pacman -S gnutls
 
 sudo pacman -S hydra
 
-yay -S jigdo
+paru jigdo
 
 sudo pacman -S hashcat
 sudo pacman -S hashcat-utils
@@ -503,10 +505,9 @@ sudo paccache  -rk0
 sudo pacman    -Rns $(pacman -Qtdq)
 sudo pacman    -Scc
 sudo pacman    -Syu
-if [ -f /usr/bin/yay ]; then
-  yay -Yc
-  yay -Sc && yay -Syu
-  yay -Ps
+if [ -f /usr/bin/paru ]; then
+  paru -Sua
+  paru -c && paru -Sc
 fi
 sudo updatedb
 

@@ -6,10 +6,17 @@ if [ -z "$system_type" ] || [ "$system_type" != "main" ]; then
 fi
 echo "SYSTEM TYPE: $system_type"
 
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd .. && rm -rf paru/
+paru -c && paru -Sc
+
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 cd .. && rm -rf yay/
+yay -Yc
 
 sudo pacman -S adobe-source-code-pro-fonts
 sudo pacman -S adobe-source-sans-pro-fonts

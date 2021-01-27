@@ -11,22 +11,12 @@ alias ..="cd .."
 alias .2="cd ../.."
 alias .3="cd ../../.."
 alias .="pwd"
-alias aac="asciiquarium && clear"
-alias addall="git add ."
-alias bc="clear && bc -lq"
 alias c="clear && clear"
-alias cb="emacs $HOME/.bashrc &"
-alias ce="emacs $HOME/.emacs  &"
-alias cmc="cmatrix && clear"
-alias commit="git commit -m"
 alias cp="cp -v"
-alias cv="vim $HOME/.vimrc"
 alias df="df -Tha --total | column -t"
 alias diff="diff --color=auto"
 alias du="du -ach | sort -h"
-alias e="emacs"
 alias egrep="egrep --color=auto"
-alias enw="emacs -nw"
 alias fgrep="fgrep --color=auto"
 alias free="free -mt"
 alias grep="grep --color=auto"
@@ -43,23 +33,54 @@ alias m="more"
 alias me="chmod a+x"
 alias mkdir="mkdir -pv"
 alias mv="mv -v"
-alias p="cd /data/projects"
 alias ping="ping -c 5"
 alias ps="ps auxf"
-alias push="git push origin main"
 alias reload="source $HOME/.bashrc"
 alias rm="rm -Iv"
-alias sl="sl && clear"
-alias status="git status"
 alias t="tree"
-alias ta="tmux attach-session -t"
 alias tarc="tar czvf"
 alias tart="tar tzvf"
-alias tl="tmux list-sessions"
-alias tm="tmux"
-alias tn="tmux new-session -s"
-alias v="vim"
 alias x="exit"
+if [ -f /usr/bin/cmatrix ]; then
+  alias cmc="cmatrix && clear"
+fi
+if [ -f /usr/bin/bc ]; then
+  alias bc="clear && bc -lq"
+fi
+if [ -f /usr/bin/asciiquarium ]; then
+  alias aac="asciiquarium && clear"
+fi
+if [ -f /usr/bin/emacs ]; then
+  alias cb="emacs $HOME/.bashrc &"
+  alias ce="emacs $HOME/.emacs  &"
+  alias e="emacs"
+  alias enw="emacs -nw"
+fi
+if [ -d /data/projects ]; then
+  alias p="cd /data/projects"
+fi
+if [ -f /usr/bin/sl ]; then
+  alias sl="sl && clear"
+fi
+if [ -f /usr/bin/git ]; then
+  alias addall="git add ."
+  alias commit="git commit -m"
+  alias push="git push origin main"
+  alias status="git status"
+fi
+if [ -f /usr/bin/tmux ]; then
+  alias ta="tmux attach-session -t"
+  alias tl="tmux list-sessions"
+  alias tm="tmux"
+  alias tn="tmux new-session -s"
+fi
+if [ -f /usr/bin/vim ]; then
+  alias cv="vim $HOME/.vimrc"
+  alias v="vim"
+fi
+if [ -f /usr/bin/bat ]; then
+  alias cat="bat"
+fi
 
 shopt -s autocd
 shopt -s cdable_vars
@@ -100,13 +121,12 @@ fi
 
 upgrade_and_clean () {
   sudo paccache -rk0
-  sudo pacman -Rns $(pacman -Qtdq)
-  sudo pacman -Scc
-  sudo pacman -Syu
-  if [ -f /usr/bin/yay ]; then
-    yay -Yc
-    yay -Sc && yay -Syu
-    yay -Ps
+  sudo pacman   -Rns $(pacman -Qtdq)
+  sudo pacman   -Scc
+  sudo pacman   -Syu
+  if [ -f /usr/bin/paru ]; then
+    paru -Sua
+    paru -c && paru -Sc
   fi
   sudo updatedb
 }
