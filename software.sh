@@ -63,7 +63,7 @@ sudo pacman -S aspell-ru
 sudo pacman -S hunspell
 sudo pacman -S hunspell-en_GB
 sudo pacman -S hunspell-en_US
-paru           hunspell-ru
+paru        -S hunspell-ru
 
 sudo pacman -S ispell
 
@@ -115,9 +115,9 @@ sudo pacman -S sysstat
 
 sudo pacman -S cronie
 sudo pacman -S rsync
-paru           timeshift
+paru        -S timeshift
 
-paru tldr-sh
+paru -S tldr-sh
 
 sudo pacman -S tree
 
@@ -214,7 +214,7 @@ sudo pacman -S libpqxx
 
 sudo pacman -S libuv
 
-paru chez-scheme
+paru -S chez-scheme
 
 sudo pacman -S racket
 
@@ -301,7 +301,7 @@ sudo pacman -S r2ghidra-dec
 sudo pacman -S radare2
 sudo pacman -S radare2-cutter
 
-paru rr
+paru -S rr
 
 sudo pacman -S sdl2
 sudo pacman -S sdl2_gfx
@@ -335,7 +335,7 @@ sudo pacman -S xerces-c
 
 sudo pacman -S z3
 
-paru zeal
+paru -S zeal
 
 sudo pacman -S ccfits
 sudo pacman -S cfitsio
@@ -365,8 +365,8 @@ sudo pacman -S netcdf
 sudo pacman -S netcdf-cxx
 sudo pacman -S netcdf-fortran
 
-paru petsc
-paru slepc
+paru -S petsc
+paru -S slepc
 
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
@@ -456,7 +456,7 @@ sudo pacman -S gnutls
 
 sudo pacman -S hydra
 
-paru jigdo
+paru -S jigdo
 
 sudo pacman -S hashcat
 sudo pacman -S hashcat-utils

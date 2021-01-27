@@ -108,7 +108,7 @@ sudo pacman -S aspell-ru
 sudo pacman -S hunspell
 sudo pacman -S hunspell-en_GB
 sudo pacman -S hunspell-en_US
-paru           hunspell-ru
+paru        -S hunspell-ru
 #+end_src
 **** [[https://www.gnu.org/software/ispell/][Ispell]]
 #+begin_src sh
@@ -184,11 +184,11 @@ sudo pacman -S sysstat
 #+begin_src sh
 sudo pacman -S cronie
 sudo pacman -S rsync
-paru           timeshift
+paru        -S timeshift
 #+end_src
 *** [[https://github.com/raylee/tldr-sh-client][tldr-sh]]
 #+begin_src sh
-paru tldr-sh
+paru -S tldr-sh
 #+end_src
 *** tree
 #+begin_src sh
@@ -360,7 +360,7 @@ sudo pacman -S libuv
 *** LISP
 **** [[https://cisco.github.io/ChezScheme/][Chez Scheme]]
 #+begin_src sh
-paru chez-scheme
+paru -S chez-scheme
 #+end_src
 **** [[https://racket-lang.org/][DrRacket]]
 #+begin_src sh
@@ -500,7 +500,7 @@ sudo pacman -S radare2-cutter
 #+end_src
 *** [[https://rr-project.org/][rr]]
 #+begin_src sh
-paru rr
+paru -S rr
 #+end_src
 *** [[https://www.libsdl.org/][SDL2]]
 #+begin_src sh
@@ -556,7 +556,7 @@ sudo pacman -S z3
 #+end_src
 *** [[https://zealdocs.org/][Zeal]]
 #+begin_src sh
-paru zeal
+paru -S zeal
 #+end_src
 ** Science
 *** [[https://heasarc.gsfc.nasa.gov/fitsio/][CFITSIO]]
@@ -609,8 +609,8 @@ sudo pacman -S netcdf-fortran
 #+end_src
 *** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
 #+begin_src sh
-paru petsc
-paru slepc
+paru -S petsc
+paru -S slepc
 #+end_src
 *** [[https://github.com/tesseract-ocr/tesseract][Tesseract]]
 #+begin_src sh
@@ -772,7 +772,7 @@ sudo pacman -S hydra
 #+end_src
 *** [[http://atterer.org/jigdo/][jigdo]]
 #+begin_src sh
-paru jigdo
+paru -S jigdo
 #+end_src
 *** [[https://www.openwall.com/john/][John the Ripper]] and [[https://hashcat.net/hashcat/][hashcat]]
 #+begin_src sh
