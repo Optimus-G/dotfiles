@@ -791,6 +791,7 @@ sudo pacman -S nmap
 #+begin_src sh
 sudo pacman -S ipset
 sudo pacman -S openssh
+sudo pacman -S sshfs
 sudo pacman -S sshguard
 #+end_src
 *** [[https://www.openssl.org][OpenSSL]]

@@ -469,6 +469,7 @@ sudo pacman -S nmap
 
 sudo pacman -S ipset
 sudo pacman -S openssh
+sudo pacman -S sshfs
 sudo pacman -S sshguard
 
 sudo pacman -S openssl
