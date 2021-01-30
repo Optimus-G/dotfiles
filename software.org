@@ -321,6 +321,7 @@ sudo pacman -S graphviz
 *** Image Libraries
 #+begin_src sh
 sudo pacman -S djvulibre
+sudo pacman -S gd
 sudo pacman -S libheif
 sudo pacman -S libjpeg-turbo
 sudo pacman -S libpng

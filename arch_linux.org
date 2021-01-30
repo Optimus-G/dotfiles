@@ -178,7 +178,7 @@ sudo systemctl enable dhcpcd.service
 ping -c 5 archlinux.org
 git clone https://github.com/karlkorp/dotfiles.git $HOME/dotfiles
 #+end_src
-** [[https://github.com/Morganamilo/paru][Paru]] and [[https://github.com/Jguer/yay][Yay]]
+** [[https://github.com/Morganamilo/paru][Paru]]
 #+begin_src sh :tangle post_installation.sh
 #!/bin/bash
 echo "SYSTEM TYPE: main/test (default)"
@@ -193,12 +193,6 @@ cd paru
 makepkg -si
 cd .. && rm -rf paru/
 paru -c && paru -Sc
-
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd .. && rm -rf yay/
-yay -Yc
 #+end_src
 ** Fonts
 #+begin_src sh :tangle post_installation.sh

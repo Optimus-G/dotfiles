@@ -188,6 +188,7 @@ sudo pacman -S gperftools
 sudo pacman -S graphviz
 
 sudo pacman -S djvulibre
+sudo pacman -S gd
 sudo pacman -S libheif
 sudo pacman -S libjpeg-turbo
 sudo pacman -S libpng

@@ -12,12 +12,6 @@ makepkg -si
 cd .. && rm -rf paru/
 paru -c && paru -Sc
 
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd .. && rm -rf yay/
-yay -Yc
-
 sudo pacman -S adobe-source-code-pro-fonts
 sudo pacman -S adobe-source-sans-pro-fonts
 sudo pacman -S adobe-source-serif-pro-fonts
