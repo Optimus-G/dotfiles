@@ -20,7 +20,7 @@ timedatectl set-ntp true
 ** Delete disks
 #+begin_src sh :tangle no
 lsblk -f
-wipefs -a /dev/sd*
+wipefs --all --force /dev/sd**
 #+end_src
 ** Partition the disks (fdisk)
 | NUMBER | DISK | MOUNT POINT | PARTITION SIZE | FILE SYSTEM | COMMANDS             |
