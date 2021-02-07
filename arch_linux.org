@@ -18,6 +18,8 @@ ping -c 5 archlinux.org
 timedatectl set-ntp true
 #+end_src
 ** Partition the disks (fdisk)
+lsblk -f
+wipefs -a /dev/sd*
 | NUMBER | DISK | MOUNT POINT | PARTITION SIZE | FILE SYSTEM | COMMANDS             |
 |--------+------+-------------+----------------+-------------+----------------------|
 |      1 | NVME | /           | +100G          | ext4        | mkfs.ext4, mount     |
