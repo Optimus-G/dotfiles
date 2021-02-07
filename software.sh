@@ -340,11 +340,11 @@ sudo pacman -S gmp
 sudo pacman -S bc
 
 sudo pacman -S octave
-echo "clc;"         >> $HOME/.octaverc
-echo "clear all;"   >> $HOME/.octaverc
-echo "close all;"   >> $HOME/.octaverc
-echo "format short" >> $HOME/.octaverc
-echo "more off;"    >> $HOME/.octaverc
+echo "clc;"          >> $HOME/.octaverc
+echo "clear all;"    >> $HOME/.octaverc
+echo "close all;"    >> $HOME/.octaverc
+echo "format short;" >> $HOME/.octaverc
+echo "more off;"     >> $HOME/.octaverc
 
 sudo pacman -S gnuplot
 

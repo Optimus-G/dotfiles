@@ -567,11 +567,11 @@ sudo pacman -S bc
 *** [[https://www.gnu.org/software/octave/index][GNU Octave]]
 #+begin_src sh
 sudo pacman -S octave
-echo "clc;"         >> $HOME/.octaverc
-echo "clear all;"   >> $HOME/.octaverc
-echo "close all;"   >> $HOME/.octaverc
-echo "format short" >> $HOME/.octaverc
-echo "more off;"    >> $HOME/.octaverc
+echo "clc;"          >> $HOME/.octaverc
+echo "clear all;"    >> $HOME/.octaverc
+echo "close all;"    >> $HOME/.octaverc
+echo "format short;" >> $HOME/.octaverc
+echo "more off;"     >> $HOME/.octaverc
 #+end_src
 *** [[http://www.gnuplot.info][Gnuplot]]
 #+begin_src sh
