@@ -88,5 +88,5 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo    "Base installation was finished!"
-read -p "Press 'enter' to reboot..."
+read -p "Press 'enter' to exit..."
 sleep 5 && exit

@@ -56,6 +56,7 @@ if [ "$system_type" = "test" ]; then
   sudo pacman -S xf86-video-fbdev # for QEMU/KVM
 else
   sudo pacman -S nvidia-lts
+  sudo pacman -S nvidia-settings
   sudo pacman -S nvidia-utils
   sudo pacman -S opencl-nvidia
 fi

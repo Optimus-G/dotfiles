@@ -448,11 +448,11 @@
 
 (install-package 'alect-themes)
 (if (package-installed-p 'alect-themes)
-    (load-theme 'alect-light t nil))
+    (load-theme 'alect-black t nil))
 
 (install-package 'spaceline)
 (if (require 'spaceline-config)
-    (spaceline-emacs-theme))
+    (spaceline-spacemacs-theme))
 
 (install-package 'markdown-mode )
 (install-package 'org           )

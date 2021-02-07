@@ -56,19 +56,6 @@ sudo pacman -S sed
 sudo pacman -S htop
 sudo pacman -S lsof
 
-sudo pacman -S aspell
-sudo pacman -S aspell-en
-sudo pacman -S aspell-ru
-
-sudo pacman -S hunspell
-sudo pacman -S hunspell-en_GB
-sudo pacman -S hunspell-en_US
-paru        -S hunspell-ru
-
-sudo pacman -S ispell
-
-sudo pacman -S languagetool
-
 sudo pacman -S less
 
 sudo pacman -S man-db
@@ -113,7 +100,6 @@ sudo pacman -S screenkey
 
 sudo pacman -S sysstat
 
-sudo pacman -S cronie
 sudo pacman -S rsync
 paru        -S timeshift
 
@@ -141,6 +127,8 @@ sudo pacman -S python-bcc
 
 sudo pacman -S boost
 
+sudo pacman -S botan
+
 sudo pacman -S ccache
 
 sudo pacman -S cimg
@@ -152,6 +140,8 @@ sudo pacman -S byacc
 sudo pacman -S flex
 
 sudo pacman -S cppcheck
+
+sudo pacman -S crypto++
 
 sudo pacman -S ctags
 
@@ -300,9 +290,9 @@ sudo pacman -S python-virtualenv
 sudo pacman -S qbs
 sudo pacman -S qtcreator
 
-sudo pacman -S r2ghidra-dec
+sudo pacman -S r2cutter
+sudo pacman -S r2ghidra
 sudo pacman -S radare2
-sudo pacman -S radare2-cutter
 
 paru -S rr
 
@@ -350,6 +340,11 @@ sudo pacman -S gmp
 sudo pacman -S bc
 
 sudo pacman -S octave
+echo "clc;"         >> $HOME/.octaverc
+echo "clear all;"   >> $HOME/.octaverc
+echo "close all;"   >> $HOME/.octaverc
+echo "format short" >> $HOME/.octaverc
+echo "more off;"    >> $HOME/.octaverc
 
 sudo pacman -S gnuplot
 
@@ -371,6 +366,10 @@ sudo pacman -S netcdf-fortran
 paru -S petsc
 paru -S slepc
 
+sudo pacman -S portaudio
+
+sudo pacman -S sundials
+
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
 sudo pacman -S tesseract-data-rus
@@ -389,6 +388,19 @@ sudo pacman -S imagemagick
 sudo pacman -S imagemagick-doc
 
 sudo pacman -S keepassxc
+
+sudo pacman -S aspell
+sudo pacman -S aspell-en
+sudo pacman -S aspell-ru
+
+sudo pacman -S hunspell
+sudo pacman -S hunspell-en_GB
+sudo pacman -S hunspell-en_US
+paru        -S hunspell-ru
+
+sudo pacman -S ispell
+
+sudo pacman -S languagetool
 
 sudo pacman -S libreoffice-still
 sudo pacman -S libreoffice-still-en-gb
@@ -431,6 +443,8 @@ sudo pacman -S gimp-help-ru
 sudo pacman -S inkscape
 
 sudo pacman -S krita
+
+sudo pacman -S scribus
 
 sudo pacman -S audacity
 
