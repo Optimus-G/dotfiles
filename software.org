@@ -402,6 +402,7 @@ sudo pacman -S arm-none-eabi-binutils
 sudo pacman -S arm-none-eabi-gcc
 sudo pacman -S arm-none-eabi-gdb
 sudo pacman -S arm-none-eabi-newlib
+sudo pacman -S libopencm3
 #+end_src
 **** [[https://en.wikipedia.org/wiki/AVR_microcontrollers][AVR]]
 #+begin_src sh
@@ -491,6 +492,7 @@ sudo pacman -S python-virtualenv
 #+end_src
 *** [[https://www.qt.io/product/development-tools][Qt Creator]]
 #+begin_src sh
+sudo pacman -S qbs
 sudo pacman -S qtcreator
 #+end_src
 *** [[https://radare.org][radare2]]

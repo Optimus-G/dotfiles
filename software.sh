@@ -239,6 +239,7 @@ sudo pacman -S arm-none-eabi-binutils
 sudo pacman -S arm-none-eabi-gcc
 sudo pacman -S arm-none-eabi-gdb
 sudo pacman -S arm-none-eabi-newlib
+sudo pacman -S libopencm3
 
 sudo pacman -S avr-binutils
 sudo pacman -S avr-gcc
@@ -296,6 +297,7 @@ sudo pacman -S python
 sudo pacman -S python-docs
 sudo pacman -S python-virtualenv
 
+sudo pacman -S qbs
 sudo pacman -S qtcreator
 
 sudo pacman -S r2ghidra-dec
