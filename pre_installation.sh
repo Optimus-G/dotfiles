@@ -78,6 +78,7 @@ pacman -S plocate
 pacman -S polkit
 pacman -S reiserfsprogs
 pacman -S rp-pppoe
+pacman -S systemd
 pacman -S udftools
 pacman -S util-linux
 pacman -S which
