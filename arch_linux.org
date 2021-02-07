@@ -187,7 +187,7 @@ git clone https://github.com/karlkorp/dotfiles.git $HOME/dotfiles
 ** [[https://github.com/Morganamilo/paru][Paru]]
 #+begin_src sh :tangle post_installation.sh
 #!/bin/bash
-echo "SYSTEM TYPE: main/test (default)"
+echo "SYSTEM TYPE: main/test (default: test)"
 read -r system_type
 if [ -z "$system_type" ] || [ "$system_type" != "main" ]; then
   system_type="test"

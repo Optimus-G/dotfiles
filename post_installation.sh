@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "SYSTEM TYPE: main/test (default)"
+echo "SYSTEM TYPE: main/test (default: test)"
 read -r system_type
 if [ -z "$system_type" ] || [ "$system_type" != "main" ]; then
   system_type="test"
