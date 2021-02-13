@@ -27,12 +27,13 @@ echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 
 mkinitcpio -P
 
-echo "SET THE ROOT PASSWORD"
+echo "SET THE ROOT PASSWORD:"
 passwd
 
 echo "NEW USER: $username"
 useradd -m -s /bin/bash "$username"
 usermod -aG audio,disk,kvm,lp,optical,scanner,storage,video,wheel "$username"
+echo "SET THE USER PASSWORD:"
 passwd "$username"
 pacman -S sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers

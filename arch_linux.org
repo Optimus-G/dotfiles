@@ -98,7 +98,7 @@ mkinitcpio -P
 #+end_src
 ** Root password
 #+begin_src sh :tangle pre_installation.sh
-echo "SET THE ROOT PASSWORD"
+echo "SET THE ROOT PASSWORD:"
 passwd
 #+end_src
 ** New user
@@ -106,6 +106,7 @@ passwd
 echo "NEW USER: $username"
 useradd -m -s /bin/bash "$username"
 usermod -aG audio,disk,kvm,lp,optical,scanner,storage,video,wheel "$username"
+echo "SET THE USER PASSWORD:"
 passwd "$username"
 pacman -S sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
