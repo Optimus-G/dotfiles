@@ -115,6 +115,14 @@ sudo pacman -S catimg
 sudo pacman -S chafa
 sudo pacman -S neofetch
 #+end_src
+*** [[https://openjdk.java.net/][OpenJDK]]
+#+begin_src sh
+sudo pacman -S jdk-openjdk
+sudo pacman -S jre-openjdk
+sudo pacman -S jre-openjdk-headless
+sudo pacman -S openjdk-doc
+sudo pacman -S openjdk-src
+#+end_src
 *** pv
 #+begin_src sh
 sudo pacman -S pv
@@ -220,6 +228,12 @@ sudo pacman -S ccache
 *** [[http://cimg.eu/][CImg]]
 #+begin_src sh
 sudo pacman -S cimg
+#+end_src
+*** [[https://clojure.org/][Clojure]]
+#+begin_src sh
+sudo pacman -S clojure
+sudo pacman -S leiningen
+paru        -S clojure-lsp-bin
 #+end_src
 *** [[https://www.cmake.org/][CMake]]
 #+begin_src sh
@@ -452,14 +466,6 @@ sudo pacman -S libxpm
 sudo pacman -S mesa
 sudo pacman -S ogre
 sudo pacman -S virtualgl
-#+end_src
-*** [[https://openjdk.java.net/][OpenJDK]]
-#+begin_src sh
-sudo pacman -S jdk-openjdk
-sudo pacman -S jre-openjdk
-sudo pacman -S jre-openjdk-headless
-sudo pacman -S openjdk-doc
-sudo pacman -S openjdk-src
 #+end_src
 *** [[https://www.open-mpi.org][OpenMPI]]
 #+begin_src sh

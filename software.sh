@@ -67,6 +67,12 @@ sudo pacman -S catimg
 sudo pacman -S chafa
 sudo pacman -S neofetch
 
+sudo pacman -S jdk-openjdk
+sudo pacman -S jre-openjdk
+sudo pacman -S jre-openjdk-headless
+sudo pacman -S openjdk-doc
+sudo pacman -S openjdk-src
+
 sudo pacman -S pv
 
 sudo pacman -S bridge-utils
@@ -132,6 +138,10 @@ sudo pacman -S botan
 sudo pacman -S ccache
 
 sudo pacman -S cimg
+
+sudo pacman -S clojure
+sudo pacman -S leiningen
+paru        -S clojure-lsp-bin
 
 sudo pacman -S cmake
 
@@ -272,12 +282,6 @@ sudo pacman -S libxpm
 sudo pacman -S mesa
 sudo pacman -S ogre
 sudo pacman -S virtualgl
-
-sudo pacman -S jdk-openjdk
-sudo pacman -S jre-openjdk
-sudo pacman -S jre-openjdk-headless
-sudo pacman -S openjdk-doc
-sudo pacman -S openjdk-src
 
 sudo pacman -S openmpi
 
