@@ -139,10 +139,6 @@ sudo pacman -S ccache
 
 sudo pacman -S cimg
 
-sudo pacman -S clojure
-sudo pacman -S leiningen
-paru        -S clojure-lsp-bin
-
 sudo pacman -S cmake
 
 sudo pacman -S bison
@@ -216,6 +212,10 @@ sudo pacman -S libpqxx
 sudo pacman -S libuv
 
 paru -S chez-scheme
+
+sudo pacman -S clojure
+sudo pacman -S leiningen
+paru        -S clojure-lsp-bin
 
 sudo pacman -S racket
 

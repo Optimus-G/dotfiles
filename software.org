@@ -229,12 +229,6 @@ sudo pacman -S ccache
 #+begin_src sh
 sudo pacman -S cimg
 #+end_src
-*** [[https://clojure.org/][Clojure]]
-#+begin_src sh
-sudo pacman -S clojure
-sudo pacman -S leiningen
-paru        -S clojure-lsp-bin
-#+end_src
 *** [[https://www.cmake.org/][CMake]]
 #+begin_src sh
 sudo pacman -S cmake
@@ -361,6 +355,12 @@ sudo pacman -S libuv
 **** [[https://cisco.github.io/ChezScheme/][Chez Scheme]]
 #+begin_src sh
 paru -S chez-scheme
+#+end_src
+**** [[https://clojure.org/][Clojure]]
+#+begin_src sh
+sudo pacman -S clojure
+sudo pacman -S leiningen
+paru        -S clojure-lsp-bin
 #+end_src
 **** [[https://racket-lang.org/][DrRacket]]
 #+begin_src sh
