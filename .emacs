@@ -273,6 +273,15 @@
   (c-toggle-electric-state         1 )
   (c-toggle-syntactic-indentation  1 ) )
 
+(defun scheme-common-mode ()
+  "Scheme common customization."
+  (cond ((executable-find "scheme")
+         (setq-default scheme-program-name "scheme" ))
+        ((executable-find "guile")
+         (setq-default scheme-program-name "guile"  )) )
+  (autoload 'run-scheme  "cmuscheme" "Run an inferior Scheme" t )
+  (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme"  t ))
+
 (defun splitting-window-for-run ()
   "Split window and balances windows."
   (split-window-sensibly   )
@@ -402,11 +411,6 @@
  ((executable-find "aspell")
   (setq-default ispell-program-name "/usr/bin/aspell"   )) )
 
-(when (executable-find "scheme")
-  (setq-default scheme-program-name "scheme")
-  (autoload 'run-scheme  "cmuscheme" "Run an inferior Scheme" t )
-  (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme"  t ))
-
 (cond
  ((executable-find "ipython")
   (setq-default python-shell-interpreter      "ipython"            )
@@ -446,12 +450,13 @@
 (unless package-archive-contents
   (ignore-errors (package-refresh-contents)))
 
-(install-package 'alect-themes)
-(if (package-installed-p 'alect-themes)
-    (load-theme 'alect-black t nil))
+(install-package 'gruvbox-theme)
+(if (package-installed-p 'gruvbox-theme)
+    (load-theme 'gruvbox-dark-hard t nil)
+  (load-theme 'wheatgrass t nil))
 
 (install-package 'spaceline)
-(if (require 'spaceline-config)
+(if (require 'spaceline-config nil :noerror)
     (spaceline-spacemacs-theme))
 
 (install-package 'markdown-mode )
@@ -532,6 +537,16 @@
 (if (require 'flycheck nil :noerror)
     (global-flycheck-mode))
 
+(if (or (executable-find "guile"  )
+        (executable-find "scheme" ))
+    (install-package 'geiser))
+(if (require 'geiser nil :noerror)
+    (cond ((executable-find "scheme")
+           (setq-default geiser-active-implementations '(chez  )) )
+          ((executable-find "guile")
+           (setq-default geiser-active-implementations '(guile )) ))
+  (scheme-common-mode))
+
 (if (executable-find "sbcl")
     (install-package 'slime))
 (when (and (require 'slime           nil :noerror )
@@ -548,8 +563,7 @@
   (add-hook 'racket-repl-mode-hook 'racket-unicode-input-method-enable ) )
 
 (when (executable-find "clojure")
-  (install-package 'cider)
-  (install-package 'clojure-mode))
+  (install-package 'cider))
 (if (package-installed-p 'cider)
     (add-hook 'clojure-mode-hook 'cider-mode))
 
@@ -577,10 +591,10 @@
 (install-package 'projectile)
 (when (require 'projectile nil :noerror)
   (projectile-mode)
-  (setq-default projectile-completion-system    'ivy                      )
-  (setq-default projectile-indexing-method      'native                   )
-  (setq-default projectile-sort-order           'recently-active          )
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map ) )
+  (setq-default projectile-completion-system    'ivy                     )
+  (setq-default projectile-indexing-method      'native                  )
+  (setq-default projectile-sort-order           'recently-active         )
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map) )
 
 (install-package 'company)
 (when (require 'company nil :noerror)
@@ -597,12 +611,13 @@
   (install-package 'lsp-ivy  )
   (install-package 'lsp-mode )
   (when (require 'lsp-mode nil :noerror)
-    (add-hook 'c++-mode-hook           'lsp )
-    (add-hook 'c-mode-hook             'lsp )
-    (add-hook 'clojure-mode-hook       'lsp )
-    (add-hook 'clojurec-mode-hook      'lsp )
-    (add-hook 'clojurescript-mode-hook 'lsp )
-    (add-hook 'python-mode-hook        'lsp )
+    (add-hook 'c++-mode-hook    'lsp )
+    (add-hook 'c-mode-hook      'lsp )
+    (add-hook 'python-mode-hook 'lsp )
+    (when (executable-find "clojure-lsp")
+      (add-hook 'clojure-mode-hook       'lsp )
+      (add-hook 'clojurec-mode-hook      'lsp )
+      (add-hook 'clojurescript-mode-hook 'lsp ))
     (setq-default lsp-auto-guess-root              t   )
     (setq-default lsp-eldoc-render-all             t   )
     (setq-default lsp-enable-file-watchers         nil )

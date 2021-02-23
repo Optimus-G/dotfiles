@@ -219,6 +219,8 @@ paru        -S clojure-lsp-bin
 
 sudo pacman -S racket
 
+sudo pacman -S guile
+
 sudo pacman -S sbcl
 
 sudo pacman -S llvm

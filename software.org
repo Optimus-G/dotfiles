@@ -351,7 +351,7 @@ sudo pacman -S libpqxx
 #+begin_src sh
 sudo pacman -S libuv
 #+end_src
-*** LISP
+*** LISPs
 **** [[https://cisco.github.io/ChezScheme/][Chez Scheme]]
 #+begin_src sh
 paru -S chez-scheme
@@ -365,6 +365,10 @@ paru        -S clojure-lsp-bin
 **** [[https://racket-lang.org/][DrRacket]]
 #+begin_src sh
 sudo pacman -S racket
+#+end_src
+**** [[https://www.gnu.org/software/guile/][Guile]]
+#+begin_src sh
+sudo pacman -S guile
 #+end_src
 **** [[http://www.sbcl.org/][SBCL]]
 #+begin_src sh
