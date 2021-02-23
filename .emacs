@@ -562,8 +562,8 @@
   (add-hook 'racket-mode-hook      'racket-unicode-input-method-enable )
   (add-hook 'racket-repl-mode-hook 'racket-unicode-input-method-enable ) )
 
-(when (executable-find "clojure")
-  (install-package 'cider))
+(if (executable-find "clojure")
+    (install-package 'cider))
 (if (package-installed-p 'cider)
     (add-hook 'clojure-mode-hook 'cider-mode))
 
