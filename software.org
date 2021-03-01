@@ -294,6 +294,10 @@ sudo pacman -S make
 #+begin_src sh
 sudo pacman -S global
 #+end_src
+*** [[http://www.jemarch.net/poke.html][GNU poke]]
+#+begin_src sh
+sudo pacman -S poke
+#+end_src
 *** [[https://www.gnu.org/software/time/][GNU Time]]
 #+begin_src sh
 sudo pacman -S time

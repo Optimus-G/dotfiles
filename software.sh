@@ -174,6 +174,8 @@ sudo pacman -S make
 
 sudo pacman -S global
 
+sudo pacman -S poke
+
 sudo pacman -S time
 
 sudo pacman -S gmock

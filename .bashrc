@@ -53,8 +53,8 @@ fi
 if [ -f /usr/bin/emacs ]; then
   alias cb="emacs $HOME/.bashrc &"
   alias ce="emacs $HOME/.emacs  &"
-  alias e="emacs"
   alias enw="emacs -nw"
+  e () { emacs "$@" & }
 fi
 if [ -d /data/projects ]; then
   alias p="cd /data/projects"
