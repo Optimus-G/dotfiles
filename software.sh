@@ -516,8 +516,6 @@ sudo pacman -S spice
 
 sudo pacman -S tcpdump
 
-sudo pacman -S telegram-desktop
-
 sudo pacman -S wireshark-cli
 sudo pacman -S wireshark-qt
 

@@ -866,10 +866,6 @@ sudo pacman -S spice
 #+begin_src sh
 sudo pacman -S tcpdump
 #+end_src
-*** [[https://desktop.telegram.org/][Telegram Desktop]]
-#+begin_src sh
-sudo pacman -S telegram-desktop
-#+end_src
 *** [[https://www.wireshark.org/][Wireshark]]
 #+begin_src sh
 sudo pacman -S wireshark-cli
