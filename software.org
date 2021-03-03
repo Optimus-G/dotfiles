@@ -55,6 +55,8 @@ sudo pacman -S cmatrix
 *** [[https://www.docker.com/][Docker]]
 #+begin_src sh
 sudo pacman -S docker
+sudo pacman -S docker-compose
+sudo pacman -S python-docker
 #+end_src
 *** [[https://github.com/sharkdp/fd][fd]]
 #+begin_src sh

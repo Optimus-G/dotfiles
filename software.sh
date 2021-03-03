@@ -35,6 +35,8 @@ sudo pacman -S bleachbit
 sudo pacman -S cmatrix
 
 sudo pacman -S docker
+sudo pacman -S docker-compose
+sudo pacman -S python-docker
 
 sudo pacman -S fd
 
