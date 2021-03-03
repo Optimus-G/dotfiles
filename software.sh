@@ -33,6 +33,8 @@ sudo pacman -S bleachbit
 
 sudo pacman -S cmatrix
 
+sudo pacman -S docker
+
 sudo pacman -S fd
 
 sudo pacman -S fdupes
@@ -157,10 +159,6 @@ sudo pacman -S doxygen-docs
 sudo pacman -S elfutils
 
 sudo pacman -S fftw
-
-sudo pacman -S fltk
-sudo pacman -S fltk-docs
-sudo pacman -S fltk-examples
 
 sudo pacman -S fmt
 

@@ -51,6 +51,10 @@ sudo pacman -S bleachbit
 #+begin_src sh
 sudo pacman -S cmatrix
 #+end_src
+*** [[https://www.docker.com/][Docker]]
+#+begin_src sh
+sudo pacman -S docker
+#+end_src
 *** [[https://github.com/sharkdp/fd][fd]]
 #+begin_src sh
 sudo pacman -S fd
@@ -263,12 +267,6 @@ sudo pacman -S elfutils
 *** [[http://www.fftw.org/][FFTW]]
 #+begin_src sh
 sudo pacman -S fftw
-#+end_src
-*** [[https://www.fltk.org/][FLTK]]
-#+begin_src sh
-sudo pacman -S fltk
-sudo pacman -S fltk-docs
-sudo pacman -S fltk-examples
 #+end_src
 *** [[https://fmt.dev/latest/index.html][{fmt}]]
 #+begin_src sh
