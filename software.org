@@ -23,6 +23,7 @@ sudo pacman -S lz4
 sudo pacman -S lzip
 sudo pacman -S lzop
 sudo pacman -S p7zip
+sudo pacman -S pigz
 sudo pacman -S tar
 sudo pacman -S unace
 sudo pacman -S unarchiver
