@@ -418,6 +418,7 @@ sudo pacman -S languagetool
 sudo pacman -S libreoffice-still
 sudo pacman -S libreoffice-still-en-gb
 sudo pacman -S libreoffice-still-ru
+sudo pacman -S libreoffice-still-sdk
 
 sudo pacman -S lyx
 

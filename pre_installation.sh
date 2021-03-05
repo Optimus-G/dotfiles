@@ -58,7 +58,6 @@ pacman -S iw
 pacman -S iwd
 pacman -S jfsutils
 pacman -S mkinitcpio
-pacman -S mlocate
 pacman -S mtools
 pacman -S nano
 pacman -S netctl openresolv
