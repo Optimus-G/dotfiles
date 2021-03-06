@@ -621,6 +621,10 @@ sudo pacman -S netcdf
 sudo pacman -S netcdf-cxx
 sudo pacman -S netcdf-fortran
 #+end_src
+*** [[https://www.opencascade.org/][Open CASCADE Technology]]
+#+begin_src sh
+sudo pacman -S opencascade
+#+end_src
 *** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
 #+begin_src sh
 paru -S petsc
@@ -715,6 +719,10 @@ sudo pacman -S okular
 *** [[https://apps.kde.org/en/spectacle][Spectacle]]
 #+begin_src sh
 sudo pacman -S spectacle
+#+end_src
+*** [[https://desktop.telegram.org/][Telegram Desktop]]
+#+begin_src sh
+sudo pacman -S telegram-desktop
 #+end_src
 *** [[https://www.tug.org/texlive/][TeX Live]]
 #+begin_src sh

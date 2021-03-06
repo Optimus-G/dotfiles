@@ -376,6 +376,8 @@ sudo pacman -S netcdf
 sudo pacman -S netcdf-cxx
 sudo pacman -S netcdf-fortran
 
+sudo pacman -S opencascade
+
 paru -S petsc
 paru -S slepc
 
@@ -430,6 +432,8 @@ sudo pacman -S plasma-browser-integration
 sudo pacman -S okular
 
 sudo pacman -S spectacle
+
+sudo pacman -S telegram-desktop
 
 sudo pacman -S biber
 sudo pacman -S texlive-bin
