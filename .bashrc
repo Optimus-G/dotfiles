@@ -128,7 +128,7 @@ upgrade_and_clean () {
     paru -Sua
     paru -c && paru -Sc
   fi
-  sudo updatedb
+  sudo updatedb.plocaet
 }
 
 extract () {

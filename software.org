@@ -263,10 +263,6 @@ sudo pacman -S ctags
 sudo pacman -S doxygen
 sudo pacman -S doxygen-docs
 #+end_src
-*** [[https://www.eclipse.org/][Eclipse IDE]]
-#+begin_src sh
-paru -S eclipse-java
-#+end_src
 *** [[https://sourceware.org/elfutils/][ELFUTILS]]
 #+begin_src sh
 sudo pacman -S elfutils
@@ -913,7 +909,7 @@ if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb
+sudo updatedb.plocate
 #+end_src
 
 * Enable normal user account to use KVM
