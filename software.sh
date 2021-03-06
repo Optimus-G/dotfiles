@@ -159,6 +159,8 @@ sudo pacman -S ctags
 sudo pacman -S doxygen
 sudo pacman -S doxygen-docs
 
+paru -S eclipse-java
+
 sudo pacman -S elfutils
 
 sudo pacman -S fftw
