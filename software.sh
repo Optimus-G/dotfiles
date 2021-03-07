@@ -543,7 +543,7 @@ if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb.plocate
+sudo updatedb
 
 sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service

@@ -909,7 +909,7 @@ if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb.plocate
+sudo updatedb
 #+end_src
 
 * Enable normal user account to use KVM

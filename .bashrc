@@ -128,7 +128,7 @@ upgrade_and_clean () {
     paru -Sua
     paru -c && paru -Sc
   fi
-  sudo updatedb.plocate
+  sudo updatedb
 }
 
 extract () {
@@ -183,3 +183,5 @@ create_python_project () {
   git init && git add . && git commit -m "Project created ..."
   clear && echo "Project created ..." && echo "" && ls -la && return
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
