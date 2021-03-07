@@ -9,7 +9,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -27,13 +26,13 @@ filetype plugin indent on
 syntax                 on
 
 if !empty(glob("$HOME/.vim/plugged"))
-  colorscheme gruvbox
   nnoremap // :BLines!<CR>
   nnoremap <leader>fi :YcmCompleter FixIt<CR>
   nnoremap <leader>gt :YcmCompleter GoTo<CR>
   nnoremap <leader>rr :YcmCompleter RefactorRename<Space>
   nnoremap ?? :Rg!<CR>
-  let g:airline_theme                                 = "minimalist"
+
+  let g:airline_theme                                 = "base16"
   let g:syntastic_aggregate_errors                    = 1
   let g:ycm_add_preview_to_completeopt                = 1
   let g:ycm_autoclose_preview_window_after_completion = 1
