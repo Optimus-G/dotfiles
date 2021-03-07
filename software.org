@@ -791,6 +791,9 @@ sudo pacman -S ffmpeg
 #+end_src
 *** [[https://userbase.kde.org/K3b][K3b]]
 #+begin_src sh
+sudo pacman -S cdrdao
+sudo pacman -S cdrtools
+sudo pacman -S dvd+rw-tools
 sudo pacman -S k3b
 #+end_src
 *** [[https://kdenlive.org/en/][Kdenlive]]

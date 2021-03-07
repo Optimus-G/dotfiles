@@ -472,6 +472,9 @@ sudo pacman -S easytag
 
 sudo pacman -S ffmpeg
 
+sudo pacman -S cdrdao
+sudo pacman -S cdrtools
+sudo pacman -S dvd+rw-tools
 sudo pacman -S k3b
 
 sudo pacman -S kdenlive
