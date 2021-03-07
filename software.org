@@ -168,6 +168,7 @@ sudo pacman -S ripgrep
 *** [[https://www.thregr.org/~wavexx/software/screenkey/][screenkey]]
 #+begin_src sh
 sudo pacman -S screenkey
+sudo pacman -S slop
 #+end_src
 *** [[http://sebastien.godard.pagesperso-orange.fr/][sysstat]]
 #+begin_src sh

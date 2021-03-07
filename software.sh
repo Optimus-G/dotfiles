@@ -108,6 +108,7 @@ sudo pacman -S virt-viewer
 sudo pacman -S ripgrep
 
 sudo pacman -S screenkey
+sudo pacman -S slop
 
 sudo pacman -S sysstat
 
