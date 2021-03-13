@@ -129,10 +129,6 @@ sudo pacman -S sddm
 sudo pacman -S sddm-kcm
 sudo systemctl enable sddm.service
 
-sudo pacman -S egl-wayland
-sudo pacman -S plasma-wayland-session
-sudo pacman -S wayland
-
 sudo pacman -S xdg-desktop-portal
 sudo pacman -S xdg-desktop-portal-kde
 sudo pacman -S xdg-user-dirs
@@ -163,12 +159,10 @@ sudo pacman -S qt5-base
 sudo pacman -S qt5-doc
 sudo pacman -S qt5-examples
 sudo pacman -S qt5-tools
-sudo pacman -S qt5-wayland
 sudo pacman -S qt6-base
 sudo pacman -S qt6-doc
 sudo pacman -S qt6-examples
 sudo pacman -S qt6-tools
-sudo pacman -S qt6-wayland
 
 sudo pacman -S a52dec
 sudo pacman -S celt
@@ -227,17 +221,10 @@ sudo pacman -S wget
 
 sudo pacman -S xsel
 sudo pacman -S xclip
-# localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 
-# .xinitrc
 echo "xrdb -merge .Xresources"       >> "$HOME"/.xinitrc
 echo "export DESKTOP_SESSION=plasma" >> "$HOME"/.xinitrc
 echo "exec startplasma-x11"          >> "$HOME"/.xinitrc
-# .profile
-echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]' >> "$HOME"/.profile
-echo 'then'                                              >> "$HOME"/.profile
-echo '  exec startx'                                     >> "$HOME"/.profile
-echo 'fi'                                                >> "$HOME"/.profile
 
 echo "Xft.antialias: true"       >> "$HOME"/.Xresources
 echo "Xft.autohint:  false"      >> "$HOME"/.Xresources
@@ -265,6 +252,11 @@ echo "set match-hidden-files                  on" >> "$HOME"/.inputrc
 echo "set show-all-if-ambiguous               on" >> "$HOME"/.inputrc
 echo "set show-all-if-unmodified              on" >> "$HOME"/.inputrc
 echo "set visible-stats                       on" >> "$HOME"/.inputrc
+
+echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]' >> "$HOME"/.profile
+echo 'then'                                              >> "$HOME"/.profile
+echo '  exec startx'                                     >> "$HOME"/.profile
+echo 'fi'                                                >> "$HOME"/.profile
 
 git config --global user.name  "karlkorp"
 git config --global user.email "lispgod@gmail.com"
