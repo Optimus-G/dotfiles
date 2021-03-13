@@ -501,16 +501,6 @@ if [ -d /data ]; then
   mkdir -p /data/torrents
 fi
 
-rm -f  "$HOME"/.gtkrc*
-rm -rf "$HOME"/.cache/kde*
-rm -rf "$HOME"/.cache/plasma*
-rm -rf "$HOME"/.config/kde*
-rm -rf "$HOME"/.config/plasma*
-rm -rf "$HOME"/.kde*
-rm -rf "$HOME"/.local/share/aurorae*
-rm -rf "$HOME"/.local/share/kde*
-rm -rf "$HOME"/.local/share/plasma*
-
 echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
