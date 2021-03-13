@@ -157,6 +157,7 @@ sudo pacman -S qemu-block-rbd
 sudo pacman -S qemu-guest-agent
 sudo pacman -S radvd
 sudo pacman -S samba
+sudo pacman -S spice
 sudo pacman -S vde2
 sudo pacman -S virt-manager
 sudo pacman -S virt-viewer
@@ -240,6 +241,7 @@ sudo pacman -S cimg
 *** [[https://www.cmake.org/][CMake]]
 #+begin_src sh
 sudo pacman -S cmake
+sudo pacman -S extra-cmake-modules
 #+end_src
 *** Compiler construction tools
 #+begin_src sh
@@ -490,6 +492,10 @@ sudo pacman -S openmpi
 *** [[https://www.kernel.org/][perf]]
 #+begin_src sh
 sudo pacman -S perf
+#+end_src
+*** [[https://pocoproject.org/][POCO]]
+#+begin_src sh
+sudo pacman -S poco
 #+end_src
 *** [[https://www.python.org/][Python]]
 #+begin_src sh
@@ -877,10 +883,6 @@ sudo pacman -S nxproxy
 sudo pacman -S remmina
 sudo pacman -S telepathy-glib
 sudo pacman -S xorg-server-xephyr
-#+end_src
-*** [[https://www.spice-space.org/][SPICE]]
-#+begin_src sh
-sudo pacman -S spice
 #+end_src
 *** [[https://www.tcpdump.org/index.html][tcpdump]]
 #+begin_src sh

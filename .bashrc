@@ -195,11 +195,11 @@ create_python_project () {
 
 clear_kde_plasma () {
   rm -rf "$HOME"/.cache/plasma*
+  rm -rf "$HOME"/.kde4/*
   rm -rf "$HOME"/.local/share/aurorae/*
   rm -rf "$HOME"/.local/share/color-schemes/*
   rm -rf "$HOME"/.local/share/plasma/*
   rm -rf "$HOME"/.local/share/wallpapers/*
-
   kquitapp5 plasmashell &
   kstart5   plasmashell &
 }

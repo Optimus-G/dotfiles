@@ -101,6 +101,7 @@ sudo pacman -S qemu-block-rbd
 sudo pacman -S qemu-guest-agent
 sudo pacman -S radvd
 sudo pacman -S samba
+sudo pacman -S spice
 sudo pacman -S vde2
 sudo pacman -S virt-manager
 sudo pacman -S virt-viewer
@@ -146,6 +147,7 @@ sudo pacman -S ccache
 sudo pacman -S cimg
 
 sudo pacman -S cmake
+sudo pacman -S extra-cmake-modules
 
 sudo pacman -S bison
 sudo pacman -S byacc
@@ -296,6 +298,8 @@ sudo pacman -S virtualgl
 sudo pacman -S openmpi
 
 sudo pacman -S perf
+
+sudo pacman -S poco
 
 sudo pacman -S python
 sudo pacman -S python-docs
@@ -525,8 +529,6 @@ sudo pacman -S nxproxy
 sudo pacman -S remmina
 sudo pacman -S telepathy-glib
 sudo pacman -S xorg-server-xephyr
-
-sudo pacman -S spice
 
 sudo pacman -S tcpdump
 
