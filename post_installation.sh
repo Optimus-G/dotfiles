@@ -102,6 +102,8 @@ sudo pacman -S xorg-xinit
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 
+sudo pacman -S wayland
+
 sudo pacman -S cronie
 sudo pacman -S packagekit-qt5
 sudo pacman -S phonon-qt5-gstreamer
@@ -290,5 +292,3 @@ curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
 echo     "Configuration was done!"
 read -rp "Press 'enter' to reboot..."
 sleep 5 && reboot
-
-sudo pacman -S wayland

@@ -312,7 +312,7 @@ sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 #+end_src
 ** [[https://wayland.freedesktop.org/][Wayland]]
-#+begin_src s :tangle post_installation.sh
+#+begin_src sh :tangle post_installation.sh
 sudo pacman -S wayland
 #+end_src
 ** [[https://kde.org/][KDE]]
