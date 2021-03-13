@@ -798,10 +798,14 @@ sudo pacman -S ffmpeg
 #+end_src
 *** [[https://userbase.kde.org/K3b][K3b]]
 #+begin_src sh
+sudo pacman -S cdparanoia
 sudo pacman -S cdrdao
 sudo pacman -S cdrtools
 sudo pacman -S dvd+rw-tools
+sudo pacman -S emovix
 sudo pacman -S k3b
+sudo pacman -S transcode
+sudo pacman -S vcdimager
 #+end_src
 *** [[https://kdenlive.org/en/][Kdenlive]]
 #+begin_src sh

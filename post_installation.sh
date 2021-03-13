@@ -55,7 +55,6 @@ sudo systemctl start  org.cups.cupsd.service
 if [ "$system_type" = "test" ]; then
   sudo pacman -S xf86-video-fbdev # for QEMU/KVM
 else
-  sudo pacman -S egl-wayland
   sudo pacman -S nvidia-lts
   sudo pacman -S nvidia-settings
   sudo pacman -S nvidia-utils
@@ -102,8 +101,6 @@ sudo pacman -S xorg-xinit
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 
-sudo pacman -S wayland
-
 sudo pacman -S cronie
 sudo pacman -S packagekit-qt5
 sudo pacman -S phonon-qt5-gstreamer
@@ -115,7 +112,6 @@ do
   echo "=============================="
   sudo pacman -S plasma-meta
   sudo pacman -S plasma-integration
-  sudo pacman -S plasma-wayland-session
   sudo pacman -S kde-system-meta
 done
 
@@ -132,6 +128,10 @@ sudo pacman -S krunner
 sudo pacman -S sddm
 sudo pacman -S sddm-kcm
 sudo systemctl enable sddm.service
+
+sudo pacman -S egl-wayland
+sudo pacman -S plasma-wayland-session
+sudo pacman -S wayland
 
 sudo pacman -S xdg-desktop-portal
 sudo pacman -S xdg-desktop-portal-kde
@@ -229,8 +229,15 @@ sudo pacman -S xsel
 sudo pacman -S xclip
 # localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 
-echo "xrdb -merge .Xresources"      >> "$HOME"/.xinitrc
-echo "exec         startplasma-x11" >> "$HOME"/.xinitrc
+# .xinitrc
+echo "xrdb -merge .Xresources"       >> "$HOME"/.xinitrc
+echo "export DESKTOP_SESSION=plasma" >> "$HOME"/.xinitrc
+echo "exec startplasma-x11"          >> "$HOME"/.xinitrc
+# .profile
+echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]' >> "$HOME"/.profile
+echo 'then'                                              >> "$HOME"/.profile
+echo '  exec startx'                                     >> "$HOME"/.profile
+echo 'fi'                                                >> "$HOME"/.profile
 
 echo "Xft.antialias: true"       >> "$HOME"/.Xresources
 echo "Xft.autohint:  false"      >> "$HOME"/.Xresources

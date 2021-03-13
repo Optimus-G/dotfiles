@@ -252,7 +252,6 @@ sudo systemctl start  org.cups.cupsd.service
 if [ "$system_type" = "test" ]; then
   sudo pacman -S xf86-video-fbdev # for QEMU/KVM
 else
-  sudo pacman -S egl-wayland
   sudo pacman -S nvidia-lts
   sudo pacman -S nvidia-settings
   sudo pacman -S nvidia-utils
@@ -311,10 +310,6 @@ sudo pacman -S xorg-xinit
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 #+end_src
-** [[https://wayland.freedesktop.org/][Wayland]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S wayland
-#+end_src
 ** [[https://kde.org/][KDE]]
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S cronie
@@ -328,7 +323,6 @@ do
   echo "=============================="
   sudo pacman -S plasma-meta
   sudo pacman -S plasma-integration
-  sudo pacman -S plasma-wayland-session
   sudo pacman -S kde-system-meta
 done
 
@@ -345,6 +339,12 @@ sudo pacman -S krunner
 sudo pacman -S sddm
 sudo pacman -S sddm-kcm
 sudo systemctl enable sddm.service
+#+end_src
+** [[https://wayland.freedesktop.org/][Wayland]]
+#+begin_src sh :tangle post_installation.sh
+sudo pacman -S egl-wayland
+sudo pacman -S plasma-wayland-session
+sudo pacman -S wayland
 #+end_src
 ** xdg
 #+begin_src sh :tangle post_installation.sh
@@ -464,10 +464,17 @@ sudo pacman -S xsel
 sudo pacman -S xclip
 # localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 #+end_src
-** .xinitrc
+** .xinitrc and .profile
 #+begin_src sh :tangle post_installation.sh
-echo "xrdb -merge .Xresources"      >> "$HOME"/.xinitrc
-echo "exec         startplasma-x11" >> "$HOME"/.xinitrc
+# .xinitrc
+echo "xrdb -merge .Xresources"       >> "$HOME"/.xinitrc
+echo "export DESKTOP_SESSION=plasma" >> "$HOME"/.xinitrc
+echo "exec startplasma-x11"          >> "$HOME"/.xinitrc
+# .profile
+echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]' >> "$HOME"/.profile
+echo 'then'                                              >> "$HOME"/.profile
+echo '  exec startx'                                     >> "$HOME"/.profile
+echo 'fi'                                                >> "$HOME"/.profile
 #+end_src
 ** .Xresources
 #+begin_src sh :tangle post_installation.sh
