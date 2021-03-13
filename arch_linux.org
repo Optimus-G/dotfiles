@@ -30,7 +30,7 @@ wipefs --all --force /dev/sd**
 |        |      | /boot/efi   | +512M          | FAT32       | mkfs.fat -F32, mount |
 |--------+------+-------------+----------------+-------------+----------------------|
 |      2 | SSD  | /home       | +100G          | ext4        | mkfs.ext4, mount     |
-|        |      | /var        | +32G           | ext4        | mkfs.ext4, mount     |
+|        |      | /var        | +42G           | ext4        | mkfs.ext4, mount     |
 |        |      | SWAP        | +8G            | swap        | mkswap, swapon       |
 |--------+------+-------------+----------------+-------------+----------------------|
 |      3 | HDD  | /backup     | +100G          | ext4        | mkfs.ext4, mount     |
@@ -301,10 +301,7 @@ sudo pacman -S xorg-xrandr
 #+end_src
 ** [[https://kde.org/][KDE]]
 #+begin_src sh :tangle post_installation.sh
-sudo pacman -S breeze
-sudo pacman -S breeze-grub
 sudo pacman -S cronie
-sudo pacman -S oxygen
 sudo pacman -S packagekit-qt5
 sudo pacman -S phonon-qt5-gstreamer
 
@@ -314,6 +311,7 @@ do
   echo "$i KDE Plasma installation ..."
   echo "=============================="
   sudo pacman -S plasma-meta
+  sudo pacman -S plasma-integration
   sudo pacman -S kde-system-meta
 done
 
@@ -342,8 +340,15 @@ xdg-user-dirs-update
 ** Themes
 #+begin_src sh :tangle post_installation.sh
 sudo pacman -S archlinux-wallpaper
+sudo pacman -S breeze
+sudo pacman -S breeze-grub
+sudo pacman -S breeze-gtk
+sudo pacman -S breeze-icons
 sudo pacman -S materia-gtk-theme
 sudo pacman -S materia-kde
+sudo pacman -S oxygen
+sudo pacman -S oxygen-icons
+sudo pacman -S oxygen-icons-svg
 sudo pacman -S papirus-icon-theme
 #+end_src
 ** [[https://github.com/tmux/tmux/wiki][tmux]]

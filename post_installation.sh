@@ -92,10 +92,7 @@ sudo pacman -S xorg-xinit
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
 
-sudo pacman -S breeze
-sudo pacman -S breeze-grub
 sudo pacman -S cronie
-sudo pacman -S oxygen
 sudo pacman -S packagekit-qt5
 sudo pacman -S phonon-qt5-gstreamer
 
@@ -105,6 +102,7 @@ do
   echo "$i KDE Plasma installation ..."
   echo "=============================="
   sudo pacman -S plasma-meta
+  sudo pacman -S plasma-integration
   sudo pacman -S kde-system-meta
 done
 
@@ -129,8 +127,15 @@ sudo pacman -S xdg-utils
 xdg-user-dirs-update
 
 sudo pacman -S archlinux-wallpaper
+sudo pacman -S breeze
+sudo pacman -S breeze-grub
+sudo pacman -S breeze-gtk
+sudo pacman -S breeze-icons
 sudo pacman -S materia-gtk-theme
 sudo pacman -S materia-kde
+sudo pacman -S oxygen
+sudo pacman -S oxygen-icons
+sudo pacman -S oxygen-icons-svg
 sudo pacman -S papirus-icon-theme
 
 sudo pacman -S tmux
