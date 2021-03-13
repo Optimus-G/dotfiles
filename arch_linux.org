@@ -182,7 +182,7 @@ sudo systemctl start  dhcpcd.service
 sudo systemctl enable dhcpcd.service
 
 ping -c 5 archlinux.org
-git clone https://github.com/karlkorp/dotfiles.git $HOME/dotfiles
+git clone https://github.com/karlkorp/dotfiles.git "$HOME"/dotfiles
 #+end_src
 ** [[https://github.com/Morganamilo/paru][Paru]]
 #+begin_src sh :tangle post_installation.sh
