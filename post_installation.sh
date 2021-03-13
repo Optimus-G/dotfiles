@@ -55,11 +55,20 @@ sudo systemctl start  org.cups.cupsd.service
 if [ "$system_type" = "test" ]; then
   sudo pacman -S xf86-video-fbdev # for QEMU/KVM
 else
+  sudo pacman -S egl-wayland
   sudo pacman -S nvidia-lts
   sudo pacman -S nvidia-settings
   sudo pacman -S nvidia-utils
   sudo pacman -S opencl-nvidia
 fi
+
+sudo pacman -S vulkan-extra-layers
+sudo pacman -S vulkan-extra-tools
+sudo pacman -S vulkan-headers
+sudo pacman -S vulkan-icd-loader
+sudo pacman -S vulkan-mesa-layers
+sudo pacman -S vulkan-tools
+sudo pacman -S vulkan-validation-layers
 
 sudo pacman -S gvfs
 sudo pacman -S gvfs-afc
@@ -83,6 +92,7 @@ sudo pacman -S opencl-mesa
 sudo pacman -S pocl
 
 sudo pacman -S xorg
+sudo pacman -S xorg-apps
 sudo pacman -S xorg-docs
 sudo pacman -S xorg-fonts-cyrillic
 sudo pacman -S xorg-server
@@ -103,6 +113,7 @@ do
   echo "=============================="
   sudo pacman -S plasma-meta
   sudo pacman -S plasma-integration
+  sudo pacman -S plasma-wayland-session
   sudo pacman -S kde-system-meta
 done
 
@@ -150,10 +161,12 @@ sudo pacman -S qt5-base
 sudo pacman -S qt5-doc
 sudo pacman -S qt5-examples
 sudo pacman -S qt5-tools
+sudo pacman -S qt5-wayland
 sudo pacman -S qt6-base
 sudo pacman -S qt6-doc
 sudo pacman -S qt6-examples
 sudo pacman -S qt6-tools
+sudo pacman -S qt6-wayland
 
 sudo pacman -S a52dec
 sudo pacman -S celt
@@ -277,3 +290,5 @@ curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
 echo     "Configuration was done!"
 read -rp "Press 'enter' to reboot..."
 sleep 5 && reboot
+
+sudo pacman -S wayland
