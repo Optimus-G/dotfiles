@@ -21,7 +21,6 @@ alias fgrep="fgrep --color=auto"
 alias free="free -mt"
 alias grep="grep --color=auto"
 alias h="history"
-alias hacker="clear && cat /dev/urandom | hexdump -C | pv -qL 10"
 alias ip="ip -color=auto"
 alias j="jobs -l"
 alias l="less"
@@ -35,12 +34,15 @@ alias mkdir="mkdir -pv"
 alias mv="mv -v"
 alias ping="ping -c 5"
 alias ps="ps auxf"
-alias reload="source $HOME/.bashrc"
+alias reload="source \$HOME/.bashrc && clear"
 alias rm="rm -Iv"
 alias t="tree"
 alias tarc="tar czvf"
 alias tart="tar tzvf"
 alias x="exit"
+if [ -f /usr/bin/pv ]; then
+  alias hacker="clear && cat /dev/urandom | hexdump -C | pv -qL 10"
+fi
 if [ -f /usr/bin/cmatrix ]; then
   alias cmc="cmatrix && clear"
 fi
@@ -51,8 +53,8 @@ if [ -f /usr/bin/asciiquarium ]; then
   alias aac="asciiquarium && clear"
 fi
 if [ -f /usr/bin/emacs ]; then
-  alias cb="emacs $HOME/.bashrc &"
-  alias ce="emacs $HOME/.emacs  &"
+  alias cb="emacs \$HOME/.bashrc &"
+  alias ce="emacs \$HOME/.emacs  &"
   alias enw="emacs -nw"
   e () { emacs "$@" & }
 fi
@@ -75,7 +77,7 @@ if [ -f /usr/bin/tmux ]; then
   alias tn="tmux new-session -s"
 fi
 if [ -f /usr/bin/vim ]; then
-  alias cv="vim $HOME/.vimrc"
+  alias cv="vim \$HOME/.vimrc"
   alias v="vim"
 fi
 if [ -f /usr/bin/bat ]; then
@@ -111,8 +113,8 @@ if [ -f /usr/bin/tldr ]; then
   export TLDR_QUOTE="italic"
 fi
 
-if [ -f "$HOME/.fzf.bash" ]; then
-  source "$HOME/.fzf.bash"
+if [ -f "$HOME"/.fzf.bash ]; then
+  execute_fzf="source $HOME/.fzf.bash" && eval "$execute_fzf" || return
   export FZF_DEFAULT_OPTS="-m --preview='head {}' --preview-window=right"
   if [ -f /usr/bin/rg ]; then
     export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
@@ -121,7 +123,7 @@ fi
 
 upgrade_and_clean () {
   sudo paccache -rk0
-  sudo pacman   -Rns $(pacman -Qtdq)
+  sudo pacman   -Rns "$(pacman -Qtdq)"
   sudo pacman   -Scc
   sudo pacman   -Syu
   if [ -f /usr/bin/paru ]; then
@@ -129,6 +131,7 @@ upgrade_and_clean () {
     paru -c && paru -Sc
   fi
   sudo updatedb
+  clear
 }
 
 extract () {
@@ -155,6 +158,9 @@ extract () {
 
 create_project () {
   project_name=$1
+  if [ -z "$project_name" ]; then
+    project_name="test"
+  fi
   if [ -d "$project_name" ]; then
     cd "$project_name/src" && clear
     echo "The project already exists ..."
@@ -167,14 +173,17 @@ create_project () {
 
 create_python_project () {
   project_name=$1
-  activate_command=./bin/activate
+  activate_command="source ./bin/activate"
+  if [ -z "$project_name" ]; then
+    project_name="test"
+  fi
   if [ -d "$project_name" ]; then
-    cd "$project_name" && source "$activate_command" && cd src || return
+    cd "$project_name" && eval "$activate_command" && cd src || return
     clear && echo "The project already exists ..." && echo "" && ls -la
     return
   fi
   python -m venv "$project_name"
-  cd "$project_name" && source "$activate_command"
+  cd "$project_name" && eval "$activate_command"
   mkdir -p src && cd src || return
   pip install --upgrade pip
   pip install --upgrade autopep8 black flake8 ipython jedi mccabe
@@ -182,4 +191,15 @@ create_python_project () {
   pip install --upgrade 'python-language-server[all]'
   git init && git add . && git commit -m "Project created ..."
   clear && echo "Project created ..." && echo "" && ls -la && return
+}
+
+clear_kde_plasma () {
+  rm -rf "$HOME"/.cache/plasma*
+  rm -rf "$HOME"/.local/share/aurorae/*
+  rm -rf "$HOME"/.local/share/color-schemes/*
+  rm -rf "$HOME"/.local/share/plasma/*
+  rm -rf "$HOME"/.local/share/wallpapers/*
+
+  kquitapp5 plasmashell &
+  kstart5   plasmashell &
 }

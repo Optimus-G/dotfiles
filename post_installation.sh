@@ -7,7 +7,7 @@ fi
 echo "SYSTEM TYPE: $system_type"
 
 git clone https://aur.archlinux.org/paru.git
-cd paru
+cd paru || return
 makepkg -si
 cd .. && rm -rf paru/
 paru -c && paru -Sc
@@ -207,47 +207,47 @@ sudo pacman -S xsel
 sudo pacman -S xclip
 # localectl --no-convert set-x11-keymap us,ru "" "" grp:alt_shift_toggle
 
-echo "xrdb -merge .Xresources"      >> $HOME/.xinitrc
-echo "exec         startplasma-x11" >> $HOME/.xinitrc
+echo "xrdb -merge .Xresources"      >> "$HOME"/.xinitrc
+echo "exec         startplasma-x11" >> "$HOME"/.xinitrc
 
-echo "Xft.antialias: true"       >> $HOME/.Xresources
-echo "Xft.autohint:  false"      >> $HOME/.Xresources
-echo "Xft.dpi:       96"         >> $HOME/.Xresources
-echo "Xft.hinting:   true"       >> $HOME/.Xresources
-echo "Xft.hintstyle: hintslight" >> $HOME/.Xresources
-echo "Xft.lcdfilter: lcddefault" >> $HOME/.Xresources
-echo "Xft.rgba:      rgb"        >> $HOME/.Xresources
+echo "Xft.antialias: true"       >> "$HOME"/.Xresources
+echo "Xft.autohint:  false"      >> "$HOME"/.Xresources
+echo "Xft.dpi:       96"         >> "$HOME"/.Xresources
+echo "Xft.hinting:   true"       >> "$HOME"/.Xresources
+echo "Xft.hintstyle: hintslight" >> "$HOME"/.Xresources
+echo "Xft.lcdfilter: lcddefault" >> "$HOME"/.Xresources
+echo "Xft.rgba:      rgb"        >> "$HOME"/.Xresources
 
-echo "\$include /etc/inputrc"                     >> $HOME/.inputrc
-echo "set bell-style                        none" >> $HOME/.inputrc
-echo "set bind-tty-special-chars              on" >> $HOME/.inputrc
-echo "set blink-matching-paren                on" >> $HOME/.inputrc
-echo "set colored-stats                       on" >> $HOME/.inputrc
-echo "set completion-ignore-case              on" >> $HOME/.inputrc
-echo "set completion-prefix-display-length     5" >> $HOME/.inputrc
-echo "set completion-query-items              10" >> $HOME/.inputrc
-echo "set echo-control-characters            off" >> $HOME/.inputrc
-echo "set editing-mode                     emacs" >> $HOME/.inputrc
-echo "set horizontal-scroll-mode              on" >> $HOME/.inputrc
-echo "set mark-directories                    on" >> $HOME/.inputrc
-echo "set mark-modified-lines                 on" >> $HOME/.inputrc
-echo "set mark-symlinked-directories          on" >> $HOME/.inputrc
-echo "set match-hidden-files                  on" >> $HOME/.inputrc
-echo "set show-all-if-ambiguous               on" >> $HOME/.inputrc
-echo "set show-all-if-unmodified              on" >> $HOME/.inputrc
-echo "set visible-stats                       on" >> $HOME/.inputrc
+echo "\$include /etc/inputrc"                     >> "$HOME"/.inputrc
+echo "set bell-style                        none" >> "$HOME"/.inputrc
+echo "set bind-tty-special-chars              on" >> "$HOME"/.inputrc
+echo "set blink-matching-paren                on" >> "$HOME"/.inputrc
+echo "set colored-stats                       on" >> "$HOME"/.inputrc
+echo "set completion-ignore-case              on" >> "$HOME"/.inputrc
+echo "set completion-prefix-display-length     5" >> "$HOME"/.inputrc
+echo "set completion-query-items              10" >> "$HOME"/.inputrc
+echo "set echo-control-characters            off" >> "$HOME"/.inputrc
+echo "set editing-mode                     emacs" >> "$HOME"/.inputrc
+echo "set horizontal-scroll-mode              on" >> "$HOME"/.inputrc
+echo "set mark-directories                    on" >> "$HOME"/.inputrc
+echo "set mark-modified-lines                 on" >> "$HOME"/.inputrc
+echo "set mark-symlinked-directories          on" >> "$HOME"/.inputrc
+echo "set match-hidden-files                  on" >> "$HOME"/.inputrc
+echo "set show-all-if-ambiguous               on" >> "$HOME"/.inputrc
+echo "set show-all-if-unmodified              on" >> "$HOME"/.inputrc
+echo "set visible-stats                       on" >> "$HOME"/.inputrc
 
 git config --global user.name  "karlkorp"
 git config --global user.email "lispgod@gmail.com"
 
-mkdir -p $HOME/.fonts
-mkdir -p $HOME/.icons
-mkdir -p $HOME/.themes
+mkdir -p "$HOME"/.fonts
+mkdir -p "$HOME"/.icons
+mkdir -p "$HOME"/.themes
 
-cp $HOME/dotfiles/.bashrc    $HOME
-cp $HOME/dotfiles/.emacs     $HOME
-cp $HOME/dotfiles/.tmux.conf $HOME
-cp $HOME/dotfiles/.vimrc     $HOME
+cp "$HOME"/dotfiles/.bashrc    "$HOME"
+cp "$HOME"/dotfiles/.emacs     "$HOME"
+cp "$HOME"/dotfiles/.tmux.conf "$HOME"
+cp "$HOME"/dotfiles/.vimrc     "$HOME"
 
 sudo systemctl enable fstrim.timer
 
@@ -262,21 +262,21 @@ if [ -d /data ]; then
   mkdir -p /data/torrents
 fi
 
-rm -f  $HOME/.gtkrc*
-rm -rf $HOME/.cache/kde*
-rm -rf $HOME/.cache/plasma*
-rm -rf $HOME/.config/kde*
-rm -rf $HOME/.config/plasma*
-rm -rf $HOME/.kde*
-rm -rf $HOME/.local/share/aurorae*
-rm -rf $HOME/.local/share/kde*
-rm -rf $HOME/.local/share/plasma*
+rm -f  "$HOME"/.gtkrc*
+rm -rf "$HOME"/.cache/kde*
+rm -rf "$HOME"/.cache/plasma*
+rm -rf "$HOME"/.config/kde*
+rm -rf "$HOME"/.config/plasma*
+rm -rf "$HOME"/.kde*
+rm -rf "$HOME"/.local/share/aurorae*
+rm -rf "$HOME"/.local/share/kde*
+rm -rf "$HOME"/.local/share/plasma*
 
 echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
-curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-echo    "Configuration was done!"
-read -p "Press 'enter' to reboot..."
+echo     "Configuration was done!"
+read -rp "Press 'enter' to reboot..."
 sleep 5 && reboot

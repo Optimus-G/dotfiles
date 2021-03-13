@@ -354,11 +354,11 @@ sudo pacman -S gmp
 sudo pacman -S bc
 
 sudo pacman -S octave
-echo "clc;"          >> $HOME/.octaverc
-echo "clear all;"    >> $HOME/.octaverc
-echo "close all;"    >> $HOME/.octaverc
-echo "format short;" >> $HOME/.octaverc
-echo "more off;"     >> $HOME/.octaverc
+echo "clc;"          >> "$HOME"/.octaverc
+echo "clear all;"    >> "$HOME"/.octaverc
+echo "close all;"    >> "$HOME"/.octaverc
+echo "format short;" >> "$HOME"/.octaverc
+echo "more off;"     >> "$HOME"/.octaverc
 
 sudo pacman -S gnuplot
 
@@ -540,19 +540,19 @@ sudo pacman -S openttd-opensfx
 sudo pacman -S wesnoth
 
 sudo paccache  -rk0
-sudo pacman    -Rns $(pacman -Qtdq)
+sudo pacman    -Rns "$(pacman -Qtdq)"
 sudo pacman    -Scc
 sudo pacman    -Syu
 if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb
+sudo updatedb && clear
 
 sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service
 echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
-sudo usermod -aG libvirt $(whoami)
+sudo usermod -aG libvirt "$(whoami)"
 newgrp libvirt
 sudo systemctl restart libvirtd.service

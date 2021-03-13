@@ -589,11 +589,11 @@ sudo pacman -S bc
 *** [[https://www.gnu.org/software/octave/index][GNU Octave]]
 #+begin_src sh
 sudo pacman -S octave
-echo "clc;"          >> $HOME/.octaverc
-echo "clear all;"    >> $HOME/.octaverc
-echo "close all;"    >> $HOME/.octaverc
-echo "format short;" >> $HOME/.octaverc
-echo "more off;"     >> $HOME/.octaverc
+echo "clc;"          >> "$HOME"/.octaverc
+echo "clear all;"    >> "$HOME"/.octaverc
+echo "close all;"    >> "$HOME"/.octaverc
+echo "format short;" >> "$HOME"/.octaverc
+echo "more off;"     >> "$HOME"/.octaverc
 #+end_src
 *** [[http://www.gnuplot.info][Gnuplot]]
 #+begin_src sh
@@ -906,14 +906,14 @@ sudo pacman -S wesnoth
 * Clean
 #+begin_src sh
 sudo paccache  -rk0
-sudo pacman    -Rns $(pacman -Qtdq)
+sudo pacman    -Rns "$(pacman -Qtdq)"
 sudo pacman    -Scc
 sudo pacman    -Syu
 if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb
+sudo updatedb && clear
 #+end_src
 
 * Enable normal user account to use KVM
@@ -922,7 +922,7 @@ sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service
 echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
-sudo usermod -aG libvirt $(whoami)
+sudo usermod -aG libvirt "$(whoami)"
 newgrp libvirt
 sudo systemctl restart libvirtd.service
 #+end_src
