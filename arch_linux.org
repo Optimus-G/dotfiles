@@ -106,7 +106,7 @@ passwd
 echo "NEW USER: $username"
 useradd -m -s /bin/bash "$username"
 usermod -aG audio,disk,kvm,lp,optical,scanner,storage,video,wheel "$username"
-echo "SET THE USER PASSWORD:"
+echo "SET THE $username PASSWORD:"
 passwd "$username"
 pacman -S sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
@@ -117,6 +117,7 @@ pacman -S acpi
 pacman -S acpid
 pacman -S avahi
 pacman -S bash-completion
+pacman -S bind
 pacman -S btrfs-progs
 pacman -S dbus
 pacman -S dhcpcd
@@ -132,6 +133,7 @@ pacman -S iproute2
 pacman -S iw
 pacman -S iwd
 pacman -S jfsutils
+pacman -S lsb-release
 pacman -S mkinitcpio
 pacman -S mtools
 pacman -S nano
@@ -224,6 +226,8 @@ sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
 sudo pacman -S ttf-opensans
+sudo pacman -S ttf-roboto
+sudo pacman -S ttf-roboto-mono
 #+end_src
 ** Drivers
 *** [[http://www.bluez.org/][BlueZ]]
@@ -355,6 +359,8 @@ sudo pacman -S breeze
 sudo pacman -S breeze-grub
 sudo pacman -S breeze-gtk
 sudo pacman -S breeze-icons
+sudo pacman -S kvantum-qt5
+sudo pacman -S kvantum-theme-materia
 sudo pacman -S materia-gtk-theme
 sudo pacman -S materia-kde
 sudo pacman -S oxygen
@@ -409,6 +415,7 @@ sudo pacman -S openal
 sudo pacman -S opencore-amr
 sudo pacman -S opus
 sudo pacman -S schroedinger
+sudo pacman -S sof-firmware
 sudo pacman -S speex
 sudo pacman -S wavpack
 sudo pacman -S x264

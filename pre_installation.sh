@@ -33,7 +33,7 @@ passwd
 echo "NEW USER: $username"
 useradd -m -s /bin/bash "$username"
 usermod -aG audio,disk,kvm,lp,optical,scanner,storage,video,wheel "$username"
-echo "SET THE USER PASSWORD:"
+echo "SET THE $username PASSWORD:"
 passwd "$username"
 pacman -S sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
@@ -42,6 +42,7 @@ pacman -S acpi
 pacman -S acpid
 pacman -S avahi
 pacman -S bash-completion
+pacman -S bind
 pacman -S btrfs-progs
 pacman -S dbus
 pacman -S dhcpcd
@@ -57,6 +58,7 @@ pacman -S iproute2
 pacman -S iw
 pacman -S iwd
 pacman -S jfsutils
+pacman -S lsb-release
 pacman -S mkinitcpio
 pacman -S mtools
 pacman -S nano

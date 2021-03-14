@@ -455,6 +455,7 @@ sudo pacman -S thunderbird-i18n-ru
 sudo pacman -S xournalpp
 
 sudo pacman -S cuda
+sudo pacman -S cuda-tools
 sudo pacman -S blender
 
 sudo pacman -S darktable
@@ -554,7 +555,9 @@ if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb && clear
+clear && echo "Update system db ..."
+sudo updatedb
+clear
 
 sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service

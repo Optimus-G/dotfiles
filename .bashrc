@@ -130,6 +130,7 @@ upgrade_and_clean () {
     paru -Sua
     paru -c && paru -Sc
   fi
+  clear && echo "Update system db ..."
   sudo updatedb
   clear
 }
@@ -195,11 +196,15 @@ create_python_project () {
 
 clear_kde_plasma () {
   rm -rf "$HOME"/.cache/plasma*
+  rm -rf "$HOME"/.config/Kvantum/*
+  rm -rf "$HOME"/.icons/*
   rm -rf "$HOME"/.kde4/*
   rm -rf "$HOME"/.local/share/aurorae/*
   rm -rf "$HOME"/.local/share/color-schemes/*
+  rm -rf "$HOME"/.local/share/icons/*
   rm -rf "$HOME"/.local/share/plasma/*
   rm -rf "$HOME"/.local/share/wallpapers/*
+  rm -rf "$HOME"/.themes/*
   kquitapp5 plasmashell &
   kstart5   plasmashell &
 }

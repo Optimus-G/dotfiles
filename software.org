@@ -752,9 +752,10 @@ sudo pacman -S thunderbird-i18n-ru
 sudo pacman -S xournalpp
 #+end_src
 ** Design
-*** [[http://www.blender.org][Blender]]
+*** [[http://www.blender.org][Blender]] and [[https://developer.nvidia.com/cuda-zone][CUDA]]
 #+begin_src sh
 sudo pacman -S cuda
+sudo pacman -S cuda-tools
 sudo pacman -S blender
 #+end_src
 *** [[https://www.darktable.org/][darktable]]
@@ -920,7 +921,9 @@ if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-sudo updatedb && clear
+clear && echo "Update system db ..."
+sudo updatedb
+clear
 #+end_src
 
 * Enable normal user account to use KVM

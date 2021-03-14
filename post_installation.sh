@@ -34,6 +34,8 @@ sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
 sudo pacman -S ttf-opensans
+sudo pacman -S ttf-roboto
+sudo pacman -S ttf-roboto-mono
 
 sudo pacman -S bluez
 sudo pacman -S bluez-cups
@@ -140,6 +142,8 @@ sudo pacman -S breeze
 sudo pacman -S breeze-grub
 sudo pacman -S breeze-gtk
 sudo pacman -S breeze-icons
+sudo pacman -S kvantum-qt5
+sudo pacman -S kvantum-theme-materia
 sudo pacman -S materia-gtk-theme
 sudo pacman -S materia-kde
 sudo pacman -S oxygen
@@ -186,6 +190,7 @@ sudo pacman -S openal
 sudo pacman -S opencore-amr
 sudo pacman -S opus
 sudo pacman -S schroedinger
+sudo pacman -S sof-firmware
 sudo pacman -S speex
 sudo pacman -S wavpack
 sudo pacman -S x264
