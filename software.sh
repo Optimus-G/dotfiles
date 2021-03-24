@@ -25,14 +25,9 @@ sudo pacman -S zip
 sudo pacman -S zlib
 sudo pacman -S zstd
 
-sudo pacman -S asciiquarium
-sudo pacman -S sl
-
 sudo pacman -S bat
 
 sudo pacman -S bleachbit
-
-sudo pacman -S cmatrix
 
 sudo pacman -S docker
 sudo pacman -S docker-compose
@@ -49,6 +44,7 @@ sudo pacman -S gawk
 sudo pacman -S glances
 
 sudo pacman -S coreutils
+sudo pacman -S moreutils
 
 sudo pacman -S diffutils
 
@@ -77,8 +73,6 @@ sudo pacman -S jre-openjdk
 sudo pacman -S jre-openjdk-headless
 sudo pacman -S openjdk-doc
 sudo pacman -S openjdk-src
-
-sudo pacman -S pv
 
 sudo pacman -S bridge-utils
 sudo pacman -S dmidecode
@@ -115,8 +109,6 @@ sudo pacman -S sysstat
 
 sudo pacman -S rsync
 paru        -S timeshift
-
-paru -S tldr-sh
 
 sudo pacman -S tree
 
@@ -279,7 +271,7 @@ sudo pacman -S ninja
 
 sudo pacman -S opencv
 sudo pacman -S opencv-samples
-sudo pacman -S vtk
+sudo pacman -S tbb
 
 sudo pacman -S freeglut
 sudo pacman -S glew
@@ -353,6 +345,10 @@ sudo pacman -S cfitsio
 
 sudo pacman -S eigen
 
+sudo pacman -S gap
+sudo pacman -S gap-doc
+sudo pacman -S gap-packages
+
 sudo pacman -S gmp
 
 sudo pacman -S bc
@@ -386,13 +382,13 @@ sudo pacman -S opencascade
 paru -S petsc
 paru -S slepc
 
-sudo pacman -S portaudio
-
 sudo pacman -S sundials
 
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
 sudo pacman -S tesseract-data-rus
+
+sudo pacman -S vtk
 
 sudo pacman -S calibre
 
@@ -414,8 +410,8 @@ sudo pacman -S aspell-en
 sudo pacman -S aspell-ru
 
 sudo pacman -S hunspell
-sudo pacman -S hunspell-en_GB
-sudo pacman -S hunspell-en_US
+sudo pacman -S hunspell-en_gb
+sudo pacman -S hunspell-en_us
 paru        -S hunspell-ru
 
 sudo pacman -S ispell
@@ -435,10 +431,6 @@ sudo pacman -S firefox-i18n-ru
 sudo pacman -S plasma-browser-integration
 
 sudo pacman -S okular
-
-sudo pacman -S spectacle
-
-sudo pacman -S telegram-desktop
 
 sudo pacman -S biber
 sudo pacman -S texlive-bin
@@ -470,13 +462,7 @@ sudo pacman -S krita
 
 sudo pacman -S scribus
 
-sudo pacman -S audacity
-
 sudo pacman -S clementine
-
-sudo pacman -S easytag
-
-sudo pacman -S ffmpeg
 
 sudo pacman -S cdparanoia
 sudo pacman -S cdrdao
@@ -490,11 +476,15 @@ sudo pacman -S vcdimager
 
 sudo pacman -S kdenlive
 
+sudo pacman -S kid3
+
+sudo pacman -S kwave
+
 sudo pacman -S mpv
 
 sudo pacman -S obs-studio
 
-sudo pacman -S soundconverter
+sudo pacman -S soundkonverter
 
 sudo pacman -S vlc
 
@@ -503,19 +493,27 @@ sudo pacman -S nftables
 
 sudo pacman -S gnutls
 
-sudo pacman -S hydra
-
-paru -S jigdo
-
 sudo pacman -S hashcat
 sudo pacman -S hashcat-utils
 sudo pacman -S hcxkeys
 sudo pacman -S hcxtools
+
+sudo pacman -S hydra
+
+paru -S jigdo
+
 sudo pacman -S john
+
+sudo pacman -S freerdp
+sudo pacman -S krdc
+sudo pacman -S libvncserver
+
+sudo pacman -S lynis
 
 sudo pacman -S nmap
 
 sudo pacman -S ipset
+sudo pacman -S libssh
 sudo pacman -S openssh
 sudo pacman -S sshfs
 sudo pacman -S sshguard
@@ -526,15 +524,6 @@ sudo pacman -S openvpn
 
 sudo pacman -S qbittorrent
 sudo pacman -S qbittorrent-nox
-
-sudo pacman -S freerdp
-sudo pacman -S libsecret
-sudo pacman -S libvncserver
-sudo pacman -S libxkbfile
-sudo pacman -S nxproxy
-sudo pacman -S remmina
-sudo pacman -S telepathy-glib
-sudo pacman -S xorg-server-xephyr
 
 sudo pacman -S tcpdump
 
@@ -556,11 +545,10 @@ if [ -f /usr/bin/paru ]; then
   paru -c && paru -Sc
 fi
 clear && echo "Update system db ..."
-sudo updatedb
-clear
+sudo updatedb && clear
 
-sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service
+sudo systemctl enable libvirtd.service
 echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
 sudo usermod -aG libvirt "$(whoami)"

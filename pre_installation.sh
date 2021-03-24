@@ -58,6 +58,7 @@ pacman -S iproute2
 pacman -S iw
 pacman -S iwd
 pacman -S jfsutils
+pacman -S libpwquality
 pacman -S lsb-release
 pacman -S mkinitcpio
 pacman -S mtools

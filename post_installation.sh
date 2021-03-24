@@ -19,12 +19,15 @@ sudo pacman -S cantarell-fonts
 sudo pacman -S freetype2
 sudo pacman -S gnu-free-fonts
 sudo pacman -S noto-fonts
+sudo pacman -S noto-fonts-cjk
+sudo pacman -S noto-fonts-emoji
 sudo pacman -S noto-fonts-extra
 sudo pacman -S otf-hermit
 sudo pacman -S pango
 sudo pacman -S terminus-font
 sudo pacman -S ttf-anonymous-pro
 sudo pacman -S ttf-carlito
+sudo pacman -S ttf-croscore
 sudo pacman -S ttf-dejavu
 sudo pacman -S ttf-droid
 sudo pacman -S ttf-fantasque-sans-mono
@@ -33,6 +36,7 @@ sudo pacman -S ttf-font-awesome
 sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
 sudo pacman -S ttf-linux-libertine
+sudo pacman -S ttf-nerd-fonts-symbols
 sudo pacman -S ttf-opensans
 sudo pacman -S ttf-roboto
 sudo pacman -S ttf-roboto-mono
@@ -51,8 +55,8 @@ sudo pacman -S print-manager
 sudo pacman -S skanlite
 sudo pacman -S system-config-printer
 
-sudo systemctl enable org.cups.cupsd.service
 sudo systemctl start  org.cups.cupsd.service
+sudo systemctl enable org.cups.cupsd.service
 
 if [ "$system_type" = "test" ]; then
   sudo pacman -S xf86-video-fbdev # for QEMU/KVM
@@ -62,14 +66,6 @@ else
   sudo pacman -S nvidia-utils
   sudo pacman -S opencl-nvidia
 fi
-
-sudo pacman -S vulkan-extra-layers
-sudo pacman -S vulkan-extra-tools
-sudo pacman -S vulkan-headers
-sudo pacman -S vulkan-icd-loader
-sudo pacman -S vulkan-mesa-layers
-sudo pacman -S vulkan-tools
-sudo pacman -S vulkan-validation-layers
 
 sudo pacman -S gvfs
 sudo pacman -S gvfs-afc
@@ -91,6 +87,14 @@ sudo pacman -S opencl-clhpp
 sudo pacman -S opencl-headers
 sudo pacman -S opencl-mesa
 sudo pacman -S pocl
+
+sudo pacman -S vulkan-extra-layers
+sudo pacman -S vulkan-extra-tools
+sudo pacman -S vulkan-headers
+sudo pacman -S vulkan-icd-loader
+sudo pacman -S vulkan-mesa-layers
+sudo pacman -S vulkan-tools
+sudo pacman -S vulkan-validation-layers
 
 sudo pacman -S xorg
 sudo pacman -S xorg-apps
@@ -121,11 +125,13 @@ sudo pacman -S dolphin
 sudo pacman -S dolphin-plugins
 sudo pacman -S kate
 sudo pacman -S kcalc
+sudo pacman -S kcolorchooser
 sudo pacman -S kcron
 sudo pacman -S kdeconnect
 sudo pacman -S kfind
 sudo pacman -S konsole
 sudo pacman -S krunner
+sudo pacman -S spectacle
 
 sudo pacman -S sddm
 sudo pacman -S sddm-kcm
@@ -155,6 +161,7 @@ sudo pacman -S tmux
 
 sudo pacman -S ecb
 sudo pacman -S emacs
+sudo pacman -S harfbuzz
 sudo pacman -S vim
 sudo pacman -S vim-spell-en
 sudo pacman -S vim-spell-ru
@@ -172,6 +179,7 @@ sudo pacman -S a52dec
 sudo pacman -S celt
 sudo pacman -S faac
 sudo pacman -S faad2
+sudo pacman -S ffmpeg
 sudo pacman -S flac
 sudo pacman -S jasper
 sudo pacman -S lame
@@ -189,6 +197,7 @@ sudo pacman -S libxv
 sudo pacman -S openal
 sudo pacman -S opencore-amr
 sudo pacman -S opus
+sudo pacman -S portaudio
 sudo pacman -S schroedinger
 sudo pacman -S sof-firmware
 sudo pacman -S speex
@@ -196,14 +205,20 @@ sudo pacman -S wavpack
 sudo pacman -S x264
 sudo pacman -S xvidcore
 
+sudo pacman -S alsa-firmware
 sudo pacman -S alsa-lib
 sudo pacman -S alsa-plugins
+sudo pacman -S alsa-tools
 sudo pacman -S alsa-utils
+
 sudo pacman -S pulseaudio
 sudo pacman -S pulseaudio-alsa
 sudo pacman -S pulseaudio-bluetooth
 sudo pacman -S pulseaudio-equalizer
 sudo pacman -S pulseaudio-jack
+sudo pacman -S pulseaudio-lirc
+sudo pacman -S pulseaudio-rtp
+sudo pacman -S pulseaudio-zeroconf
 
 sudo pacman -S gst-editing-services
 sudo pacman -S gst-libav
@@ -263,12 +278,24 @@ echo 'then'                                              >> "$HOME"/.profile
 echo '  exec startx'                                     >> "$HOME"/.profile
 echo 'fi'                                                >> "$HOME"/.profile
 
-git config --global user.name  "karlkorp"
-git config --global user.email "lispgod@gmail.com"
+sudo pacman -S clamav
+sudo systemctl stop clamav-freshclam.service && sudo freshclam
+
+sudo systemctl start  clamav-freshclam.service
+sudo systemctl enable clamav-freshclam.service
+
+sudo systemctl start  clamav-daemon.service
+sudo systemctl enable clamav-daemon.service
+
+git config --global init.defaultBranch "main"
+git config --global user.email         "lispgod@gmail.com"
+git config --global user.name          "karlkorp"
 
 mkdir -p "$HOME"/.fonts
 mkdir -p "$HOME"/.icons
 mkdir -p "$HOME"/.themes
+
+git clone https://github.com/vinceliuice/Layan-kde.git "$HOME"/.themes/Layan
 
 cp "$HOME"/dotfiles/.bashrc    "$HOME"
 cp "$HOME"/dotfiles/.emacs     "$HOME"
@@ -277,8 +304,8 @@ cp "$HOME"/dotfiles/.vimrc     "$HOME"
 
 sudo systemctl enable fstrim.timer
 
-sudo systemctl enable paccache.timer
 sudo systemctl start  paccache.timer
+sudo systemctl enable paccache.timer
 
 if [ -d /data ]; then
   sudo chown "$USER":"$USER" /data
@@ -292,6 +319,8 @@ echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
 curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+sudo pacman -S arch-audit
 
 echo     "Configuration was done!"
 read -rp "Press 'enter' to reboot..."

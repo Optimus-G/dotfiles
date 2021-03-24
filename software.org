@@ -35,11 +35,6 @@ sudo pacman -S zip
 sudo pacman -S zlib
 sudo pacman -S zstd
 #+end_src
-*** asciiquarium and sl
-#+begin_src sh
-sudo pacman -S asciiquarium
-sudo pacman -S sl
-#+end_src
 *** [[https://github.com/sharkdp/bat][bat]]
 #+begin_src sh
 sudo pacman -S bat
@@ -47,10 +42,6 @@ sudo pacman -S bat
 *** [[https://www.bleachbit.org/][BleachBit]]
 #+begin_src sh
 sudo pacman -S bleachbit
-#+end_src
-*** [[http://www.asty.org/cmatrix/][CMatrix]]
-#+begin_src sh
-sudo pacman -S cmatrix
 #+end_src
 *** [[https://www.docker.com/][Docker]]
 #+begin_src sh
@@ -81,6 +72,7 @@ sudo pacman -S glances
 *** [[https://www.gnu.org/software/coreutils/][GNU core utilities]]
 #+begin_src sh
 sudo pacman -S coreutils
+sudo pacman -S moreutils
 #+end_src
 *** [[https://www.gnu.org/software/diffutils][GNU Diffutils]]
 #+begin_src sh
@@ -130,10 +122,6 @@ sudo pacman -S jre-openjdk-headless
 sudo pacman -S openjdk-doc
 sudo pacman -S openjdk-src
 #+end_src
-*** pv
-#+begin_src sh
-sudo pacman -S pv
-#+end_src
 *** [[https://www.qemu.org/][QEMU]]
 #+begin_src sh
 sudo pacman -S bridge-utils
@@ -179,10 +167,6 @@ sudo pacman -S sysstat
 #+begin_src sh
 sudo pacman -S rsync
 paru        -S timeshift
-#+end_src
-*** [[https://github.com/raylee/tldr-sh-client][tldr-sh]]
-#+begin_src sh
-paru -S tldr-sh
 #+end_src
 *** tree
 #+begin_src sh
@@ -467,7 +451,7 @@ sudo pacman -S ninja
 #+begin_src sh
 sudo pacman -S opencv
 sudo pacman -S opencv-samples
-sudo pacman -S vtk
+sudo pacman -S tbb
 #+end_src
 *** OpenGL
 #+begin_src sh
@@ -584,6 +568,12 @@ sudo pacman -S cfitsio
 #+begin_src sh
 sudo pacman -S eigen
 #+end_src
+*** [[https://www.gap-system.org/][GAP]]
+#+begin_src sh
+sudo pacman -S gap
+sudo pacman -S gap-doc
+sudo pacman -S gap-packages
+#+end_src
 *** [[https://gmplib.org/][GMP]]
 #+begin_src sh
 sudo pacman -S gmp
@@ -637,10 +627,6 @@ sudo pacman -S opencascade
 paru -S petsc
 paru -S slepc
 #+end_src
-*** [[http://www.portaudio.com/][PortAudio]]
-#+begin_src sh
-sudo pacman -S portaudio
-#+end_src
 *** [[https://computation.llnl.gov/casc/sundials/main.html][SUNDIALS]]
 #+begin_src sh
 sudo pacman -S sundials
@@ -650,6 +636,10 @@ sudo pacman -S sundials
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
 sudo pacman -S tesseract-data-rus
+#+end_src
+*** [[https://www.vtk.org/][VTK]]
+#+begin_src sh
+sudo pacman -S vtk
 #+end_src
 ** Office
 *** [[https://calibre-ebook.com/][calibre]]
@@ -689,8 +679,8 @@ sudo pacman -S aspell-ru
 **** [[https://hunspell.github.io/][Hunspell]]
 #+begin_src sh
 sudo pacman -S hunspell
-sudo pacman -S hunspell-en_GB
-sudo pacman -S hunspell-en_US
+sudo pacman -S hunspell-en_gb
+sudo pacman -S hunspell-en_us
 paru        -S hunspell-ru
 #+end_src
 **** [[https://www.gnu.org/software/ispell/][Ispell]]
@@ -722,14 +712,6 @@ sudo pacman -S plasma-browser-integration
 *** [[https://apps.kde.org/en/okular][Okular]]
 #+begin_src sh
 sudo pacman -S okular
-#+end_src
-*** [[https://apps.kde.org/en/spectacle][Spectacle]]
-#+begin_src sh
-sudo pacman -S spectacle
-#+end_src
-*** [[https://desktop.telegram.org/][Telegram Desktop]]
-#+begin_src sh
-sudo pacman -S telegram-desktop
 #+end_src
 *** [[https://www.tug.org/texlive/][TeX Live]]
 #+begin_src sh
@@ -781,21 +763,9 @@ sudo pacman -S krita
 sudo pacman -S scribus
 #+end_src
 ** Multimedia
-*** [[https://www.audacityteam.org/][Audacity]]
-#+begin_src sh
-sudo pacman -S audacity
-#+end_src
 *** [[https://www.clementine-player.org/][Clementine]]
 #+begin_src sh
 sudo pacman -S clementine
-#+end_src
-*** [[https://wiki.gnome.org/Apps/EasyTAG][EasyTAG]]
-#+begin_src sh
-sudo pacman -S easytag
-#+end_src
-*** [[https://ffmpeg.org/][FFmpeg]]
-#+begin_src sh
-sudo pacman -S ffmpeg
 #+end_src
 *** [[https://userbase.kde.org/K3b][K3b]]
 #+begin_src sh
@@ -813,6 +783,14 @@ sudo pacman -S vcdimager
 #+begin_src sh
 sudo pacman -S kdenlive
 #+end_src
+*** [[https://kid3.kde.org/][Kid3]]
+#+begin_src sh
+sudo pacman -S kid3
+#+end_src
+*** [[https://kwave.sourceforge.net/][Kwave]]
+#+begin_src sh
+sudo pacman -S kwave
+#+end_src
 *** [[https://mpv.io/][mpv]]
 #+begin_src sh
 sudo pacman -S mpv
@@ -821,9 +799,9 @@ sudo pacman -S mpv
 #+begin_src sh
 sudo pacman -S obs-studio
 #+end_src
-*** [[https://soundconverter.org/][SoundConverter]]
+*** soundKonverter
 #+begin_src sh
-sudo pacman -S soundconverter
+sudo pacman -S soundkonverter
 #+end_src
 *** [[https://www.videolan.org/vlc/][VLC media player]]
 #+begin_src sh
@@ -839,6 +817,13 @@ sudo pacman -S nftables
 #+begin_src sh
 sudo pacman -S gnutls
 #+end_src
+*** [[https://hashcat.net/hashcat/][hashcat]]
+#+begin_src sh
+sudo pacman -S hashcat
+sudo pacman -S hashcat-utils
+sudo pacman -S hcxkeys
+sudo pacman -S hcxtools
+#+end_src
 *** [[https://github.com/vanhauser-thc/thc-hydra][hydra]]
 #+begin_src sh
 sudo pacman -S hydra
@@ -847,13 +832,19 @@ sudo pacman -S hydra
 #+begin_src sh
 paru -S jigdo
 #+end_src
-*** [[https://www.openwall.com/john/][John the Ripper]] and [[https://hashcat.net/hashcat/][hashcat]]
+*** [[https://www.openwall.com/john/][John the Ripper]]
 #+begin_src sh
-sudo pacman -S hashcat
-sudo pacman -S hashcat-utils
-sudo pacman -S hcxkeys
-sudo pacman -S hcxtools
 sudo pacman -S john
+#+end_src
+*** [[https://apps.kde.org/en/krdc][KRDC]]
+#+begin_src sh
+sudo pacman -S freerdp
+sudo pacman -S krdc
+sudo pacman -S libvncserver
+#+end_src
+*** [[https://cisofy.com/lynis/][Lynis]]
+#+begin_src sh
+sudo pacman -S lynis
 #+end_src
 *** [[https://nmap.org/][Nmap]]
 #+begin_src sh
@@ -862,6 +853,7 @@ sudo pacman -S nmap
 *** [[https://www.openssh.com/portable.html][OpenSSH]]
 #+begin_src sh
 sudo pacman -S ipset
+sudo pacman -S libssh
 sudo pacman -S openssh
 sudo pacman -S sshfs
 sudo pacman -S sshguard
@@ -878,17 +870,6 @@ sudo pacman -S openvpn
 #+begin_src sh
 sudo pacman -S qbittorrent
 sudo pacman -S qbittorrent-nox
-#+end_src
-*** [[https://www.remmina.org/][Remmina]]
-#+begin_src sh
-sudo pacman -S freerdp
-sudo pacman -S libsecret
-sudo pacman -S libvncserver
-sudo pacman -S libxkbfile
-sudo pacman -S nxproxy
-sudo pacman -S remmina
-sudo pacman -S telepathy-glib
-sudo pacman -S xorg-server-xephyr
 #+end_src
 *** [[https://www.tcpdump.org/index.html][tcpdump]]
 #+begin_src sh
@@ -922,14 +903,13 @@ if [ -f /usr/bin/paru ]; then
   paru -c && paru -Sc
 fi
 clear && echo "Update system db ..."
-sudo updatedb
-clear
+sudo updatedb && clear
 #+end_src
 
 * Enable normal user account to use KVM
 #+begin_src sh
-sudo systemctl enable libvirtd.service
 sudo systemctl start  libvirtd.service
+sudo systemctl enable libvirtd.service
 echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
 sudo usermod -aG libvirt "$(whoami)"

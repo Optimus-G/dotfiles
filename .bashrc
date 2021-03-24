@@ -40,17 +40,8 @@ alias t="tree"
 alias tarc="tar czvf"
 alias tart="tar tzvf"
 alias x="exit"
-if [ -f /usr/bin/pv ]; then
-  alias hacker="clear && cat /dev/urandom | hexdump -C | pv -qL 10"
-fi
-if [ -f /usr/bin/cmatrix ]; then
-  alias cmc="cmatrix && clear"
-fi
 if [ -f /usr/bin/bc ]; then
   alias bc="clear && bc -lq"
-fi
-if [ -f /usr/bin/asciiquarium ]; then
-  alias aac="asciiquarium && clear"
 fi
 if [ -f /usr/bin/emacs ]; then
   alias cb="emacs \$HOME/.bashrc &"
@@ -60,9 +51,6 @@ if [ -f /usr/bin/emacs ]; then
 fi
 if [ -d /data/projects ]; then
   alias p="cd /data/projects"
-fi
-if [ -f /usr/bin/sl ]; then
-  alias sl="sl && clear"
 fi
 if [ -f /usr/bin/git ]; then
   alias addall="git add ."
@@ -105,22 +93,6 @@ export PS1=$'\n\w \U03BB '
 export TERM=xterm-256color
 export VISUAL="$EDITOR"
 
-if [ -f /usr/bin/tldr ]; then
-  export TLDR_CODE="red"
-  export TLDR_DESCRIPTION="green"
-  export TLDR_HEADER="magenta bold underline"
-  export TLDR_PARAM="blue"
-  export TLDR_QUOTE="italic"
-fi
-
-if [ -f "$HOME"/.fzf.bash ]; then
-  execute_fzf="source $HOME/.fzf.bash" && eval "$execute_fzf" || return
-  export FZF_DEFAULT_OPTS="-m --preview='head {}' --preview-window=right"
-  if [ -f /usr/bin/rg ]; then
-    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-  fi
-fi
-
 upgrade_and_clean () {
   sudo paccache -rk0
   sudo pacman   -Rns "$(pacman -Qtdq)"
@@ -131,8 +103,7 @@ upgrade_and_clean () {
     paru -c && paru -Sc
   fi
   clear && echo "Update system db ..."
-  sudo updatedb
-  clear
+  sudo updatedb && clear
 }
 
 extract () {
@@ -180,8 +151,7 @@ create_python_project () {
   fi
   if [ -d "$project_name" ]; then
     cd "$project_name" && eval "$activate_command" && cd src || return
-    clear && echo "The project already exists ..." && echo "" && ls -la
-    return
+    clear && echo "The project already exists ..." && echo "" && ls -la . && return
   fi
   python -m venv "$project_name"
   cd "$project_name" && eval "$activate_command"
@@ -192,6 +162,20 @@ create_python_project () {
   pip install --upgrade 'python-language-server[all]'
   git init && git add . && git commit -m "Project created ..."
   clear && echo "Project created ..." && echo "" && ls -la && return
+}
+
+av () {
+  object_name=$1
+  if [ -f /usr/bin/clamscan ]; then
+    if [ ! -d "$HOME"/.clamav ]; then
+      mkdir "$HOME"/.clamav
+      mkdir "$HOME"/.clamav/log
+      mkdir "$HOME"/.clamav/quarantine
+    fi
+    clamscan --bell --infected --recursive \
+             --move="$HOME"/.clamav/quarantine \
+             --log="$HOME"/.clamav/log/clamscan.log "$object_name"
+  fi
 }
 
 clear_kde_plasma () {
@@ -205,6 +189,7 @@ clear_kde_plasma () {
   rm -rf "$HOME"/.local/share/plasma/*
   rm -rf "$HOME"/.local/share/wallpapers/*
   rm -rf "$HOME"/.themes/*
+
   kquitapp5 plasmashell &
   kstart5   plasmashell &
 }
