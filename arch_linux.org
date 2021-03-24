@@ -57,7 +57,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 ** Chroot
 #+begin_src sh :tangle no
 arch-chroot /mnt
-git clone https://github.com/karlkorp/dotfiles.git /tmp/dotfiles
+git clone https://gitlab.com/karlkorp/dotfiles.git /tmp/dotfiles
 #+end_src
 ** Time zone
 #+begin_src sh :tangle pre_installation.sh
@@ -185,7 +185,7 @@ sudo systemctl start  dhcpcd.service
 sudo systemctl enable dhcpcd.service
 
 ping -c 5 archlinux.org
-git clone https://github.com/karlkorp/dotfiles.git "$HOME"/dotfiles
+git clone https://gitlab.com/karlkorp/dotfiles.git "$HOME"/dotfiles
 #+end_src
 ** [[https://github.com/Morganamilo/paru][Paru]]
 #+begin_src sh :tangle post_installation.sh
