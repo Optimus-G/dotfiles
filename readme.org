@@ -1,3 +1,6 @@
-#+TITLE: dotfiles
-#+AUTHOR: karlkorp
+#+AUTHOR: Cyber Research Systems
 #+EMAIL: lispgod@gmail.com
+#+LANGUAGE: english
+#+STARTUP: indent
+#+STARTUP: showeverything
+#+TITLE: dotfiles

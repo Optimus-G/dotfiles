@@ -16,6 +16,7 @@ sudo pacman -S adobe-source-code-pro-fonts
 sudo pacman -S adobe-source-sans-pro-fonts
 sudo pacman -S adobe-source-serif-pro-fonts
 sudo pacman -S cantarell-fonts
+sudo pacman -S fontconfig
 sudo pacman -S freetype2
 sudo pacman -S gnu-free-fonts
 sudo pacman -S noto-fonts
@@ -67,6 +68,11 @@ else
   sudo pacman -S opencl-nvidia
 fi
 
+if [ "$system_type" = "main" ]; then
+  sudo pacman -S cuda
+  sudo pacman -S cuda-tools
+fi
+
 sudo pacman -S gvfs
 sudo pacman -S gvfs-afc
 sudo pacman -S gvfs-goa
@@ -99,13 +105,37 @@ sudo pacman -S vulkan-validation-layers
 sudo pacman -S xorg
 sudo pacman -S xorg-apps
 sudo pacman -S xorg-docs
+sudo pacman -S xorg-font-util
+sudo pacman -S xorg-fonts-100dpi
+sudo pacman -S xorg-fonts-75dpi
+sudo pacman -S xorg-fonts-alias-100dpi
+sudo pacman -S xorg-fonts-alias-75dpi
+sudo pacman -S xorg-fonts-alias-cyrillic
+sudo pacman -S xorg-fonts-alias-misc
 sudo pacman -S xorg-fonts-cyrillic
+sudo pacman -S xorg-fonts-encodings
+sudo pacman -S xorg-fonts-misc
+sudo pacman -S xorg-fonts-type1
 sudo pacman -S xorg-server
 sudo pacman -S xorg-setxkbmap
+sudo pacman -S xorg-xclipboard
 sudo pacman -S xorg-xdm
 sudo pacman -S xorg-xinit
+sudo pacman -S xorg-xman
 sudo pacman -S xorg-xmodmap
 sudo pacman -S xorg-xrandr
+sudo pacman -S xsettingsd
+
+sudo pacman -S xcb-imdkit
+sudo pacman -S xcb-proto
+sudo pacman -S xcb-util
+sudo pacman -S xcb-util-cursor
+sudo pacman -S xcb-util-errors
+sudo pacman -S xcb-util-image
+sudo pacman -S xcb-util-keysyms
+sudo pacman -S xcb-util-renderutil
+sudo pacman -S xcb-util-wm
+sudo pacman -S xcb-util-xrm
 
 sudo pacman -S cronie
 sudo pacman -S packagekit-qt5
@@ -159,9 +189,13 @@ sudo pacman -S papirus-icon-theme
 
 sudo pacman -S tmux
 
+sudo pacman -S ed
+
 sudo pacman -S ecb
 sudo pacman -S emacs
 sudo pacman -S harfbuzz
+
+sudo pacman -S vi
 sudo pacman -S vim
 sudo pacman -S vim-spell-en
 sudo pacman -S vim-spell-ru
@@ -198,6 +232,7 @@ sudo pacman -S openal
 sudo pacman -S opencore-amr
 sudo pacman -S opus
 sudo pacman -S portaudio
+sudo pacman -S rtmidi
 sudo pacman -S schroedinger
 sudo pacman -S sof-firmware
 sudo pacman -S speex
@@ -211,6 +246,7 @@ sudo pacman -S alsa-plugins
 sudo pacman -S alsa-tools
 sudo pacman -S alsa-utils
 
+sudo pacman -S libpulse
 sudo pacman -S pulseaudio
 sudo pacman -S pulseaudio-alsa
 sudo pacman -S pulseaudio-bluetooth
@@ -224,7 +260,9 @@ sudo pacman -S gst-editing-services
 sudo pacman -S gst-libav
 sudo pacman -S gst-plugin-gtk
 sudo pacman -S gst-plugin-opencv
+sudo pacman -S gst-plugin-pipewire
 sudo pacman -S gst-plugin-qmlgl
+sudo pacman -S gst-plugin-wpe
 sudo pacman -S gst-plugins-bad
 sudo pacman -S gst-plugins-bad-libs
 sudo pacman -S gst-plugins-base
@@ -235,6 +273,12 @@ sudo pacman -S gst-plugins-ugly
 sudo pacman -S gstreamer
 sudo pacman -S gstreamermm
 
+sudo pacman -S pipewire
+sudo pacman -S pipewire-alsa
+sudo pacman -S pipewire-docs
+sudo pacman -S pipewire-jack
+sudo pacman -S pipewire-media-session
+
 sudo pacman -S curl
 
 sudo pacman -S wget
@@ -242,41 +286,49 @@ sudo pacman -S wget
 sudo pacman -S xsel
 sudo pacman -S xclip
 
-echo "xrdb -merge .Xresources"       >> "$HOME"/.xinitrc
-echo "export DESKTOP_SESSION=plasma" >> "$HOME"/.xinitrc
-echo "exec startplasma-x11"          >> "$HOME"/.xinitrc
+{
+  echo "Xft.antialias: true"
+  echo "Xft.autohint:  false"
+  echo "Xft.dpi:       96"
+  echo "Xft.hinting:   true"
+  echo "Xft.hintstyle: hintslight"
+  echo "Xft.lcdfilter: lcddefault"
+  echo "Xft.rgba:      rgb"
+} >> "$HOME"/.Xresources
 
-echo "Xft.antialias: true"       >> "$HOME"/.Xresources
-echo "Xft.autohint:  false"      >> "$HOME"/.Xresources
-echo "Xft.dpi:       96"         >> "$HOME"/.Xresources
-echo "Xft.hinting:   true"       >> "$HOME"/.Xresources
-echo "Xft.hintstyle: hintslight" >> "$HOME"/.Xresources
-echo "Xft.lcdfilter: lcddefault" >> "$HOME"/.Xresources
-echo "Xft.rgba:      rgb"        >> "$HOME"/.Xresources
+{
+  echo "xrdb -merge .Xresources"
+  echo "export DESKTOP_SESSION=plasma"
+  echo "exec startplasma-x11"
+} >> "$HOME"/.xinitrc
 
-echo "\$include /etc/inputrc"                     >> "$HOME"/.inputrc
-echo "set bell-style                        none" >> "$HOME"/.inputrc
-echo "set bind-tty-special-chars              on" >> "$HOME"/.inputrc
-echo "set blink-matching-paren                on" >> "$HOME"/.inputrc
-echo "set colored-stats                       on" >> "$HOME"/.inputrc
-echo "set completion-ignore-case              on" >> "$HOME"/.inputrc
-echo "set completion-prefix-display-length     5" >> "$HOME"/.inputrc
-echo "set completion-query-items              10" >> "$HOME"/.inputrc
-echo "set echo-control-characters            off" >> "$HOME"/.inputrc
-echo "set editing-mode                     emacs" >> "$HOME"/.inputrc
-echo "set horizontal-scroll-mode              on" >> "$HOME"/.inputrc
-echo "set mark-directories                    on" >> "$HOME"/.inputrc
-echo "set mark-modified-lines                 on" >> "$HOME"/.inputrc
-echo "set mark-symlinked-directories          on" >> "$HOME"/.inputrc
-echo "set match-hidden-files                  on" >> "$HOME"/.inputrc
-echo "set show-all-if-ambiguous               on" >> "$HOME"/.inputrc
-echo "set show-all-if-unmodified              on" >> "$HOME"/.inputrc
-echo "set visible-stats                       on" >> "$HOME"/.inputrc
+{
+  echo "\$include /etc/inputrc"
+  echo "set bell-style                        none"
+  echo "set bind-tty-special-chars              on"
+  echo "set blink-matching-paren                on"
+  echo "set colored-stats                       on"
+  echo "set completion-ignore-case              on"
+  echo "set completion-prefix-display-length     5"
+  echo "set completion-query-items              10"
+  echo "set echo-control-characters            off"
+  echo "set editing-mode                     emacs"
+  echo "set horizontal-scroll-mode              on"
+  echo "set mark-directories                    on"
+  echo "set mark-modified-lines                 on"
+  echo "set mark-symlinked-directories          on"
+  echo "set match-hidden-files                  on"
+  echo "set show-all-if-ambiguous               on"
+  echo "set show-all-if-unmodified              on"
+  echo "set visible-stats                       on"
+} >> "$HOME"/.inputrc
 
-echo 'if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]' >> "$HOME"/.profile
-echo 'then'                                              >> "$HOME"/.profile
-echo '  exec startx'                                     >> "$HOME"/.profile
-echo 'fi'                                                >> "$HOME"/.profile
+{
+  echo "if [ -z \"\${DISPLAY}\" ] && [ \"\${XDG_VTNR}\" -eq 1 ]"
+  echo "then"
+  echo "  exec startx"
+  echo "fi"
+} >> "$HOME"/.profile
 
 sudo pacman -S clamav
 sudo systemctl stop clamav-freshclam.service && sudo freshclam
@@ -294,11 +346,11 @@ git config --global user.name          "karlkorp"
 mkdir -p "$HOME"/.fonts
 mkdir -p "$HOME"/.icons
 mkdir -p "$HOME"/.themes
-
-git clone https://github.com/vinceliuice/Layan-kde.git "$HOME"/.themes/Layan
+mkdir -p "$HOME"/.tmp
 
 cp "$HOME"/dotfiles/.bashrc    "$HOME"
 cp "$HOME"/dotfiles/.emacs     "$HOME"
+cp "$HOME"/dotfiles/.emacs.org "$HOME"
 cp "$HOME"/dotfiles/.tmux.conf "$HOME"
 cp "$HOME"/dotfiles/.vimrc     "$HOME"
 
@@ -320,8 +372,9 @@ echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-sudo pacman -S arch-audit
+git clone https://github.com/vinceliuice/Layan-kde.git "$HOME"/.tmp/Layan
 
 echo     "Configuration was done!"
 read -rp "Press 'enter' to reboot..."
+
 sleep 5 && reboot

@@ -14,7 +14,7 @@ alias .="pwd"
 alias c="clear && clear"
 alias cp="cp -v"
 alias df="df -Tha --total | column -t"
-alias diff="diff --color=auto"
+alias diff="diff -y --color=auto"
 alias du="du -ach | sort -h"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
@@ -44,8 +44,8 @@ if [ -f /usr/bin/bc ]; then
   alias bc="clear && bc -lq"
 fi
 if [ -f /usr/bin/emacs ]; then
-  alias cb="emacs \$HOME/.bashrc &"
-  alias ce="emacs \$HOME/.emacs  &"
+  alias cb="emacs \$HOME/.bashrc     &"
+  alias ce="emacs \$HOME/.emacs.org  &"
   alias enw="emacs -nw"
   e () { emacs "$@" & }
 fi
@@ -93,6 +93,15 @@ export PS1=$'\n\w \U03BB '
 export TERM=xterm-256color
 export VISUAL="$EDITOR"
 
+if [ -f /usr/bin/fzf ]; then
+  source /usr/share/fzf/completion.bash
+  source /usr/share/fzf/key-bindings.bash
+  export FZF_DEFAULT_OPTS="-m --preview='cat {}' --preview-window=right"
+  if [ -f /usr/bin/rg ]; then
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+  fi
+fi
+
 upgrade_and_clean () {
   sudo paccache -rk0
   sudo pacman   -Rns "$(pacman -Qtdq)"
@@ -135,33 +144,65 @@ create_project () {
   fi
   if [ -d "$project_name" ]; then
     cd "$project_name/src" && clear
-    echo "The project already exists ..."
-    echo "" && ls -la . && return
+    echo "The project already exists ..." && echo "" && ls -la . && return
   fi
-  mkdir -p "$project_name/src" && cd "$project_name/src" || return
+  mkdir -p "$project_name/src" && cd "$project_name/src" && \
+    mkdir -p build || return
+  CMAKE_VERSION="3.14.1"
+  {
+    echo "cmake_minimum_required(VERSION $CMAKE_VERSION)"
+    echo "project($project_name)"
+    echo "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)"
+  } > CMakeLists.txt
   git init && git add . && git commit -m "Project created ..."
   clear && echo "Project created ..." && echo "" && ls -la . && return
 }
 
-create_python_project () {
+create_geant4_project () {
   project_name=$1
-  activate_command="source ./bin/activate"
   if [ -z "$project_name" ]; then
     project_name="test"
   fi
-  if [ -d "$project_name" ]; then
-    cd "$project_name" && eval "$activate_command" && cd src || return
-    clear && echo "The project already exists ..." && echo "" && ls -la . && return
+  if [ ! -d "$project_name" ]; then
+    create_project "$project_name"
+    if [ -d /data/projects/geant4/ ]; then
+      source /data/projects/geant4/install/bin/geant4.sh
+    fi
+    {
+      echo "find_package(Geant4 REQUIRED ui_all vis_all)"
+      echo "find_package(MPI QUIET)"
+      echo "find_package(TBB QUIET)"
+      echo "include(\${Geant4_USE_FILE})"
+    } >> CMakeLists.txt
+  else
+    create_project "$project_name" && return
   fi
-  python -m venv "$project_name"
-  cd "$project_name" && eval "$activate_command"
-  mkdir -p src && cd src || return
-  pip install --upgrade pip
-  pip install --upgrade autopep8 black flake8 ipython jedi mccabe
-  pip install --upgrade pycodestyle pydocstyle pyflakes rope yapf
-  pip install --upgrade 'python-language-server[all]'
-  git init && git add . && git commit -m "Project created ..."
-  clear && echo "Project created ..." && echo "" && ls -la && return
+}
+
+create_python_project () {
+  project_name=$1
+  if [ -z "$project_name" ]; then
+    project_name="test"
+  fi
+  activate_command="source ./bin/activate"
+  if [ -f /usr/bin/virtualenv ]; then
+    if [ -z "$project_name" ]; then
+      project_name="test"
+    fi
+    if [ -d "$project_name" ]; then
+      cd "$project_name" && eval "$activate_command" && cd src || return
+      clear && echo "The project already exists ..." && echo "" && ls -la . && return
+    fi
+    python -m venv "$project_name"
+    cd "$project_name" && eval "$activate_command"
+    mkdir -p src && cd src || return
+    pip install --upgrade pip
+    pip install --upgrade autopep8 black flake8 ipython jedi mccabe
+    pip install --upgrade pycodestyle pydocstyle pyflakes rope yapf
+    pip install --upgrade 'python-language-server[all]'
+    git init && git add . && git commit -m "Project created ..."
+    clear && echo "Project created ..." && echo "" && ls -la && return
+  fi
 }
 
 av () {
@@ -189,7 +230,6 @@ clear_kde_plasma () {
   rm -rf "$HOME"/.local/share/plasma/*
   rm -rf "$HOME"/.local/share/wallpapers/*
   rm -rf "$HOME"/.themes/*
-
   kquitapp5 plasmashell &
   kstart5   plasmashell &
 }

@@ -29,15 +29,15 @@ sudo pacman -S bat
 
 sudo pacman -S bleachbit
 
-sudo pacman -S docker
-sudo pacman -S docker-compose
-sudo pacman -S python-docker
+sudo pacman -S bpytop
 
 sudo pacman -S fd
 
 sudo pacman -S fdupes
 
 sudo pacman -S findutils
+
+sudo pacman -S fzf
 
 sudo pacman -S gawk
 
@@ -79,6 +79,7 @@ sudo pacman -S dmidecode
 sudo pacman -S dnsmasq
 sudo pacman -S ebtables
 sudo pacman -S edk2-ovmf
+sudo pacman -S gettext
 sudo pacman -S iptables
 sudo pacman -S libvirt
 sudo pacman -S libvirt-storage-gluster
@@ -102,13 +103,12 @@ sudo pacman -S virt-viewer
 
 sudo pacman -S ripgrep
 
+sudo pacman -S rsync
+
 sudo pacman -S screenkey
 sudo pacman -S slop
 
-sudo pacman -S sysstat
-
-sudo pacman -S rsync
-paru        -S timeshift
+paru -S timeshift
 
 sudo pacman -S tree
 
@@ -228,6 +228,7 @@ sudo pacman -S sbcl
 sudo pacman -S llvm
 
 sudo pacman -S clang
+paru        -S bear
 
 sudo pacman -S lldb
 
@@ -239,6 +240,7 @@ sudo pacman -S aarch64-linux-gnu-binutils
 sudo pacman -S aarch64-linux-gnu-gcc
 sudo pacman -S aarch64-linux-gnu-gdb
 sudo pacman -S aarch64-linux-gnu-glibc
+sudo pacman -S aarch64-linux-gnu-linux-api-headers
 sudo pacman -S arm-none-eabi-binutils
 sudo pacman -S arm-none-eabi-gcc
 sudo pacman -S arm-none-eabi-gdb
@@ -258,6 +260,19 @@ sudo pacman -S openocd
 sudo pacman -S gpsim
 sudo pacman -S gputils
 sudo pacman -S sdcc
+
+sudo pacman -S riscv32-elf-binutils
+sudo pacman -S riscv32-elf-gdb
+sudo pacman -S riscv32-elf-newlib
+sudo pacman -S riscv64-elf-binutils
+sudo pacman -S riscv64-elf-gcc
+sudo pacman -S riscv64-elf-gdb
+sudo pacman -S riscv64-elf-newlib
+sudo pacman -S riscv64-linux-gnu-binutils
+sudo pacman -S riscv64-linux-gnu-gcc
+sudo pacman -S riscv64-linux-gnu-gdb
+sudo pacman -S riscv64-linux-gnu-glibc
+sudo pacman -S riscv64-linux-gnu-linux-api-headers
 
 sudo pacman -S stlink
 
@@ -353,12 +368,16 @@ sudo pacman -S gmp
 
 sudo pacman -S bc
 
+mkdir -p "$HOME"/.octave
 sudo pacman -S octave
-echo "clc;"          >> "$HOME"/.octaverc
-echo "clear all;"    >> "$HOME"/.octaverc
-echo "close all;"    >> "$HOME"/.octaverc
-echo "format short;" >> "$HOME"/.octaverc
-echo "more off;"     >> "$HOME"/.octaverc
+{
+  echo "clc;"
+  echo "clear all;"
+  echo "close all;"
+  echo "format short;"
+  echo "more off;"
+  echo "pkg prefix ~/.octave;"
+} >> "$HOME"/.octaverc
 
 sudo pacman -S gnuplot
 
@@ -380,6 +399,9 @@ sudo pacman -S netcdf-fortran
 sudo pacman -S opencascade
 
 paru -S petsc
+
+sudo pacman -S root
+
 paru -S slepc
 
 sudo pacman -S sundials
@@ -446,8 +468,6 @@ sudo pacman -S thunderbird-i18n-ru
 
 sudo pacman -S xournalpp
 
-sudo pacman -S cuda
-sudo pacman -S cuda-tools
 sudo pacman -S blender
 
 sudo pacman -S darktable
@@ -536,10 +556,10 @@ sudo pacman -S openttd-opensfx
 
 sudo pacman -S wesnoth
 
-sudo paccache  -rk0
-sudo pacman    -Rns "$(pacman -Qtdq)"
-sudo pacman    -Scc
-sudo pacman    -Syu
+sudo paccache -rk0
+sudo pacman   -Rns "$(pacman -Qtdq)"
+sudo pacman   -Scc
+sudo pacman   -Syu
 if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
@@ -549,6 +569,7 @@ sudo updatedb && clear
 
 sudo systemctl start  libvirtd.service
 sudo systemctl enable libvirtd.service
+
 echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
 sudo usermod -aG libvirt "$(whoami)"

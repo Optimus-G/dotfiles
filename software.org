@@ -1,6 +1,9 @@
+#+AUTHOR: Cyber Research Systems
 #+LANGUAGE: english
 #+PROPERTY: header-args :exports code :tangle software.sh
-#+STARTUP:  showeverything
+#+STARTUP: indent
+#+STARTUP: showeverything
+#+TITLE: Software list
 
 * List of GNU/Linux software
 ** System
@@ -43,11 +46,9 @@ sudo pacman -S bat
 #+begin_src sh
 sudo pacman -S bleachbit
 #+end_src
-*** [[https://www.docker.com/][Docker]]
+*** [[https://github.com/aristocratos/bpytop][BPYTOP]]
 #+begin_src sh
-sudo pacman -S docker
-sudo pacman -S docker-compose
-sudo pacman -S python-docker
+sudo pacman -S bpytop
 #+end_src
 *** [[https://github.com/sharkdp/fd][fd]]
 #+begin_src sh
@@ -60,6 +61,10 @@ sudo pacman -S fdupes
 *** [[https://www.gnu.org/software/findutils/][Findutils]]
 #+begin_src sh
 sudo pacman -S findutils
+#+end_src
+*** [[https://github.com/junegunn/fzf][fzf]]
+#+begin_src sh
+sudo pacman -S fzf
 #+end_src
 *** [[https://www.gnu.org/software/gawk/][Gawk]]
 #+begin_src sh
@@ -129,6 +134,7 @@ sudo pacman -S dmidecode
 sudo pacman -S dnsmasq
 sudo pacman -S ebtables
 sudo pacman -S edk2-ovmf
+sudo pacman -S gettext
 sudo pacman -S iptables
 sudo pacman -S libvirt
 sudo pacman -S libvirt-storage-gluster
@@ -154,19 +160,18 @@ sudo pacman -S virt-viewer
 #+begin_src sh
 sudo pacman -S ripgrep
 #+end_src
+*** [[https://rsync.samba.org/][rsync]]
+#+begin_src sh
+sudo pacman -S rsync
+#+end_src
 *** [[https://www.thregr.org/~wavexx/software/screenkey/][screenkey]]
 #+begin_src sh
 sudo pacman -S screenkey
 sudo pacman -S slop
 #+end_src
-*** [[http://sebastien.godard.pagesperso-orange.fr/][sysstat]]
+*** [[https://github.com/teejee2008/timeshift][Timeshift]]
 #+begin_src sh
-sudo pacman -S sysstat
-#+end_src
-*** [[https://github.com/teejee2008/timeshift][Timeshift]] and [[https://rsync.samba.org/][rsync]]
-#+begin_src sh
-sudo pacman -S rsync
-paru        -S timeshift
+paru -S timeshift
 #+end_src
 *** tree
 #+begin_src sh
@@ -379,6 +384,7 @@ sudo pacman -S llvm
 **** [[https://clang.llvm.org/][Clang]]
 #+begin_src sh
 sudo pacman -S clang
+paru        -S bear
 #+end_src
 **** [[https://lldb.llvm.org/][LLDB]]
 #+begin_src sh
@@ -399,6 +405,7 @@ sudo pacman -S aarch64-linux-gnu-binutils
 sudo pacman -S aarch64-linux-gnu-gcc
 sudo pacman -S aarch64-linux-gnu-gdb
 sudo pacman -S aarch64-linux-gnu-glibc
+sudo pacman -S aarch64-linux-gnu-linux-api-headers
 sudo pacman -S arm-none-eabi-binutils
 sudo pacman -S arm-none-eabi-gcc
 sudo pacman -S arm-none-eabi-gdb
@@ -426,6 +433,21 @@ sudo pacman -S openocd
 sudo pacman -S gpsim
 sudo pacman -S gputils
 sudo pacman -S sdcc
+#+end_src
+**** RISC-V
+#+begin_src sh
+sudo pacman -S riscv32-elf-binutils
+sudo pacman -S riscv32-elf-gdb
+sudo pacman -S riscv32-elf-newlib
+sudo pacman -S riscv64-elf-binutils
+sudo pacman -S riscv64-elf-gcc
+sudo pacman -S riscv64-elf-gdb
+sudo pacman -S riscv64-elf-newlib
+sudo pacman -S riscv64-linux-gnu-binutils
+sudo pacman -S riscv64-linux-gnu-gcc
+sudo pacman -S riscv64-linux-gnu-gdb
+sudo pacman -S riscv64-linux-gnu-glibc
+sudo pacman -S riscv64-linux-gnu-linux-api-headers
 #+end_src
 **** [[https://github.com/texane/stlink][stlink]]
 #+begin_src sh
@@ -584,12 +606,16 @@ sudo pacman -S bc
 #+end_src
 *** [[https://www.gnu.org/software/octave/index][GNU Octave]]
 #+begin_src sh
+mkdir -p "$HOME"/.octave
 sudo pacman -S octave
-echo "clc;"          >> "$HOME"/.octaverc
-echo "clear all;"    >> "$HOME"/.octaverc
-echo "close all;"    >> "$HOME"/.octaverc
-echo "format short;" >> "$HOME"/.octaverc
-echo "more off;"     >> "$HOME"/.octaverc
+{
+  echo "clc;"
+  echo "clear all;"
+  echo "close all;"
+  echo "format short;"
+  echo "more off;"
+  echo "pkg prefix ~/.octave;"
+} >> "$HOME"/.octaverc
 #+end_src
 *** [[http://www.gnuplot.info][Gnuplot]]
 #+begin_src sh
@@ -622,9 +648,16 @@ sudo pacman -S netcdf-fortran
 #+begin_src sh
 sudo pacman -S opencascade
 #+end_src
-*** [[https://www.mcs.anl.gov/petsc/][PETSc]] and [[https://slepc.upv.es/][SLEPc]]
+*** [[https://www.mcs.anl.gov/petsc/][PETSc]]
 #+begin_src sh
 paru -S petsc
+#+end_src
+*** [[https://root.cern/][ROOT]]
+#+begin_src sh
+sudo pacman -S root
+#+end_src
+*** [[https://slepc.upv.es/][SLEPc]]
+#+begin_src sh
 paru -S slepc
 #+end_src
 *** [[https://computation.llnl.gov/casc/sundials/main.html][SUNDIALS]]
@@ -734,10 +767,8 @@ sudo pacman -S thunderbird-i18n-ru
 sudo pacman -S xournalpp
 #+end_src
 ** Design
-*** [[http://www.blender.org][Blender]] and [[https://developer.nvidia.com/cuda-zone][CUDA]]
+*** [[http://www.blender.org][Blender]]
 #+begin_src sh
-sudo pacman -S cuda
-sudo pacman -S cuda-tools
 sudo pacman -S blender
 #+end_src
 *** [[https://www.darktable.org/][darktable]]
@@ -894,10 +925,10 @@ sudo pacman -S wesnoth
 
 * Clean
 #+begin_src sh
-sudo paccache  -rk0
-sudo pacman    -Rns "$(pacman -Qtdq)"
-sudo pacman    -Scc
-sudo pacman    -Syu
+sudo paccache -rk0
+sudo pacman   -Rns "$(pacman -Qtdq)"
+sudo pacman   -Scc
+sudo pacman   -Syu
 if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
@@ -910,6 +941,7 @@ sudo updatedb && clear
 #+begin_src sh
 sudo systemctl start  libvirtd.service
 sudo systemctl enable libvirtd.service
+
 echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
 sudo usermod -aG libvirt "$(whoami)"

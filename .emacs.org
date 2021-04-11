@@ -1,3 +1,12 @@
+#+AUTHOR: Cyber Research Systems
+#+LANGUAGE: english
+#+PROPERTY: header-args :exports code :tangle .emacs
+#+STARTUP: indent
+#+STARTUP: showeverything
+#+TITLE: GNU Emacs configuration file
+
+* GNU Emacs configuration file header
+#+begin_src emacs-lisp
 ;;; Package --- .emacs
 ;;; Commentary:
 ;;; GNU Emacs configuration file
@@ -12,7 +21,10 @@
   "Reset `gc-cons-threshold' to its default value."
   (setq-default gc-cons-threshold 800000))
 (add-hook 'emacs-startup-hook 'reset-gc-cons-threshold)
+#+end_src
 
+* Load built-in features
+#+begin_src emacs-lisp
 (require 'ansi-color nil :noerror)
 (require 'autoinsert nil :noerror)
 (require 'bookmark   nil :noerror)
@@ -54,11 +66,17 @@
 (require 'wdired     nil :noerror)
 (require 'whitespace nil :noerror)
 (require 'windmove   nil :noerror)
+#+end_src
 
+* Aliases
+#+begin_src emacs-lisp
 (defalias 'list-buffers 'ibuffer    )
 (defalias 'perl-mode    'cperl-mode )
 (defalias 'yes-or-no-p  'y-or-n-p   )
+#+end_src
 
+* Modes
+#+begin_src emacs-lisp
 (abbrev-mode                       1 )
 (auto-fill-mode                   -1 )
 (auto-insert-mode                 -1 )
@@ -100,7 +118,10 @@
 (use-hard-newlines                -1 )
 (which-function-mode              -1 )
 (window-divider-mode              -1 )
+#+end_src
 
+* Variables with numeric value
+#+begin_src emacs-lisp
 (setq-default auto-revert-interval            1    )
 (setq-default auto-save-timeout             500    )
 (setq-default c-basic-offset                  2    )
@@ -126,7 +147,10 @@
 (setq-default standard-indent                 2    )
 (setq-default tab-width                       2    )
 (setq-default whitespace-line-column        100    )
+#+end_src
 
+* Variables with logical value
+#+begin_src emacs-lisp
 (setq-default apropos-do-all                          t   )
 (setq-default auto-revert-avoid-polling               nil )
 (setq-default auto-revert-check-vc-info               t   )
@@ -250,12 +274,18 @@
 (setq-default window-combination-resize               t   )
 (setq-default window-divider-default-places           nil )
 (setq-default x-stretch-cursor                        t   )
+#+end_src
 
+* Variables with calculable value
+#+begin_src emacs-lisp
 (setq-default large-file-warning-threshold (* 10240 10240 ) )
 (setq-default message-log-max              (*  1024  1024 ) )
 (setq-default read-process-output-max      (*  1024  1024 ) )
 (setq-default undo-limit                   (* 10240 10240 ) )
+#+end_src
 
+* Variables with string value
+#+begin_src emacs-lisp
 (setq-default c-default-style          "stroustrup"           )
 (setq-default custom-file              "~/.emacs.d/custom.el" )
 (setq-default dired-listing-switches   "-a -F -G -h -l"       )
@@ -264,7 +294,10 @@
 (setq-default shell-file-name          "/bin/bash"            )
 (setq-default tramp-default-method     "ssh"                  )
 (setq-default uniquify-separator       "::"                   )
+#+end_src
 
+* Variables with symbolic value
+#+begin_src emacs-lisp
 (setq-default ad-redefinition-action               'accept                        )
 (setq-default async-shell-command-buffer           'rename-buffer                 )
 (setq-default backup-directory-alist               '(("." . "~/.emacs.d/backup")) )
@@ -288,13 +321,20 @@
 (setq-default uniquify-buffer-name-style           'forward                       )
 (setq-default vc-handled-backends                  '(git svn)                     )
 (setq-default whitespace-style                     '(face lines tabs trailing)    )
+#+end_src
 
+* Functions
+** Begin using Ibuffer to edit a list of buffers
+#+begin_src emacs-lisp
 (defun begin-using-Ibuffer ()
   "Begin using Ibuffer to edit a list of buffers."
   (interactive)
   (split-and-balance-windows )
   (ibuffer                   ) )
+#+end_src
 
+** Customize C/C++ programming mode
+#+begin_src emacs-lisp
 (defun customize-C/C++-programming-mode ()
   "Customize C/C++ programming mode."
   (interactive)
@@ -304,13 +344,19 @@
   (c-toggle-electric-state         1 )
   (c-toggle-parse-state-debug      1 )
   (c-toggle-syntactic-indentation  1 ) )
+#+end_src
 
+** Delete duplicate lines and sort
+#+begin_src emacs-lisp
 (defun ddls ()
   "Delete duplicate lines and sort."
   (interactive)
   (delete-duplicate-lines     (region-beginning) (region-end))
   (sort-lines             nil (region-beginning) (region-end)) )
+#+end_src
 
+** Format buffer before saving
+#+begin_src emacs-lisp
 (defun format-buffer-before-saving ()
   "Format buffer before saving."
   (interactive)
@@ -326,21 +372,30 @@
                 (equal major-mode 'text-mode           ) )
       (indent-region (point-min) (point-max)) ))
   (save-buffer) nil)
+#+end_src
 
+** Insert an empty line above the current line and indent
+#+begin_src emacs-lisp
 (defun insert-an-empty-line-above-the-current-line-and-indent ()
   "Insert an empty line above the current line and indent."
   (interactive)
   (end-of-line        0 )
   (open-line          0 )
   (newline-and-indent   ) )
+#+end_src
 
+** Kill all other buffers
+#+begin_src emacs-lisp
 (defun kill-all-other-buffers ()
   "Kill all other buffers."
   (interactive)
   (delete-other-windows)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list) ))
   (message "All other buffers was killed!"))
+#+end_src
 
+** Run an inferior Scheme process
+#+begin_src emacs-lisp
 (defun exec-scheme ()
   "Run an inferior Scheme process."
   (interactive)
@@ -350,7 +405,10 @@
           (save-selected-window (run-scheme "scheme" )) )
         ( (executable-find "guile"  )
           (save-selected-window (run-scheme "guile"  )) ) ))
+#+end_src
 
+** Signal an error if variable is obsolete
+#+begin_src emacs-lisp
 (defun signal-an-error-if-variable-is-obsolete ()
   "Signal an error if variable is obsolete."
   (interactive)
@@ -359,14 +417,20 @@
   (if  (string-match "obsolete" variable-doc-string)
       (error "This variable is obsolete")
     (message "The test is passed successfully") ))
+#+end_src
 
+** Split and balance windows
+#+begin_src emacs-lisp
 (defun split-and-balance-windows ()
   "Split and balance windows."
   (interactive)
   (split-window-sensibly   )
   (other-window          1 )
   (balance-windows         ) )
+#+end_src
 
+** Start a terminal emulator in a new window
+#+begin_src emacs-lisp
 (defun running-a-terminal-emulator ()
   "Start a terminal emulator in a new window."
   (interactive)
@@ -378,7 +442,10 @@
       (if (>= (length (window-list)) 2)
           (progn (kill-buffer) (delete-window))
         (kill-buffer) )) ))
+#+end_src
 
+** Toggle spell checker with selectable dictionary
+#+begin_src emacs-lisp
 (defun toggle-spell-checker ()
   "Toggle spell checker with selectable dictionary."
   (interactive)
@@ -395,17 +462,27 @@
              (mapcar 'list
                      (ispell-valid-dictionary-list)))
         nil t)) )) )
+#+end_src
 
+* Common settings
+** C/C++ programming
+#+begin_src emacs-lisp
 (add-hook 'makefile-mode-hook
           '(lambda () (setq-default indent-tabs-mode t)) )
 (add-hook 'c-mode-common-hook 'customize-C/C++-programming-mode)
+#+end_src
 
+** Checking and Correcting Spelling
+#+begin_src emacs-lisp
 (cond
  ( (executable-find "hunspell" )
    (setq-default ispell-program-name "/usr/bin/hunspell" ) )
  ( (executable-find "aspell"   )
    (setq-default ispell-program-name "/usr/bin/aspell"   ) ) )
+#+end_src
 
+** Default Python interpreter for shell
+#+begin_src emacs-lisp
 (cond
  ((executable-find "ipython")
   (setq-default python-shell-interpreter      "ipython"            )
@@ -413,14 +490,23 @@
  ((executable-find "python")
   (setq-default python-shell-interpreter      "python"             )
   (setq-default python-shell-interpreter-args "-i"                 ) ) )
+#+end_src
 
+** Indicate empty lines
+#+begin_src emacs-lisp
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines)
   (setq-default indicate-empty-lines t))
+#+end_src
 
+** Load bookmarks if exists
+#+begin_src emacs-lisp
 (if (file-exists-p bookmark-default-file)
     (bookmark-load bookmark-default-file t))
+#+end_src
 
+** [[https://www.gnu.org/software/emacs/manual/html_mono/octave-mode.html][Octave Mode]]
+#+begin_src emacs-lisp
 (defun run-an-inferior-Octave-process ()
   "Run an inferior Octave process."
   (interactive)
@@ -428,11 +514,20 @@
 (when (executable-find "octave")
   (add-hook    'octave-mode-hook 'run-an-inferior-Octave-process )
   (add-to-list 'auto-mode-alist  '("\\.m$" . octave-mode)        ) )
+#+end_src
 
+** Scheme programming
+#+begin_src emacs-lisp
 (add-hook 'scheme-mode-hook 'exec-scheme)
+#+end_src
 
+** The name of the browser program
+#+begin_src emacs-lisp
 (setq-default browse-url-generic-program (executable-find "firefox"))
+#+end_src
 
+** UI settings
+#+begin_src emacs-lisp
 (when (display-graphic-p)
   (blink-cursor-mode )
   (display-time      )
@@ -456,7 +551,10 @@
                                              ( t      . left )) )
   (set-frame-parameter (selected-frame) (quote  alpha) (quote (95 . 95) ))
   (add-to-list 'default-frame-alist     (quote (alpha    .    (95 . 95) )) ))
+#+end_src
 
+** Working with Coding Systems and Unicode in Emacs
+#+begin_src emacs-lisp
 (prefer-coding-system          'utf-8 )
 (set-buffer-file-coding-system 'utf-8 )
 (set-default-coding-systems    'utf-8 )
@@ -464,7 +562,11 @@
 (set-keyboard-coding-system    'utf-8 )
 (set-language-environment      'utf-8 )
 (set-terminal-coding-system    'utf-8 )
+#+end_src
 
+* Customizing Key Bindings
+** Function keys behavior
+#+begin_src emacs-lisp
 (global-set-key (kbd "<f1>"  ) 'running-a-terminal-emulator )
 (global-set-key (kbd "<f2>"  ) 'begin-using-Ibuffer         )
 (global-set-key (kbd "<f3>"  ) 'comment-line                )
@@ -477,9 +579,15 @@
 (global-set-key (kbd "<f10>" ) 'kmacro-call-macro           )
 (global-set-key (kbd "<f11>" ) 'toggle-frame-fullscreen     )
 (global-set-key (kbd "<f12>" ) 'kill-all-other-buffers      )
+#+end_src
 
+** Set up keybindings for 'windmove'
+#+begin_src emacs-lisp
 (windmove-default-keybindings 'shift)
+#+end_src
 
+** Unset unused key bindings
+#+begin_src emacs-lisp
 (global-unset-key (kbd "<deletechar>" ) )
 (global-unset-key (kbd "<end>"        ) )
 (global-unset-key (kbd "<home>"       ) )
@@ -490,7 +598,10 @@
 (global-unset-key [left               ] )
 (global-unset-key [right              ] )
 (global-unset-key [up                 ] )
+#+end_src
 
+** User defined key bindings
+#+begin_src emacs-lisp
 (global-set-key (kbd "<escape>"    ) 'keyboard-escape-quit                                   )
 (global-set-key (kbd "C-<return>"  ) 'insert-an-empty-line-above-the-current-line-and-indent )
 (global-set-key (kbd "C-c C-f"     ) 'recentf-open-files                                     )
@@ -500,20 +611,30 @@
 (global-set-key (kbd "S-C-<left>"  ) 'shrink-window-horizontally                             )
 (global-set-key (kbd "S-C-<right>" ) 'enlarge-window-horizontally                            )
 (global-set-key (kbd "S-C-<up>"    ) 'enlarge-window                                         )
+#+end_src
 
+* External packages
+** Setting up manager for Emacs Lisp packages
+#+begin_src emacs-lisp
 (require 'package nil :noerror)
 (add-to-list 'package-archives '("melpa"        . "https://melpa.org/packages/"        ) t )
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/" ) t )
 (add-to-list 'package-archives '("org"          . "https://orgmode.org/elpa/"          ) t )
 (package-initialize)
 (unless package-archive-contents (ignore-errors (package-refresh-contents)))
+#+end_src
 
+** [[https://github.com/jwiegley/use-package][use-package]]
+#+begin_src emacs-lisp
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (when (require 'use-package nil :noerror)
   (setq-default use-package-always-ensure t   )
   (setq-default use-package-verbose       nil ) )
+#+end_src
 
+*** [[https://github.com/abo-abo/avy][avy]]
+#+begin_src emacs-lisp
 (use-package avy
   :defer t
   :init
@@ -526,12 +647,18 @@
   ( ("M-g c" . avy-goto-char   )
     ("M-g l" . avy-goto-line   )
     ("M-g w" . avy-goto-word-1 ) ) )
+#+end_src
 
+*** [[https://cider.mx/][CIDER]]
+#+begin_src emacs-lisp
 (use-package cider
   :defer t
   :if   (executable-find "clojure")
   :hook (clojure-mode . cider-mode) )
+#+end_src
 
+*** [[https://github.com/Lindydancer/cmake-font-lock][cmake-font-lock]]
+#+begin_src emacs-lisp
 (use-package cmake-font-lock
   :defer t
   :if (executable-find "cmake")
@@ -539,11 +666,17 @@
   :config
   (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
   :hook (cmake-mode . cmake-font-lock-activate) )
+#+end_src
 
+*** [[https://melpa.org/#/cmake-mode][cmake-mode]]
+#+begin_src emacs-lisp
 (use-package cmake-mode
   :defer t
   :if (executable-find "cmake") )
+#+end_src
 
+*** [[https://company-mode.github.io/][company-mode]]
+#+begin_src emacs-lisp
 (use-package company
   :defer t
   :init
@@ -561,7 +694,10 @@
          ("C-d"   . company-show-doc-buffer )
          ("C-n"   . company-select-next     )
          ("C-p"   . company-select-previous ) ) )
+#+end_src
 
+*** [[https://github.com/abo-abo/swiper][Counsel]]
+#+begin_src emacs-lisp
 (use-package counsel
   :defer t
   :init
@@ -572,7 +708,10 @@
   :bind
   ( ("C-x C-f" . counsel-find-file )
     ("M-x"     . counsel-M-x       ) ) )
+#+end_src
 
+**** [[https://github.com/redguardtoo/counsel-etags][counsel-etags]]
+#+begin_src emacs-lisp
 (use-package counsel-etags
   :defer t
   :if (or (executable-find "ctags")
@@ -586,13 +725,19 @@
   :config
   (setq-default counsel-etags-update-interval 60)
   (push "build" counsel-etags-ignore-directories) )
+#+end_src
 
+**** [[https://github.com/ericdanan/counsel-projectile][counsel-projectile]]
+#+begin_src emacs-lisp
 (use-package counsel-projectile
   :defer t
   :after    (counsel projectile      )
   :requires (counsel projectile      )
   :config   (counsel-projectile-mode ) )
+#+end_src
 
+*** [[https://github.com/hlissner/emacs-doom-themes][DOOM Themes]]
+#+begin_src emacs-lisp
 (use-package doom-themes
   :defer t
   :if window-system
@@ -602,7 +747,10 @@
   (setq-default doom-themes-enable-bold   t     )
   (setq-default doom-themes-enable-italic t     )
   (load-theme 'doom-palenight             t nil ) )
+#+end_src
 
+*** [[https://github.com/jorgenschaefer/elpy][Elpy]]
+#+begin_src emacs-lisp
 (use-package elpy
   :defer t
   :if (executable-find "python")
@@ -612,19 +760,31 @@
             (lambda () (add-hook 'before-save-hook 'elpy-format-code    nil t )) )
   (add-hook 'elpy-mode-hook
             (lambda () (add-hook 'before-save-hook 'elpy-black-fix-code nil t )) ) )
+#+end_src
 
+*** [[https://github.com/magnars/expand-region.el][Expand region]]
+#+begin_src emacs-lisp
 (use-package expand-region
   :defer t
   :commands er/expand-region
   :bind ("C-=" . er/expand-region) )
+#+end_src
 
+*** [[https://www.flycheck.org/en/latest/][Flycheck]]
+#+begin_src emacs-lisp
 (use-package flycheck
   :defer t
   :init (global-flycheck-mode) )
+#+end_src
 
+*** [[https://github.com/lassik/emacs-format-all-the-code][format-all]]
+#+begin_src emacs-lisp
 (use-package format-all
   :defer t)
+#+end_src
 
+*** [[https://www.nongnu.org/geiser/][Geiser]]
+#+begin_src emacs-lisp
 (defun exec-geiser ()
   "Run an inferior Scheme (Geiser) process."
   (interactive)
@@ -644,12 +804,18 @@
   (add-to-list 'auto-mode-alist  '("\\.ss$" . scheme-mode) )
   (remove-hook 'scheme-mode-hook 'exec-scheme              )
   :hook (scheme-mode . exec-geiser) )
+#+end_src
 
+*** [[https://github.com/emacsorphanage/git-gutter][git-gutter]]
+#+begin_src emacs-lisp
 (use-package git-gutter
   :defer t
   :if   (executable-find "git"  )
   :init (global-git-gutter-mode ) )
+#+end_src
 
+*** [[https://github.com/emacsorphanage/gnuplot][gnuplot-mode]]
+#+begin_src emacs-lisp
 (use-package gnuplot-mode
   :defer t
   :if (executable-find "gnuplot")
@@ -658,11 +824,17 @@
   :config
   (autoload 'gnuplot-mode        "gnuplot" "Gnuplot major mode"            t )
   (autoload 'gnuplot-make-buffer "gnuplot" "Open a buffer in gnuplot-mode" t ) )
+#+end_src
 
+*** [[https://github.com/tarsius/hl-todo][hl-todo]]
+#+begin_src emacs-lisp
 (use-package hl-todo
   :defer t
   :init (global-hl-todo-mode) )
+#+end_src
 
+*** [[https://github.com/abo-abo/swiper][Ivy]]
+#+begin_src emacs-lisp
 (use-package ivy
   :defer t
   :init
@@ -671,7 +843,10 @@
   (setq-default ivy-use-selectable-prompt t   )
   (setq-default ivy-use-virtual-buffers   t   )
   (setq-default ivy-wrap                  t   ) )
+#+end_src
 
+*** [[https://emacs-lsp.github.io/lsp-mode/][LSP Mode]]
+#+begin_src emacs-lisp
 (use-package lsp-mode
   :defer t
   :if (or (executable-find "clangd"      )
@@ -702,23 +877,35 @@
     (python-mode        . lsp ) )
   :bind ( :map lsp-mode-map
                ("M-<return>" . lsp-rename) ) )
+#+end_src
 
+**** [[https://github.com/emacs-lsp/lsp-ivy][lsp-ivy]]
+#+begin_src emacs-lisp
 (use-package lsp-ivy
   :defer t
   :after (ivy lsp)
   :requires (ivy lsp) )
+#+end_src
 
+*** [[https://magit.vc/][Magit]]
+#+begin_src emacs-lisp
 (use-package magit
   :defer t
   :if (executable-find "git")
   :commands magit-status
   :bind ("C-x g" . magit-status) )
+#+end_src
 
+*** [[https://github.com/ludwigpacifici/modern-cpp-font-lock][modern-cpp-font-lock]]
+#+begin_src emacs-lisp
 (use-package modern-cpp-font-lock
   :defer t
   :config
   (modern-c++-font-lock-global-mode) )
+#+end_src
 
+*** [[https://orgmode.org/][Org Mode]]
+#+begin_src emacs-lisp
 (use-package org
   :defer t
   :ensure org-plus-contrib
@@ -752,13 +939,19 @@
   (setq-default org-src-window-setup                        'reorganize-frame )
   (setq-default org-startup-folded                           nil              )
   (setq-default org-startup-indented                         t                ) )
+#+end_src
 
+**** [[https://github.com/integral-dw/org-superstar-mode][org-superstar]]
+#+begin_src emacs-lisp
 (use-package org-superstar
   :defer t
   :after org
   :commands org-superstar-mode
   :hook (org-mode . org-superstar-mode) )
+#+end_src
 
+*** [[https://github.com/bbatsov/projectile][Projectile]]
+#+begin_src emacs-lisp
 (use-package projectile
   :defer t
   :if (executable-find "git")
@@ -772,7 +965,10 @@
   (setq-default projectile-sort-order        'recently-active )
   :bind ( :map projectile-mode-map
                ("C-c p" . projectile-command-map) ) )
+#+end_src
 
+*** [[https://www.racket-mode.com/][Racket Mode]]
+#+begin_src emacs-lisp
 (use-package racket-mode
   :defer t
   :if (executable-find "racket")
@@ -781,7 +977,10 @@
   :commands racket-unicode-input-method-enable
   :hook ( (racket-mode      . racket-unicode-input-method-enable )
           (racket-repl-mode . racket-unicode-input-method-enable ) ) )
+#+end_src
 
+*** [[https://common-lisp.net/project/slime/][SLIME]]
+#+begin_src emacs-lisp
 (use-package slime
   :defer t
   :if (executable-find "sbcl")
@@ -791,25 +990,37 @@
   (setq-default inferior-lisp-program     "sbcl" )
   (slime-setup
    '(slime-asdf slime-fancy slime-tramp slime-indentation) ) )
+#+end_src
 
+*** [[https://github.com/Fuco1/smartparens][smartparens]]
+#+begin_src emacs-lisp
 (use-package smartparens
   :defer t
   :commands smartparens-mode
   :hook (prog-mode . smartparens-mode) )
+#+end_src
 
+*** [[https://github.com/TheBB/spaceline][Spaceline]]
+#+begin_src emacs-lisp
 (use-package spaceline
   :defer t
   :init
   (spaceline-spacemacs-theme)
   (setq-default spaceline-window-numbers-unicode    t )
   (setq-default spaceline-workspace-numbers-unicode t ) )
+#+end_src
 
+*** [[https://github.com/abo-abo/swiper][Swiper]]
+#+begin_src emacs-lisp
 (use-package swiper
   :defer t
   :commands swiper
   :init (setq-default swiper-action-recenter t)
   :bind ("C-s" . swiper) )
+#+end_src
 
+*** [[https://github.com/justbur/emacs-which-key][which-key]]
+#+begin_src emacs-lisp
 (use-package which-key
   :defer t
   :init
@@ -819,17 +1030,27 @@
   (setq-default which-key-idle-delay             0.3 )
   (setq-default which-key-side-window-max-height 0.3 )
   (setq-default which-key-side-window-max-width  0.3 ) )
+#+end_src
 
+*** [[https://github.com/joaotavora/yasnippet][YASnippet]]
+#+begin_src emacs-lisp
 (use-package yasnippet
   :defer t
   :init (yas-global-mode)
   :requires yasnippet-snippets)
+#+end_src
 
+**** [[https://github.com/AndreaCrotti/yasnippet-snippets][yasnippet-snippets]]
+#+begin_src emacs-lisp
 (use-package yasnippet-snippets
   :defer t
   :after yasnippet)
+#+end_src
 
+* GNU Emacs configuration file end
+#+begin_src emacs-lisp
 (message (emacs-init-time))
 
 (provide '.emacs)
 ;;; .emacs ends here
+#+end_src

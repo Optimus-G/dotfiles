@@ -4,6 +4,11 @@ let g:mapleader = " "
 language messages POSIX
 runtime macros/matchit.vim
 
+filetype               on
+filetype plugin        on
+filetype plugin indent on
+syntax                 on
+
 call plug#begin("$HOME/.vim/plugged")
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
@@ -18,10 +23,8 @@ Plug 'vim-syntastic/syntastic'
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clangd-completer' }
 call plug#end()
 
-filetype               on
-filetype plugin        on
-filetype plugin indent on
-syntax                 on
+colorscheme ron
+highlight Normal ctermbg=NONE
 
 if !empty(glob("$HOME/.vim/plugged"))
   nnoremap <leader>fi :YcmCompleter FixIt<CR>
