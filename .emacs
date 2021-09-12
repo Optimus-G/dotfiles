@@ -1,18 +1,11 @@
 ;;; Package --- .emacs
 ;;; Commentary:
 ;;; GNU Emacs configuration file
+
 ;;; -*- lexical-binding: t; -*-
 ;;; -*- no-byte-compile: t; -*-
 
 ;;; Code:
-;;; Reducing Emacs Startup Time
-(setq-default gc-cons-threshold most-positive-fixnum)
-
-(defun reset-gc-cons-threshold ()
-  "Reset `gc-cons-threshold' to its default value."
-  (setq-default gc-cons-threshold 800000))
-(add-hook 'emacs-startup-hook 'reset-gc-cons-threshold)
-
 (require 'ansi-color nil :noerror)
 (require 'autoinsert nil :noerror)
 (require 'bookmark   nil :noerror)
@@ -28,6 +21,7 @@
 (require 'doc-view   nil :noerror)
 (require 'ediff      nil :noerror)
 (require 'eldoc      nil :noerror)
+(require 'em-smart   nil :noerror)
 (require 'eshell     nil :noerror)
 (require 'find-dired nil :noerror)
 (require 'flyspell   nil :noerror)
@@ -40,6 +34,7 @@
 (require 'ispell     nil :noerror)
 (require 'message    nil :noerror)
 (require 'profiler   nil :noerror)
+(require 'python     nil :noerror)
 (require 'recentf    nil :noerror)
 (require 'savehist   nil :noerror)
 (require 'saveplace  nil :noerror)
@@ -50,6 +45,7 @@
 (require 'time       nil :noerror)
 (require 'tramp      nil :noerror)
 (require 'uniquify   nil :noerror)
+(require 'url        nil :noerror)
 (require 'warnings   nil :noerror)
 (require 'wdired     nil :noerror)
 (require 'whitespace nil :noerror)
@@ -76,9 +72,11 @@
 (global-font-lock-mode             1 )
 (global-hl-line-mode              -1 )
 (global-prettify-symbols-mode      1 )
+(global-so-long-mode               1 )
 (global-subword-mode               1 )
 (global-visual-line-mode          -1 )
 (global-whitespace-mode            1 )
+(horizontal-scroll-bar-mode       -1 )
 (icomplete-mode                    1 )
 (ido-mode                          1 )
 (line-number-mode                  1 )
@@ -113,7 +111,10 @@
 (setq-default kept-old-versions               1    )
 (setq-default lazy-highlight-initial-delay    0    )
 (setq-default lazy-highlight-interval         0    )
+(setq-default max-mini-window-height          0.2  )
 (setq-default message-log-max              1000    )
+(setq-default python-indent                   4    )
+(setq-default python-indent-offset            4    )
 (setq-default recentf-max-menu-items         10    )
 (setq-default recentf-max-saved-items       100    )
 (setq-default scroll-conservatively        1000    )
@@ -127,130 +128,150 @@
 (setq-default tab-width                       2    )
 (setq-default whitespace-line-column        100    )
 
-(setq-default apropos-do-all                          t   )
-(setq-default auto-revert-avoid-polling               nil )
-(setq-default auto-revert-check-vc-info               t   )
-(setq-default auto-revert-remote-files                t   )
-(setq-default auto-revert-use-notify                  nil )
-(setq-default auto-revert-verbose                     nil )
-(setq-default auto-save-default                       t   )
-(setq-default auto-window-vscroll                     nil )
-(setq-default backup-by-copying                       t   )
-(setq-default blink-matching-paren                    t   )
-(setq-default bookmark-completion-ignore-case         t   )
-(setq-default bookmark-save-flag                      t   )
-(setq-default c-mark-wrong-style-of-comment           t   )
-(setq-default case-fold-search                        t   )
-(setq-default column-number-indicator-zero-based      nil )
-(setq-default completion-ignore-case                  t   )
-(setq-default confirm-kill-processes                  nil )
-(setq-default create-lockfiles                        nil )
-(setq-default cursor-in-non-selected-windows          nil )
-(setq-default debug-on-error                          t   )
-(setq-default debug-on-quit                           nil )
-(setq-default delete-auto-save-files                  t   )
-(setq-default delete-by-moving-to-trash               t   )
-(setq-default delete-old-versions                     t   )
-(setq-default delete-trailing-lines                   t   )
-(setq-default dired-dwim-target                       t   )
-(setq-default dired-hide-details-hide-symlink-targets nil )
-(setq-default dired-ls-F-marks-symlinks               t   )
-(setq-default dired-omit-extensions                   nil )
-(setq-default dired-omit-mode                         nil )
-(setq-default dired-omit-verbose                      nil )
-(setq-default display-time-24hr-format                t   )
-(setq-default display-time-day-and-date               nil )
-(setq-default display-time-default-load-average       nil )
-(setq-default enable-recursive-minibuffers            t   )
-(setq-default enable-remote-dir-locals                t   )
-(setq-default eshell-kill-processes-on-exit           t   )
-(setq-default file-name-handler-alist                 nil )
-(setq-default find-file-visit-truename                t   )
-(setq-default font-lock-maximum-decoration            t   )
-(setq-default frame-resize-pixelwise                  t   )
-(setq-default gdb-enable-debug                        t   )
-(setq-default gdb-many-windows                        nil )
-(setq-default gdb-show-changed-values                 t   )
-(setq-default gdb-show-main                           t   )
-(setq-default gdb-show-threads-by-default             t   )
-(setq-default gdb-speedbar-auto-raise                 t   )
-(setq-default history-delete-duplicates               t   )
-(setq-default ibuffer-expert                          t   )
-(setq-default ibuffer-show-empty-filter-groups        nil )
-(setq-default ido-enable-flex-matching                t   )
-(setq-default ido-everywhere                          t   )
-(setq-default ido-use-virtual-buffers                 t   )
-(setq-default imenu-auto-rescan                       t   )
-(setq-default imenu-use-popup-menu                    nil )
-(setq-default indent-tabs-mode                        nil )
-(setq-default inhibit-compacting-font-caches          t   )
-(setq-default inhibit-splash-screen                   t   )
-(setq-default inhibit-startup-buffer-menu             t   )
-(setq-default inhibit-startup-message                 t   )
-(setq-default inhibit-startup-screen                  t   )
-(setq-default initial-buffer-choice                   nil )
-(setq-default initial-scratch-message                 nil )
-(setq-default ispell-dictionary                       nil )
-(setq-default ispell-really-aspell                    nil )
-(setq-default ispell-really-hunspell                  t   )
-(setq-default kill-whole-line                         t   )
-(setq-default large-file-warning-threshold            nil )
-(setq-default lexical-binding                         t   )
-(setq-default line-move-visual                        nil )
-(setq-default load-prefer-newer                       t   )
-(setq-default make-backup-files                       t   )
-(setq-default make-pointer-invisible                  t   )
-(setq-default message-log-max                         t   )
-(setq-default mouse-drag-copy-region                  nil )
-(setq-default mouse-wheel-follow-mouse                t   )
-(setq-default mouse-wheel-progressive-speed           t   )
-(setq-default mouse-yank-at-point                     t   )
-(setq-default next-line-add-newlines                  nil )
-(setq-default package-check-signature                 nil )
-(setq-default package-enable-at-startup               nil )
-(setq-default python-indent-guess-indent-offset       nil )
-(setq-default query-replace-highlight                 t   )
-(setq-default read-buffer-completion-ignore-case      t   )
-(setq-default read-file-name-completion-ignore-case   t   )
-(setq-default recenter-redisplay                      nil )
-(setq-default require-final-newline                   t   )
-(setq-default resize-mini-windows                     nil )
-(setq-default save-interprogram-paste-before-kill     t   )
-(setq-default save-place-forget-unreadable-files      t   )
-(setq-default savehist-save-minibuffer-history        t   )
-(setq-default scroll-error-top-bottom                 t   )
-(setq-default scroll-preserve-screen-position         t   )
-(setq-default search-highlight                        t   )
-(setq-default select-enable-clipboard                 t   )
-(setq-default select-enable-primary                   nil )
-(setq-default sentence-end-double-space               nil )
-(setq-default set-mark-command-repeat-pop             t   )
-(setq-default shift-select-mode                       nil )
-(setq-default show-trailing-whitespace                t   )
-(setq-default split-height-threshold                  nil )
-(setq-default split-width-threshold                   nil )
-(setq-default system-uses-terminfo                    nil )
-(setq-default tags-revert-without-query               t   )
-(setq-default track-eol                               t   )
-(setq-default truncate-lines                          t   )
-(setq-default truncate-partial-width-windows          nil )
-(setq-default uniquify-after-kill-buffer-p            t   )
-(setq-default use-dialog-box                          nil )
-(setq-default use-file-dialog                         nil )
-(setq-default vc-follow-symlinks                      t   )
-(setq-default vc-make-backup-files                    t   )
-(setq-default version-control                         t   )
-(setq-default visible-bell                            t   )
-(setq-default warning-suppress-types                  nil )
-(setq-default wdired-allow-to-change-permissions      t   )
-(setq-default wdired-allow-to-redirect-links          t   )
-(setq-default wdired-confirm-overwrite                t   )
-(setq-default wdired-use-dired-vertical-movement      t   )
-(setq-default wdired-use-interactive-rename           t   )
-(setq-default window-combination-resize               t   )
-(setq-default window-divider-default-places           nil )
-(setq-default x-stretch-cursor                        t   )
+(setq-default apropos-do-all                           t   )
+(setq-default auto-revert-avoid-polling                nil )
+(setq-default auto-revert-check-vc-info                t   )
+(setq-default auto-revert-remote-files                 t   )
+(setq-default auto-revert-use-notify                   nil )
+(setq-default auto-revert-verbose                      nil )
+(setq-default auto-save-default                        t   )
+(setq-default auto-window-vscroll                      nil )
+(setq-default backup-by-copying                        t   )
+(setq-default blink-matching-paren                     t   )
+(setq-default bookmark-completion-ignore-case          t   )
+(setq-default bookmark-save-flag                       t   )
+(setq-default c-mark-wrong-style-of-comment            t   )
+(setq-default case-fold-search                         t   )
+(setq-default column-number-indicator-zero-based       nil )
+(setq-default comint-move-point-for-output             t   )
+(setq-default comint-process-echoes                    t   )
+(setq-default comint-scroll-to-bottom-on-input         t   )
+(setq-default comint-scroll-to-bottom-on-output        t   )
+(setq-default compilation-read-command                 t   )
+(setq-default compilation-scroll-output                t   )
+(setq-default completion-ignore-case                   t   )
+(setq-default confirm-kill-emacs                       nil )
+(setq-default confirm-kill-processes                   nil )
+(setq-default confirm-nonexistent-file-or-buffer       nil )
+(setq-default create-lockfiles                         nil )
+(setq-default cursor-in-non-selected-windows           nil )
+(setq-default custom-safe-themes                       t   )
+(setq-default debug-on-error                           nil )
+(setq-default debug-on-quit                            nil )
+(setq-default delete-auto-save-files                   t   )
+(setq-default delete-by-moving-to-trash                t   )
+(setq-default delete-old-versions                      t   )
+(setq-default delete-trailing-lines                    t   )
+(setq-default dired-dwim-target                        t   )
+(setq-default dired-hide-details-hide-symlink-targets  nil )
+(setq-default dired-ls-F-marks-symlinks                t   )
+(setq-default dired-omit-extensions                    nil )
+(setq-default dired-omit-mode                          nil )
+(setq-default dired-omit-verbose                       nil )
+(setq-default display-time-24hr-format                 t   )
+(setq-default display-time-day-and-date                nil )
+(setq-default display-time-default-load-average        nil )
+(setq-default enable-recursive-minibuffers             t   )
+(setq-default enable-remote-dir-locals                 t   )
+(setq-default eshell-kill-processes-on-exit            t   )
+(setq-default eshell-review-quick-commands             nil )
+(setq-default eshell-smart-space-goes-to-end           t   )
+(setq-default file-name-handler-alist                  nil )
+(setq-default find-file-visit-truename                 t   )
+(setq-default font-lock-maximum-decoration             t   )
+(setq-default frame-inhibit-implied-resize             t   )
+(setq-default frame-resize-pixelwise                   t   )
+(setq-default gdb-enable-debug                         t   )
+(setq-default gdb-many-windows                         nil )
+(setq-default gdb-show-changed-values                  t   )
+(setq-default gdb-show-main                            t   )
+(setq-default gdb-show-threads-by-default              t   )
+(setq-default gdb-speedbar-auto-raise                  t   )
+(setq-default global-auto-revert-non-file-buffers      t   )
+(setq-default history-delete-duplicates                t   )
+(setq-default ibuffer-expert                           t   )
+(setq-default ibuffer-show-empty-filter-groups         nil )
+(setq-default ido-enable-flex-matching                 t   )
+(setq-default ido-everywhere                           t   )
+(setq-default ido-use-virtual-buffers                  t   )
+(setq-default imenu-auto-rescan                        t   )
+(setq-default imenu-use-popup-menu                     nil )
+(setq-default indent-tabs-mode                         nil )
+(setq-default inhibit-compacting-font-caches           t   )
+(setq-default inhibit-splash-screen                    t   )
+(setq-default inhibit-startup-buffer-menu              t   )
+(setq-default inhibit-startup-message                  t   )
+(setq-default inhibit-startup-screen                   t   )
+(setq-default initial-buffer-choice                    nil )
+(setq-default initial-scratch-message                  nil )
+(setq-default ispell-dictionary                        nil )
+(setq-default ispell-really-aspell                     nil )
+(setq-default ispell-really-hunspell                   t   )
+(setq-default kill-whole-line                          t   )
+(setq-default large-file-warning-threshold             nil )
+(setq-default lexical-binding                          t   )
+(setq-default line-move-visual                         nil )
+(setq-default load-prefer-newer                        t   )
+(setq-default make-backup-files                        t   )
+(setq-default make-pointer-invisible                   t   )
+(setq-default mark-even-if-inactive                    nil )
+(setq-default message-log-max                          t   )
+(setq-default mouse-drag-copy-region                   nil )
+(setq-default mouse-wheel-follow-mouse                 t   )
+(setq-default mouse-wheel-progressive-speed            t   )
+(setq-default mouse-yank-at-point                      t   )
+(setq-default native-comp-async-report-warnings-errors nil )
+(setq-default next-line-add-newlines                   nil )
+(setq-default package-check-signature                  nil )
+(setq-default package-enable-at-startup                nil )
+(setq-default package-native-compile                   t   )
+(setq-default python-indent-guess-indent-offset        nil )
+(setq-default query-replace-highlight                  t   )
+(setq-default read-buffer-completion-ignore-case       t   )
+(setq-default read-file-name-completion-ignore-case    t   )
+(setq-default recenter-redisplay                       nil )
+(setq-default require-final-newline                    t   )
+(setq-default resize-mini-windows                      nil )
+(setq-default save-interprogram-paste-before-kill      t   )
+(setq-default save-place-forget-unreadable-files       t   )
+(setq-default savehist-save-minibuffer-history         t   )
+(setq-default scroll-error-top-bottom                  t   )
+(setq-default scroll-preserve-screen-position          t   )
+(setq-default search-highlight                         t   )
+(setq-default select-enable-clipboard                  t   )
+(setq-default select-enable-primary                    nil )
+(setq-default sentence-end-double-space                nil )
+(setq-default set-mark-command-repeat-pop              t   )
+(setq-default shift-select-mode                        nil )
+(setq-default show-trailing-whitespace                 t   )
+(setq-default split-height-threshold                   nil )
+(setq-default split-width-threshold                    nil )
+(setq-default system-uses-terminfo                     nil )
+(setq-default tags-revert-without-query                t   )
+(setq-default track-eol                                t   )
+(setq-default truncate-lines                           t   )
+(setq-default truncate-partial-width-windows           nil )
+(setq-default uniquify-after-kill-buffer-p             t   )
+(setq-default use-dialog-box                           nil )
+(setq-default use-file-dialog                          nil )
+(setq-default vc-follow-symlinks                       t   )
+(setq-default vc-make-backup-files                     t   )
+(setq-default version-control                          t   )
+(setq-default view-read-only                           t   )
+(setq-default visible-bell                             t   )
+(setq-default warning-suppress-types                   nil )
+(setq-default wdired-allow-to-change-permissions       t   )
+(setq-default wdired-allow-to-redirect-links           t   )
+(setq-default wdired-confirm-overwrite                 t   )
+(setq-default wdired-use-dired-vertical-movement       t   )
+(setq-default wdired-use-interactive-rename            t   )
+(setq-default window-combination-resize                t   )
+(setq-default window-divider-default-places            nil )
+(setq-default x-frame-normalize-before-maximize        t   )
+(setq-default x-stretch-cursor                         t   )
+(setq-default yank-pop-change-selection                t   )
 
+(setq-default gc-cons-threshold            (* 10240 10240 ) )
 (setq-default large-file-warning-threshold (* 10240 10240 ) )
 (setq-default message-log-max              (*  1024  1024 ) )
 (setq-default read-process-output-max      (*  1024  1024 ) )
@@ -261,33 +282,36 @@
 (setq-default dired-listing-switches   "-a -F -G -h -l"       )
 (setq-default explicit-shell-file-name "/bin/bash"            )
 (setq-default frame-title-format       "GNU Emacs"            )
+(setq-default ispell-dictionary        "en_US"                )
 (setq-default shell-file-name          "/bin/bash"            )
 (setq-default tramp-default-method     "ssh"                  )
 (setq-default uniquify-separator       "::"                   )
+(setq-default user-full-name           "Cyberdyne Systems"    )
 
-(setq-default ad-redefinition-action               'accept                        )
-(setq-default async-shell-command-buffer           'rename-buffer                 )
-(setq-default backup-directory-alist               '(("." . "~/.emacs.d/backup")) )
-(setq-default backward-delete-char-untabify-method 'hungry                        )
-(setq-default browse-url-browser-function          'browse-url-generic            )
-(setq-default calendar-date-style                  'european                      )
-(setq-default dired-recursive-copies               'always                        )
-(setq-default dired-recursive-deletes              'top                           )
-(setq-default ediff-window-setup-function          'ediff-setup-windows-plain     )
-(setq-default initial-major-mode                   'lisp-interaction-mode         )
-(setq-default lisp-indent-function                 'lisp-indent-function          )
-(setq-default major-mode                           'text-mode                     )
-(setq-default mouse-wheel-scroll-amount            '(1 ((shift) . 1))             )
-(setq-default prettify-symbols-unprettify-at-point 'right-edge                    )
-(setq-default recenter-positions                   '(middle top bottom)           )
-(setq-default ring-bell-function                   'ignore                        )
-(setq-default save-abbrevs                         'silently                      )
-(setq-default select-active-regions                'only                          )
-(setq-default show-paren-style                     'mixed                         )
-(setq-default tab-always-indent                    'complete                      )
-(setq-default uniquify-buffer-name-style           'forward                       )
-(setq-default vc-handled-backends                  '(git svn)                     )
-(setq-default whitespace-style                     '(face lines tabs trailing)    )
+(setq-default ad-redefinition-action               'accept                          )
+(setq-default async-shell-command-buffer           'rename-buffer                   )
+(setq-default backup-directory-alist               '( ("." . "~/.emacs.d/backup") ) )
+(setq-default backward-delete-char-untabify-method 'hungry                          )
+(setq-default browse-url-browser-function          'browse-url-generic              )
+(setq-default calendar-date-style                  'european                        )
+(setq-default dired-recursive-copies               'always                          )
+(setq-default dired-recursive-deletes              'top                             )
+(setq-default ediff-window-setup-function          'ediff-setup-windows-plain       )
+(setq-default eshell-where-to-jump                 'begin                           )
+(setq-default initial-major-mode                   'lisp-interaction-mode           )
+(setq-default lisp-indent-function                 'lisp-indent-function            )
+(setq-default major-mode                           'text-mode                       )
+(setq-default mouse-wheel-scroll-amount            '(1 ((shift) . 1))               )
+(setq-default prettify-symbols-unprettify-at-point 'right-edge                      )
+(setq-default recenter-positions                   '(middle top bottom)             )
+(setq-default ring-bell-function                   'ignore                          )
+(setq-default save-abbrevs                         'silently                        )
+(setq-default select-active-regions                'only                            )
+(setq-default show-paren-style                     'mixed                           )
+(setq-default tab-always-indent                    'complete                        )
+(setq-default uniquify-buffer-name-style           'forward                         )
+(setq-default vc-handled-backends                  '(git svn)                       )
+(setq-default whitespace-style                     '(face lines tabs trailing)      )
 
 (defun begin-using-Ibuffer ()
   "Begin using Ibuffer to edit a list of buffers."
@@ -308,8 +332,8 @@
 (defun ddls ()
   "Delete duplicate lines and sort."
   (interactive)
-  (delete-duplicate-lines     (region-beginning) (region-end))
-  (sort-lines             nil (region-beginning) (region-end)) )
+  (delete-duplicate-lines     (region-beginning) (region-end) )
+  (sort-lines             nil (region-beginning) (region-end) ) )
 
 (defun format-buffer-before-saving ()
   "Format buffer before saving."
@@ -319,12 +343,12 @@
     (delete-trailing-whitespace)
     (if (equal major-mode 'makefile-gmake-mode)
         (tabify (point-min) (point-max) )
-      (untabify (point-min) (point-max) ))
+      (untabify (point-min) (point-max) ) )
     (unless (or (equal major-mode 'fundamental-mode    )
                 (equal major-mode 'makefile-gmake-mode )
                 (equal major-mode 'python-mode         )
                 (equal major-mode 'text-mode           ) )
-      (indent-region (point-min) (point-max)) ))
+      (indent-region (point-min) (point-max) ) ) )
   (save-buffer) nil)
 
 (defun insert-an-empty-line-above-the-current-line-and-indent ()
@@ -338,8 +362,8 @@
   "Kill all other buffers."
   (interactive)
   (delete-other-windows)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list) ))
-  (message "All other buffers was killed!"))
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list) ) )
+  (message "All other buffers was killed!") )
 
 (defun exec-scheme ()
   "Run an inferior Scheme process."
@@ -347,18 +371,18 @@
   (autoload 'run-scheme  "cmuscheme" "Run an inferior Scheme" t )
   (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme"  t )
   (cond ( (executable-find "scheme" )
-          (save-selected-window (run-scheme "scheme" )) )
+          (save-selected-window (run-scheme (executable-find "scheme" ) ) ) )
         ( (executable-find "guile"  )
-          (save-selected-window (run-scheme "guile"  )) ) ))
+          (save-selected-window (run-scheme (executable-find "guile"  ) ) ) ) ) )
 
 (defun signal-an-error-if-variable-is-obsolete ()
   "Signal an error if variable is obsolete."
   (interactive)
   (defvar variable-doc-string)
-  (setq variable-doc-string (describe-variable (symbol-at-point)))
+  (setq variable-doc-string (describe-variable (symbol-at-point) ) )
   (if  (string-match "obsolete" variable-doc-string)
       (error "This variable is obsolete")
-    (message "The test is passed successfully") ))
+    (message "The test is passed successfully") ) )
 
 (defun split-and-balance-windows ()
   "Split and balance windows."
@@ -367,111 +391,77 @@
   (other-window          1 )
   (balance-windows         ) )
 
-(defun running-a-terminal-emulator ()
-  "Start a terminal emulator in a new window."
-  (interactive)
-  (split-and-balance-windows)
-  (when (string-equal system-type "gnu/linux")
-    (ansi-term (executable-find "bash"))
-    (defadvice term-handle-exit
-        (after term-kill-buffer-on-exit activate)
-      (if (>= (length (window-list)) 2)
-          (progn (kill-buffer) (delete-window))
-        (kill-buffer) )) ))
-
-(defun toggle-spell-checker ()
-  "Toggle spell checker with selectable dictionary."
-  (interactive)
-  (if (bound-and-true-p flyspell-mode)
-      (flyspell-mode-off)
-    (progn
-      (if (derived-mode-p 'prog-mode)
-          (flyspell-prog-mode)
-        (flyspell-mode))
-      (ispell-change-dictionary
-       (completing-read
-        "Use new dictionary (RET for *default*): "
-        (and (fboundp 'ispell-valid-dictionary-list)
-             (mapcar 'list
-                     (ispell-valid-dictionary-list)))
-        nil t)) )) )
-
 (add-hook 'makefile-mode-hook
-          '(lambda () (setq-default indent-tabs-mode t)) )
+          '(lambda () (setq-default indent-tabs-mode t) ) )
 (add-hook 'c-mode-common-hook 'customize-C/C++-programming-mode)
 
-(cond
- ( (executable-find "hunspell" )
-   (setq-default ispell-program-name "/usr/bin/hunspell" ) )
- ( (executable-find "aspell"   )
-   (setq-default ispell-program-name "/usr/bin/aspell"   ) ) )
+(prefer-coding-system       'utf-8  )
+(set-default-coding-systems 'utf-8  )
+(set-language-environment   "UTF-8" )
+(setq-default default-input-method "russian-computer")
 
 (cond
- ((executable-find "ipython")
-  (setq-default python-shell-interpreter      "ipython"            )
-  (setq-default python-shell-interpreter-args "--simple-prompt -i" ) )
- ((executable-find "python")
-  (setq-default python-shell-interpreter      "python"             )
-  (setq-default python-shell-interpreter-args "-i"                 ) ) )
+ ( (executable-find "ipython" )
+   (setq-default python-shell-interpreter (executable-find "ipython") )
+   (setq-default python-shell-interpreter-args "--simple-prompt -i" ) )
+ ( (executable-find "python"  )
+   (setq-default python-shell-interpreter (executable-find "python" ) )
+   (setq-default python-shell-interpreter-args "-i"                 ) ) )
+
+(add-hook 'prog-mode-hook
+          (lambda () (setq-default display-line-numbers 'visual) ) )
 
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines)
-  (setq-default indicate-empty-lines t))
+  (setq-default indicate-empty-lines t) )
 
 (if (file-exists-p bookmark-default-file)
-    (bookmark-load bookmark-default-file t))
+    (bookmark-load bookmark-default-file t) )
 
 (defun run-an-inferior-Octave-process ()
   "Run an inferior Octave process."
   (interactive)
-  (save-selected-window (run-octave nil)) )
+  (save-selected-window (run-octave nil) ) )
 (when (executable-find "octave")
   (add-hook    'octave-mode-hook 'run-an-inferior-Octave-process )
   (add-to-list 'auto-mode-alist  '("\\.m$" . octave-mode)        ) )
 
 (add-hook 'scheme-mode-hook 'exec-scheme)
 
-(setq-default browse-url-generic-program (executable-find "firefox"))
+(setq-default browse-url-generic-program
+              (cond ( (executable-find "firefox"       ) (executable-find "firefox"       ) )
+                    ( (executable-find "google-chrome" ) (executable-find "google-chrome" ) ) ) )
 
 (when (display-graphic-p)
   (blink-cursor-mode )
   (display-time      )
   (fringe-mode       )
-  (set-cursor-color "red")
   (setq-default cursor-type 'box)
-  (cond ((member "JetBrains Mono" (font-family-list))
-         (set-frame-font "Jetbrains Mono 12" t t))
-        ((member "Hermit" (font-family-list))
-         (set-frame-font "Hermit 12" t t))
-        ((member "Fantasque Sans Mono" (font-family-list))
-         (set-frame-font "Fantasque Sans Mono 14" t t))
-        ((member "DejaVu Sans Mono" (font-family-list))
-         (set-frame-font "DejaVu Sans Mono 12" t t)))
-  (add-to-list 'default-frame-alist '(height .   30) )
-  (add-to-list 'default-frame-alist '(width  .  120) )
-  (setq-default indicate-buffer-boundaries '(( bottom . left )
-                                             ( down   . left )
-                                             ( top    . left )
-                                             ( up     . left )
-                                             ( t      . left )) )
-  (set-frame-parameter (selected-frame) (quote  alpha) (quote (95 . 95) ))
-  (add-to-list 'default-frame-alist     (quote (alpha    .    (95 . 95) )) ))
+  (add-to-list 'default-frame-alist '(height .  40) )
+  (add-to-list 'default-frame-alist '(width  . 120) )
+  (cond ( (member "Cascadia Code"       (font-family-list) )
+          (set-frame-font "Cascadia Code 18"       t t ) )
+        ( (member "Fantasque Sans Mono" (font-family-list) )
+          (set-frame-font "Fantasque Sans Mono 18" t t ) )
+        ( (member "JetBrains Mono"      (font-family-list) )
+          (set-frame-font "JetBrains Mono 16"      t t ) )
+        ( (member "DejaVu Sans Mono"    (font-family-list) )
+          (set-frame-font "DejaVu Sans Mono 14"    t t ) ) )
+  (setq-default indicate-buffer-boundaries '( ( bottom . left )
+                                              ( down   . left )
+                                              ( top    . left )
+                                              ( up     . left )
+                                              ( t      . left ) ) )
+  (set-frame-parameter (selected-frame) (quote  alpha) (quote (95 . 95) ) )
+  (add-to-list 'default-frame-alist     (quote (alpha    .    (95 . 95) ) ) ) )
 
-(prefer-coding-system          'utf-8 )
-(set-buffer-file-coding-system 'utf-8 )
-(set-default-coding-systems    'utf-8 )
-(set-file-name-coding-system   'utf-8 )
-(set-keyboard-coding-system    'utf-8 )
-(set-language-environment      'utf-8 )
-(set-terminal-coding-system    'utf-8 )
-
-(global-set-key (kbd "<f1>"  ) 'running-a-terminal-emulator )
+(global-set-key (kbd "<f1>"  ) 'apropos                     )
 (global-set-key (kbd "<f2>"  ) 'begin-using-Ibuffer         )
 (global-set-key (kbd "<f3>"  ) 'comment-line                )
-(global-set-key (kbd "<f4>"  ) 'toggle-spell-checker        )
-(global-set-key (kbd "<f5>"  ) 'bookmark-set                )
-(global-set-key (kbd "<f6>"  ) 'bookmark-jump               )
-(global-set-key (kbd "<f7>"  ) 'bookmark-bmenu-list         )
+(global-set-key (kbd "<f4>"  ) 'bookmark-set                )
+(global-set-key (kbd "<f5>"  ) 'bookmark-jump               )
+(global-set-key (kbd "<f6>"  ) 'bookmark-bmenu-list         )
+(global-set-key (kbd "<f7>"  ) 'ispell-comments-and-strings )
 (global-set-key (kbd "<f8>"  ) 'kmacro-start-macro          )
 (global-set-key (kbd "<f9>"  ) 'kmacro-end-macro            )
 (global-set-key (kbd "<f10>" ) 'kmacro-call-macro           )
@@ -502,169 +492,128 @@
 (global-set-key (kbd "S-C-<up>"    ) 'enlarge-window                                         )
 
 (require 'package nil :noerror)
-(add-to-list 'package-archives '("melpa"        . "https://melpa.org/packages/"        ) t )
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/" ) t )
-(add-to-list 'package-archives '("org"          . "https://orgmode.org/elpa/"          ) t )
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/" ) t )
+(add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/"   ) t )
 (package-initialize)
-(unless package-archive-contents (ignore-errors (package-refresh-contents)))
+(unless package-archive-contents (ignore-errors (package-refresh-contents) ) )
 
 (unless (package-installed-p 'use-package)
-  (package-install 'use-package))
+  (package-install 'use-package) )
 (when (require 'use-package nil :noerror)
   (setq-default use-package-always-ensure t   )
   (setq-default use-package-verbose       nil ) )
 
+(use-package ace-window
+  :bind ("M-o" . ace-window) )
+
+(use-package all-the-icons
+  :if (not (string-equal system-type "windows-nt") ) )
+
+(use-package all-the-icons-dired
+  :after all-the-icons
+  :hook (dired-mode . all-the-icons-dired-mode)
+  :if (not (string-equal system-type "windows-nt") ) )
+
+(use-package anzu
+  :init (global-anzu-mode) )
+
 (use-package avy
-  :defer t
-  :init
-  (setq-default avy-all-windows nil )
-  (setq-default avy-background  t   )
-  :commands ( avy-goto-char
-              avy-goto-line
-              avy-goto-word-1 )
   :bind
   ( ("M-g c" . avy-goto-char   )
     ("M-g l" . avy-goto-line   )
-    ("M-g w" . avy-goto-word-1 ) ) )
+    ("M-g w" . avy-goto-word-1 ) )
+  :init
+  (setq-default avy-all-windows nil )
+  (setq-default avy-background  t   ) )
 
 (use-package cider
-  :defer t
-  :if   (executable-find "clojure")
-  :hook (clojure-mode . cider-mode) )
-
-(use-package cmake-font-lock
-  :defer t
-  :if (executable-find "cmake")
-  :commands cmake-font-lock-activate
   :config
-  (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
-  :hook (cmake-mode . cmake-font-lock-activate) )
+  (setq-default cider-repl-display-help-banner       nil          )
+  (setq-default cider-repl-pop-to-buffer-on-connect 'display-only )
+  :hook (clojure-mode . cider-mode)
+  :if (executable-find "clojure") )
+
+(use-package clojure-mode
+  :hook (clojure-mode . smartparens-strict-mode)
+  :if (executable-find "clojure") )
+
+(use-package clojure-mode-extra-font-locking
+  :after clojure-mode
+  :if (executable-find "clojure") )
 
 (use-package cmake-mode
-  :defer t
+  :if (executable-find "cmake") )
+
+(use-package cmake-font-lock
+  :after cmake-mode
+  :config (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+  :hook (cmake-mode . cmake-font-lock-activate)
   :if (executable-find "cmake") )
 
 (use-package company
-  :defer t
-  :init
-  (setq-default company-idle-delay            0 )
-  (setq-default company-selection-wrap-around t )
-  (setq-default company-tooltip-limit         5 )
-  :commands ( company-complete
-              company-select-next
-              company-select-previous
-              company-show-doc-buffer )
-  :hook (prog-mode . company-mode)
   :bind
   ( :map company-active-map
          ("<tab>" . company-complete        )
          ("C-d"   . company-show-doc-buffer )
          ("C-n"   . company-select-next     )
-         ("C-p"   . company-select-previous ) ) )
+         ("C-p"   . company-select-previous ) )
+  :hook (prog-mode . company-mode)
+  :init
+  (setq-default company-idle-delay            0 )
+  (setq-default company-selection-wrap-around t )
+  (setq-default company-tooltip-limit         5 ) )
 
 (use-package counsel
-  :defer t
+  :bind
+  ( ("<f1>"    . counsel-apropos   )
+    ("C-x C-f" . counsel-find-file )
+    ("M-x"     . counsel-M-x       ) )
   :init
   (ido-mode     -1 )
-  (counsel-mode    )
-  :commands ( counsel-find-file
-              counsel-M-x       )
-  :bind
-  ( ("C-x C-f" . counsel-find-file )
-    ("M-x"     . counsel-M-x       ) ) )
-
-(use-package counsel-etags
-  :defer t
-  :if (or (executable-find "ctags")
-          (executable-find "etags") )
-  :requires counsel
-  :init
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook
-                        'counsel-etags-virtual-update-tags 'append 'local) ) )
-  :config
-  (setq-default counsel-etags-update-interval 60)
-  (push "build" counsel-etags-ignore-directories) )
+  (counsel-mode    ) )
 
 (use-package counsel-projectile
-  :defer t
-  :after    (counsel projectile      )
-  :requires (counsel projectile      )
-  :config   (counsel-projectile-mode ) )
+  :after (counsel projectile)
+  :config (counsel-projectile-mode) )
 
 (use-package doom-themes
-  :defer t
   :if window-system
   :init
   (doom-themes-org-config         )
   (doom-themes-visual-bell-config )
   (setq-default doom-themes-enable-bold   t     )
   (setq-default doom-themes-enable-italic t     )
-  (load-theme 'doom-palenight             t nil ) )
+  (load-theme 'doom-horizon               t nil ) )
 
-(use-package elpy
-  :defer t
-  :if (executable-find "python")
-  :init
-  (elpy-enable)
-  (add-hook 'elpy-mode-hook
-            (lambda () (add-hook 'before-save-hook 'elpy-format-code    nil t )) )
-  (add-hook 'elpy-mode-hook
-            (lambda () (add-hook 'before-save-hook 'elpy-black-fix-code nil t )) ) )
+(use-package doom-modeline
+  :config (setq-default doom-modeline-height 37)
+  :init (doom-modeline-mode) )
+
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook               )
+  (setq-default dashboard-set-file-icons    t )
+  (setq-default dashboard-set-heading-icons t ) )
 
 (use-package expand-region
-  :defer t
-  :commands er/expand-region
   :bind ("C-=" . er/expand-region) )
 
 (use-package flycheck
-  :defer t
   :init (global-flycheck-mode) )
 
-(use-package format-all
-  :defer t)
-
-(defun exec-geiser ()
-  "Run an inferior Scheme (Geiser) process."
-  (interactive)
-  (cond ( (executable-find "scheme" )
-          (setq-default geiser-active-implementations '(chez  ))
-          (save-selected-window (run-geiser 'chez  )) )
-        ( (executable-find "guile"  )
-          (setq-default geiser-active-implementations '(guile ))
-          (save-selected-window (run-geiser 'guile )) )) )
-
-(use-package geiser
-  :defer t
-  :if (or (executable-find "guile"  )
-          (executable-find "scheme" ) )
-  :pin melpa-stable
-  :init
-  (add-to-list 'auto-mode-alist  '("\\.ss$" . scheme-mode) )
-  (remove-hook 'scheme-mode-hook 'exec-scheme              )
-  :hook (scheme-mode . exec-geiser) )
-
-(use-package git-gutter
-  :defer t
-  :if   (executable-find "git"  )
-  :init (global-git-gutter-mode ) )
-
-(use-package gnuplot-mode
-  :defer t
-  :if (executable-find "gnuplot")
-  :init
-  (add-to-list 'auto-mode-alist  '("\\.gp$" . gnuplot-mode) )
+(use-package gnuplot
   :config
+  (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot-mode" t )
   (autoload 'gnuplot-mode        "gnuplot" "Gnuplot major mode"            t )
-  (autoload 'gnuplot-make-buffer "gnuplot" "Open a buffer in gnuplot-mode" t ) )
+  :if (executable-find "gnuplot")
+  :mode ("\\.gp\\'" . gnuplot-mode) )
 
 (use-package hl-todo
-  :defer t
   :init (global-hl-todo-mode) )
 
+(use-package iedit)
+
 (use-package ivy
-  :defer t
   :init
   (ivy-mode)
   (setq-default ivy-initial-inputs-alist  nil )
@@ -673,70 +622,92 @@
   (setq-default ivy-wrap                  t   ) )
 
 (use-package lsp-mode
-  :defer t
-  :if (or (executable-find "clangd"      )
-          (executable-find "clojure-lsp" ) )
-  :commands (lsp lsp-command-map lsp-rename)
-  :requires yasnippet
+  :bind
+  ( :map lsp-mode-map
+         ("M-<return>" . lsp-rename) )
   :config
   (setq-default lsp-auto-guess-root              t   )
   (setq-default lsp-eldoc-render-all             t   )
-  (setq-default lsp-enable-file-watchers         t   )
   (setq-default lsp-enable-symbol-highlighting   nil )
   (setq-default lsp-headerline-breadcrumb-enable nil )
   (setq-default lsp-lens-enable                  t   )
-  (setq-default lsp-modeline-code-actions-enable nil )
-  (setq-default lsp-modeline-diagnostics-enable  nil )
-  (setq-default lsp-progress-via-spinner         nil )
-  (setq-default lsp-semantic-highlighting        t   )
-  (setq-default lsp-semantic-tokens-enable       t   )
-  (setq-default lsp-clients-clangd-args
-                '("-j=4" "--background-index"
-                  "--clang-tidy" "--log=error"))
+  :init
+  (setq-default lsp-clients-clangd-args '( "--background-index"
+                                           "--clang-tidy"
+                                           "--cross-file-rename"
+                                           "--log=error"
+                                           "--pch-storage=memory"
+                                           "--pretty"
+                                           "-j=4"                 ) )
+  (setq-default lsp-keymap-prefix          "C-c l"                  )
   :hook
-  ( (c++-mode           . lsp )
-    (c-mode             . lsp )
-    (clojure-mode       . lsp )
-    (clojurec-mode      . lsp )
-    (clojurescript-mode . lsp )
-    (python-mode        . lsp ) )
-  :bind ( :map lsp-mode-map
-               ("M-<return>" . lsp-rename) ) )
-
-(use-package lsp-ivy
-  :defer t
-  :after (ivy lsp)
-  :requires (ivy lsp) )
+  ( (bibtex-mode        . lsp                              )
+    (c++-mode           . lsp                              )
+    (c-mode             . lsp                              )
+    (clojure-mode       . lsp                              )
+    (clojurec-mode      . lsp                              )
+    (clojurescript-mode . lsp                              )
+    (latex-mode         . lsp                              )
+    (lsp-mode           . lsp-enable-which-key-integration )
+    (rustic-mode        . lsp                              )
+    (tex-mode           . lsp                              )
+    (tuareg-mode        . lsp                              ) )
+  :if
+  (or (executable-find "clangd"      )
+      (executable-find "clojure-lsp" )
+      (executable-find "ocamllsp"    )
+      (executable-find "rls"         )
+      (executable-find "texlab"      ) ) )
 
 (use-package magit
-  :defer t
-  :if (executable-find "git")
-  :commands magit-status
-  :bind ("C-x g" . magit-status) )
+  :bind ("C-x g" . magit-status)
+  :if (executable-find "git") )
+
+(use-package markdown-mode
+  :config
+  (setq-default markdown-enable-math                  t )
+  (setq-default markdown-fontify-code-blocks-natively t )
+  :if (executable-find "markdown") )
 
 (use-package modern-cpp-font-lock
-  :defer t
-  :config
-  (modern-c++-font-lock-global-mode) )
+  :config (modern-c++-font-lock-global-mode) )
+
+(use-package ocamlformat
+  :custom (ocamlformat-enable 'enable-outside-detected-project)
+  :hook (before-save . ocamlformat-before-save)
+  :if (executable-find "ocamlformat") )
+
+(use-package tuareg
+  :if (executable-find "ocaml") )
+
+(use-package utop
+  :config (setq-default utop-command "opam config exec -- dune utop . -- -emacs")
+  :hook (tuareg-mode . utop-minor-mode)
+  :init
+  (autoload 'utop            "utop" "Toplevel for OCaml"  t )
+  (autoload 'utop-minor-mode "utop" "Minor mode for utop" t )
+  :if (executable-find "utop") )
 
 (use-package org
-  :defer t
-  :ensure org-plus-contrib
   :config
-  (require 'ob        nil :noerror )
-  (require 'org-tempo nil :noerror )
+  (require 'ob         nil :noerror )
+  (require 'ob-clojure nil :noerror )
+  (require 'org-tempo  nil :noerror )
+  (require 'ox-latex   nil :noerror )
   (org-babel-do-load-languages 'org-babel-load-languages
                                '( ( awk        . t )
+                                  ( clojure    . t )
                                   ( emacs-lisp . t )
                                   ( gnuplot    . t )
                                   ( lisp       . t )
                                   ( makefile   . t )
-                                  ( org        . t )
+                                  ( octave     . t )
                                   ( perl       . t )
                                   ( python     . t )
                                   ( scheme     . t )
                                   ( sed        . t )
                                   ( shell      . t ) ) )
+  (setq-default org-babel-clojure-backend                   'cider            )
   (setq-default org-checkbox-hierarchical-statistics         nil              )
   (setq-default org-confirm-babel-evaluate                   nil              )
   (setq-default org-fontify-done-headline                    t                )
@@ -751,85 +722,70 @@
   (setq-default org-src-tab-acts-natively                    t                )
   (setq-default org-src-window-setup                        'reorganize-frame )
   (setq-default org-startup-folded                           nil              )
-  (setq-default org-startup-indented                         t                ) )
+  (setq-default org-startup-indented                         t                )
+  :ensure org-plus-contrib)
 
 (use-package org-superstar
-  :defer t
   :after org
-  :commands org-superstar-mode
   :hook (org-mode . org-superstar-mode) )
 
 (use-package projectile
-  :defer t
-  :if (executable-find "git")
-  :after    ivy
-  :requires ivy
-  :commands projectile-command-map
-  :init (projectile-mode)
+  :after ivy
+  :bind
+  ( :map projectile-mode-map
+         ("C-c p" . projectile-command-map) )
   :config
   (setq-default projectile-completion-system 'ivy             )
   (setq-default projectile-indexing-method   'native          )
   (setq-default projectile-sort-order        'recently-active )
-  :bind ( :map projectile-mode-map
-               ("C-c p" . projectile-command-map) ) )
+  :if (executable-find "git")
+  :init (projectile-mode) )
 
 (use-package racket-mode
-  :defer t
+  :hook
+  ( (racket-mode      . racket-unicode-input-method-enable )
+    (racket-repl-mode . racket-unicode-input-method-enable ) )
   :if (executable-find "racket")
-  :init
-  (add-to-list 'auto-mode-alist  '("\\.rkt$" . racket-mode) )
-  :commands racket-unicode-input-method-enable
-  :hook ( (racket-mode      . racket-unicode-input-method-enable )
-          (racket-repl-mode . racket-unicode-input-method-enable ) ) )
+  :mode "\\.rkt\\'")
+
+(use-package rustic
+  :config
+  (setq-default lsp-rust-analyzer-server-display-inlay-hints t )
+  (setq-default rustic-format-on-save                        t )
+  :if (executable-find "rustup") )
 
 (use-package slime
-  :defer t
-  :if (executable-find "sbcl")
   :config
   (require 'slime-autoloads nil :noerror)
   (setq-default common-lisp-style-default "sbcl" )
   (setq-default inferior-lisp-program     "sbcl" )
-  (slime-setup
-   '(slime-asdf slime-fancy slime-tramp slime-indentation) ) )
+  (slime-setup '(slime-asdf slime-fancy slime-tramp slime-indentation) )
+  :if (executable-find "sbcl") )
 
 (use-package smartparens
-  :defer t
-  :commands smartparens-mode
   :hook (prog-mode . smartparens-mode) )
 
-(use-package spaceline
-  :defer t
-  :init
-  (spaceline-spacemacs-theme)
-  (setq-default spaceline-window-numbers-unicode    t )
-  (setq-default spaceline-workspace-numbers-unicode t ) )
-
 (use-package swiper
-  :defer t
-  :commands swiper
-  :init (setq-default swiper-action-recenter t)
-  :bind ("C-s" . swiper) )
+  :bind ("C-s" . swiper)
+  :init (setq-default swiper-action-recenter t) )
+
+(use-package vterm
+  :if (not (string-equal system-type "windows-nt") )
+  :init (setq-default vterm-always-compile-module t) )
+
+(use-package web-mode)
 
 (use-package which-key
-  :defer t
   :init
-  (which-key-mode                           )
-  (which-key-setup-minibuffer               )
-  (which-key-setup-side-window-right-bottom )
-  (setq-default which-key-idle-delay             0.3 )
-  (setq-default which-key-side-window-max-height 0.3 )
-  (setq-default which-key-side-window-max-width  0.3 ) )
+  (which-key-mode                     )
+  (which-key-setup-minibuffer         )
+  (which-key-setup-side-window-bottom ) )
 
 (use-package yasnippet
-  :defer t
-  :init (yas-global-mode)
-  :requires yasnippet-snippets)
+  :init (yas-global-mode) )
 
 (use-package yasnippet-snippets
-  :defer t
   :after yasnippet)
-
-(message (emacs-init-time))
 
 (provide '.emacs)
 ;;; .emacs ends here

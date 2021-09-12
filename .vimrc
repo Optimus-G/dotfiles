@@ -2,44 +2,11 @@ set nocompatible
 scriptencoding utf-8
 let g:mapleader = " "
 language messages POSIX
-runtime macros/matchit.vim
-
 filetype               on
 filetype plugin        on
 filetype plugin indent on
 syntax                 on
-
-call plug#begin("$HOME/.vim/plugged")
-Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-syntastic/syntastic'
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clangd-completer' }
-call plug#end()
-
-colorscheme ron
-highlight Normal ctermbg=NONE
-
-if !empty(glob("$HOME/.vim/plugged"))
-  nnoremap <leader>fi :YcmCompleter FixIt<CR>
-  nnoremap <leader>gt :YcmCompleter GoTo<CR>
-  nnoremap <leader>rr :YcmCompleter RefactorRename<Space>
-  let g:airline_theme                                 = "base16"
-  let g:syntastic_aggregate_errors                    = 1
-  let g:ycm_add_preview_to_completeopt                = 1
-  let g:ycm_autoclose_preview_window_after_completion = 1
-  let g:ycm_clangd_args                               = ["-log=verbose", "-pretty"]
-  let g:ycm_clangd_uses_ycmd_caching                  = 0
-  let g:ycm_collect_identifiers_from_tags_files       = 1
-  let g:ycm_max_num_candidates                        = 10
-  let g:ycm_min_num_of_chars_for_completion           = 5
-endif
+runtime macros/matchit.vim
 
 set autochdir
 set autoindent
@@ -65,7 +32,7 @@ set ignorecase
 set incsearch
 set infercase
 set langmenu=en
-set laststatus=2
+set laststatus=0
 set lazyredraw
 set mouse=a
 set nofoldenable

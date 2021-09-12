@@ -6,10 +6,31 @@
 #+TITLE: Software list
 
 * List of GNU/Linux software
+** AUR helper
+*** [[https://rustup.rs/][An installer for the Rust]]
+#+begin_src sh
+#!/bin/bash
+sudo pacman -S rustup
+rustup default stable
+#+end_src
+*** Component for the Rust
+#+begin_src sh
+rustup component add rls
+rustup component add rust-analysis
+rustup component add rust-src
+cargo install cargo-edit
+#+end_src
+*** [[https://github.com/Morganamilo/paru][Paru]]
+#+begin_src sh
+git clone https://aur.archlinux.org/paru.git
+cd paru || return
+makepkg -si
+cd .. && rm -rf paru/
+paru -c && paru -Sc
+#+end_src
 ** System
 *** ack
 #+begin_src sh
-#!/bin/bash
 sudo pacman -S ack
 #+end_src
 *** Archiving and compression
@@ -46,9 +67,9 @@ sudo pacman -S bat
 #+begin_src sh
 sudo pacman -S bleachbit
 #+end_src
-*** [[https://github.com/aristocratos/bpytop][BPYTOP]]
+*** [[https://the.exa.website/][exa]]
 #+begin_src sh
-sudo pacman -S bpytop
+sudo pacman -S exa
 #+end_src
 *** [[https://github.com/sharkdp/fd][fd]]
 #+begin_src sh
@@ -58,10 +79,6 @@ sudo pacman -S fd
 #+begin_src sh
 sudo pacman -S fdupes
 #+end_src
-*** [[https://www.gnu.org/software/findutils/][Findutils]]
-#+begin_src sh
-sudo pacman -S findutils
-#+end_src
 *** [[https://github.com/junegunn/fzf][fzf]]
 #+begin_src sh
 sudo pacman -S fzf
@@ -69,19 +86,6 @@ sudo pacman -S fzf
 *** [[https://www.gnu.org/software/gawk/][Gawk]]
 #+begin_src sh
 sudo pacman -S gawk
-#+end_src
-*** [[https://github.com/nicolargo/glances][Glances]]
-#+begin_src sh
-sudo pacman -S glances
-#+end_src
-*** [[https://www.gnu.org/software/coreutils/][GNU core utilities]]
-#+begin_src sh
-sudo pacman -S coreutils
-sudo pacman -S moreutils
-#+end_src
-*** [[https://www.gnu.org/software/diffutils][GNU Diffutils]]
-#+begin_src sh
-sudo pacman -S diffutils
 #+end_src
 *** [[https://www.gnu.org/software/grep/][GNU Grep]]
 #+begin_src sh
@@ -104,10 +108,9 @@ sudo pacman -S lsof
 #+begin_src sh
 sudo pacman -S less
 #+end_src
-*** [[https://www.nongnu.org/man-db/][man-db]]
+*** [[https://github.com/neovim/libvterm][libvterm]]
 #+begin_src sh
-sudo pacman -S man-db
-sudo pacman -S man-pages
+sudo pacman -S libvterm
 #+end_src
 *** [[https://midnight-commander.org/][Midnight Commander]]
 #+begin_src sh
@@ -124,7 +127,6 @@ sudo pacman -S neofetch
 sudo pacman -S jdk-openjdk
 sudo pacman -S jre-openjdk
 sudo pacman -S jre-openjdk-headless
-sudo pacman -S openjdk-doc
 sudo pacman -S openjdk-src
 #+end_src
 *** [[https://www.qemu.org/][QEMU]]
@@ -132,10 +134,8 @@ sudo pacman -S openjdk-src
 sudo pacman -S bridge-utils
 sudo pacman -S dmidecode
 sudo pacman -S dnsmasq
-sudo pacman -S ebtables
 sudo pacman -S edk2-ovmf
 sudo pacman -S gettext
-sudo pacman -S iptables
 sudo pacman -S libvirt
 sudo pacman -S libvirt-storage-gluster
 sudo pacman -S libvirt-storage-iscsi-direct
@@ -250,14 +250,13 @@ sudo pacman -S crypto++
 #+begin_src sh
 sudo pacman -S ctags
 #+end_src
+*** [[https://github.com/distcc/distcc][distcc]]
+#+begin_src sh
+sudo pacman -S distcc
+#+end_src
 *** [[https://www.doxygen.nl/index.html][Doxygen]]
 #+begin_src sh
 sudo pacman -S doxygen
-sudo pacman -S doxygen-docs
-#+end_src
-*** [[https://sourceware.org/elfutils/][ELFUTILS]]
-#+begin_src sh
-sudo pacman -S elfutils
 #+end_src
 *** [[http://www.fftw.org/][FFTW]]
 #+begin_src sh
@@ -281,10 +280,6 @@ sudo pacman -S gcc-fortran
 #+begin_src sh
 sudo pacman -S gdb
 #+end_src
-**** [[https://www.gnu.org/software/binutils/][GNU Binutils]]
-#+begin_src sh
-sudo pacman -S binutils
-#+end_src
 **** [[https://www.gnu.org/software/make][GNU Make]]
 #+begin_src sh
 sudo pacman -S make
@@ -301,12 +296,16 @@ sudo pacman -S poke
 #+begin_src sh
 sudo pacman -S time
 #+end_src
-*** [[https://github.com/google/googletest][GoogleTest]]
+*** Google
+**** [[https://github.com/google/benchmark][Benchmark]]
 #+begin_src sh
-sudo pacman -S gmock
+sudo pacman -S benchmark
+#+end_src
+**** [[https://github.com/google/googletest][GoogleTest]]
+#+begin_src sh
 sudo pacman -S gtest
 #+end_src
-*** [[https://github.com/gperftools/gperftools][gperftools]]
+**** [[https://github.com/gperftools/gperftools][gperftools]]
 #+begin_src sh
 sudo pacman -S gperftools
 #+end_src
@@ -318,6 +317,7 @@ sudo pacman -S graphviz
 #+begin_src sh
 sudo pacman -S djvulibre
 sudo pacman -S gd
+sudo pacman -S jasper
 sudo pacman -S libheif
 sudo pacman -S libjpeg-turbo
 sudo pacman -S libpng
@@ -337,14 +337,9 @@ sudo pacman -S openjpeg2
 #+begin_src sh
 sudo pacman -S jemalloc
 #+end_src
-*** [[https://github.com/nlohmann/json][JSON]]
-#+begin_src sh
-sudo pacman -S nlohmann-json
-#+end_src
 *** [[https://github.com/open-source-parsers/jsoncpp][JsonCpp]]
 #+begin_src sh
 sudo pacman -S jsoncpp
-sudo pacman -S jsoncpp-doc
 #+end_src
 *** [[http://pqxx.org/development/libpqxx/][libpqxx]]
 #+begin_src sh
@@ -384,7 +379,14 @@ sudo pacman -S llvm
 **** [[https://clang.llvm.org/][Clang]]
 #+begin_src sh
 sudo pacman -S clang
-paru        -S bear
+#+end_src
+**** [[https://libcxx.llvm.org/][libc++]]
+#+begin_src sh
+sudo pacman -S libc++
+#+end_src
+**** [[https://lld.llvm.org/][LLD]]
+#+begin_src sh
+sudo pacman -S lld
 #+end_src
 **** [[https://lldb.llvm.org/][LLDB]]
 #+begin_src sh
@@ -397,6 +399,10 @@ sudo pacman -S openmp
 **** [[https://polly.llvm.org/][Polly]]
 #+begin_src sh
 sudo pacman -S polly
+#+end_src
+*** [[https://mesonbuild.com/][Meson]]
+#+begin_src sh
+sudo pacman -S meson
 #+end_src
 *** Microcontrollers
 **** [[https://www.arm.com/][ARM64]]
@@ -469,11 +475,48 @@ sudo pacman -S ncurses
 #+begin_src sh
 sudo pacman -S ninja
 #+end_src
+*** [[https://github.com/nlohmann/json][nlohmann/json]]
+#+begin_src sh
+sudo pacman -S nlohmann-json
+#+end_src
+*** [[https://ocaml.org/][OCaml]]
+#+begin_src sh
+sudo pacman -S ocaml
+#+end_src
+**** [[https://opam.ocaml.org/][opam]]
+#+begin_src sh
+sudo pacman -S opam
+opam init                      -y
+opam install base              -y
+opam install batteries         -y
+opam install containers        -y
+opam install containers-data   -y
+opam install containers-thread -y
+opam install core              -y
+opam install dune              -y
+opam install lsp               -y
+opam install ocaml-lsp-server  -y
+opam install ocamlformat       -y
+opam install ounit2            -y
+opam install tuareg            -y
+opam install utop              -y
+{
+  echo "Sys.interactive := false;;"
+  echo "#use \"topfind\";;"
+  echo "#thread;;"
+  echo "#require \"core.top\";;"
+  echo "#require \"core.syntax\";;"
+} > "$HOME"/.ocamlinit
+eval "$(opam env)"
+#+end_src
+*** [[https://github.com/oneapi-src/oneTBB][oneTBB]]
+#+begin_src sh
+sudo pacman -S tbb
+#+end_src
 *** [[https://opencv.org/][OpenCV]]
 #+begin_src sh
 sudo pacman -S opencv
 sudo pacman -S opencv-samples
-sudo pacman -S tbb
 #+end_src
 *** OpenGL
 #+begin_src sh
@@ -481,6 +524,7 @@ sudo pacman -S freeglut
 sudo pacman -S glew
 sudo pacman -S glfw-x11
 sudo pacman -S glm
+sudo pacman -S glslang
 sudo pacman -S glu
 sudo pacman -S libx11
 sudo pacman -S libxext
@@ -506,23 +550,12 @@ sudo pacman -S poco
 *** [[https://www.python.org/][Python]]
 #+begin_src sh
 sudo pacman -S python
-sudo pacman -S python-docs
 sudo pacman -S python-virtualenv
 #+end_src
 *** [[https://www.qt.io/product/development-tools][Qt Creator]]
 #+begin_src sh
 sudo pacman -S qbs
 sudo pacman -S qtcreator
-#+end_src
-*** [[https://radare.org][radare2]]
-#+begin_src sh
-sudo pacman -S r2cutter
-sudo pacman -S r2ghidra
-sudo pacman -S radare2
-#+end_src
-*** [[https://rr-project.org/][rr]]
-#+begin_src sh
-paru -S rr
 #+end_src
 *** [[https://www.libsdl.org/][SDL2]]
 #+begin_src sh
@@ -567,7 +600,6 @@ sudo pacman -S vc
 #+begin_src sh
 sudo pacman -S expat
 sudo pacman -S libxml++
-sudo pacman -S libxml++-docs
 sudo pacman -S libxml2
 sudo pacman -S pugixml
 sudo pacman -S xerces-c
@@ -575,10 +607,6 @@ sudo pacman -S xerces-c
 *** [[https://github.com/Z3Prover/z3][Z3]]
 #+begin_src sh
 sudo pacman -S z3
-#+end_src
-*** [[https://zealdocs.org/][Zeal]]
-#+begin_src sh
-paru -S zeal
 #+end_src
 ** Science
 *** [[https://heasarc.gsfc.nasa.gov/fitsio/][CFITSIO]]
@@ -593,12 +621,13 @@ sudo pacman -S eigen
 *** [[https://www.gap-system.org/][GAP]]
 #+begin_src sh
 sudo pacman -S gap
-sudo pacman -S gap-doc
 sudo pacman -S gap-packages
 #+end_src
 *** [[https://gmplib.org/][GMP]]
 #+begin_src sh
 sudo pacman -S gmp
+sudo pacman -S mpfi
+sudo pacman -S mpfr
 #+end_src
 *** [[https://www.gnu.org/software/bc/][GNU bc]]
 #+begin_src sh
@@ -606,8 +635,9 @@ sudo pacman -S bc
 #+end_src
 *** [[https://www.gnu.org/software/octave/index][GNU Octave]]
 #+begin_src sh
-mkdir -p "$HOME"/.octave
 sudo pacman -S octave
+# Add configuration file
+mkdir -p "$HOME"/.octave
 {
   echo "clc;"
   echo "clear all;"
@@ -615,11 +645,16 @@ sudo pacman -S octave
   echo "format short;"
   echo "more off;"
   echo "pkg prefix ~/.octave;"
-} >> "$HOME"/.octaverc
+} > "$HOME"/.octaverc
 #+end_src
 *** [[http://www.gnuplot.info][Gnuplot]]
 #+begin_src sh
 sudo pacman -S gnuplot
+#+end_src
+*** [[https://www.gnuradio.org/][GNU Radio]]
+#+begin_src sh
+sudo pacman -S gnuradio
+sudo pacman -S gnuradio-companion
 #+end_src
 *** [[https://www.gnu.org/software/gsl/gsl.html][GSL]]
 #+begin_src sh
@@ -630,7 +665,6 @@ sudo pacman -S gsl
 sudo pacman -S blas
 sudo pacman -S cblas
 sudo pacman -S lapack
-sudo pacman -S lapack-doc
 sudo pacman -S lapacke
 #+end_src
 *** [[http://maxima.sourceforge.net][Maxima]]
@@ -648,17 +682,9 @@ sudo pacman -S netcdf-fortran
 #+begin_src sh
 sudo pacman -S opencascade
 #+end_src
-*** [[https://www.mcs.anl.gov/petsc/][PETSc]]
-#+begin_src sh
-paru -S petsc
-#+end_src
 *** [[https://root.cern/][ROOT]]
 #+begin_src sh
 sudo pacman -S root
-#+end_src
-*** [[https://slepc.upv.es/][SLEPc]]
-#+begin_src sh
-paru -S slepc
 #+end_src
 *** [[https://computation.llnl.gov/casc/sundials/main.html][SUNDIALS]]
 #+begin_src sh
@@ -691,12 +717,10 @@ sudo pacman -S ghostscript
 #+begin_src sh
 sudo pacman -S gwenview
 sudo pacman -S kimageformats
-sudo pacman -S qt5-imageformats
 #+end_src
 *** [[https://www.imagemagick.org/][ImageMagick]]
 #+begin_src sh
 sudo pacman -S imagemagick
-sudo pacman -S imagemagick-doc
 #+end_src
 *** [[https://keepassxc.org/][KeePassXC]]
 #+begin_src sh
@@ -746,9 +770,14 @@ sudo pacman -S plasma-browser-integration
 #+begin_src sh
 sudo pacman -S okular
 #+end_src
+*** [[https://pandoc.org/][pandoc]]
+#+begin_src sh
+sudo pacman -S pandoc
+#+end_src
 *** [[https://www.tug.org/texlive/][TeX Live]]
 #+begin_src sh
 sudo pacman -S biber
+sudo pacman -S texlab
 sudo pacman -S texlive-bin
 sudo pacman -S texlive-core
 sudo pacman -S texlive-lang
@@ -778,8 +807,6 @@ sudo pacman -S darktable
 *** [[https://www.gimp.org/][GIMP]]
 #+begin_src sh
 sudo pacman -S gimp
-sudo pacman -S gimp-help-en
-sudo pacman -S gimp-help-ru
 #+end_src
 *** [[https://inkscape.org/][Inkscape]]
 #+begin_src sh
@@ -794,9 +821,25 @@ sudo pacman -S krita
 sudo pacman -S scribus
 #+end_src
 ** Multimedia
+*** Audio Plugins
+#+begin_src sh
+sudo pacman -S carla
+sudo pacman -S ladspa
+sudo pacman -S ladspa-plugins
+sudo pacman -S lv2
+sudo pacman -S lv2-plugins
+sudo pacman -S vst-plugins
+sudo pacman -S vst3-plugins
+sudo pacman -S vst3sdk
+#+end_src
 *** [[https://www.clementine-player.org/][Clementine]]
 #+begin_src sh
 sudo pacman -S clementine
+#+end_src
+*** [[https://handbrake.fr/][HandBrake]]
+#+begin_src sh
+sudo pacman -S handbrake
+sudo pacman -S handbrake-cli
 #+end_src
 *** [[https://userbase.kde.org/K3b][K3b]]
 #+begin_src sh
@@ -818,10 +861,6 @@ sudo pacman -S kdenlive
 #+begin_src sh
 sudo pacman -S kid3
 #+end_src
-*** [[https://kwave.sourceforge.net/][Kwave]]
-#+begin_src sh
-sudo pacman -S kwave
-#+end_src
 *** [[https://mpv.io/][mpv]]
 #+begin_src sh
 sudo pacman -S mpv
@@ -830,19 +869,37 @@ sudo pacman -S mpv
 #+begin_src sh
 sudo pacman -S obs-studio
 #+end_src
+*** [[https://www.ocenaudio.com/][ocenaudio]]
+#+begin_src sh
+paru -S ocenaudio-bin
+#+end_src
+*** [[https://qtractor.org/][Qtractor]]
+#+begin_src sh
+sudo pacman -S qtractor
+#+end_src
 *** soundKonverter
 #+begin_src sh
 sudo pacman -S soundkonverter
+#+end_src
+*** [[https://www.spotify.com/][Spotify]]
+#+begin_src sh
+paru -S spotify
 #+end_src
 *** [[https://www.videolan.org/vlc/][VLC media player]]
 #+begin_src sh
 sudo pacman -S vlc
 #+end_src
 ** Web
+*** [[https://httpd.apache.org/][Apache]]
+#+begin_src sh
+sudo pacman -S apache
+#+end_src
 *** [[https://firewalld.org/][Firewalld]]
 #+begin_src sh
 sudo pacman -S firewalld
 sudo pacman -S nftables
+# sudo systemctl start  firewalld.service
+# sudo systemctl enable firewalld.service
 #+end_src
 *** [[https://www.gnutls.org/][GnuTLS]]
 #+begin_src sh
@@ -877,6 +934,16 @@ sudo pacman -S libvncserver
 #+begin_src sh
 sudo pacman -S lynis
 #+end_src
+*** [[https://www.netdata.cloud/][Netdata]]
+#+begin_src sh
+sudo pacman -S netdata
+sudo systemctl start  netdata.service
+sudo systemctl enable netdata.service
+#+end_src
+*** [[https://nginx.org/][nginx]]
+#+begin_src sh
+sudo pacman -S nginx
+#+end_src
 *** [[https://nmap.org/][Nmap]]
 #+begin_src sh
 sudo pacman -S nmap
@@ -897,6 +964,10 @@ sudo pacman -S openssl
 #+begin_src sh
 sudo pacman -S openvpn
 #+end_src
+*** [[https://www.chiark.greenend.org.uk/~sgtatham/putty/][PuTTY]]
+#+begin_src sh
+sudo pacman -S putty
+#+end_src
 *** [[https://www.qbittorrent.org/][qBittorrent]]
 #+begin_src sh
 sudo pacman -S qbittorrent
@@ -905,6 +976,10 @@ sudo pacman -S qbittorrent-nox
 *** [[https://www.tcpdump.org/index.html][tcpdump]]
 #+begin_src sh
 sudo pacman -S tcpdump
+#+end_src
+*** [[https://desktop.telegram.org/][Telegram Desktop]]
+#+begin_src sh
+sudo pacman -S telegram-desktop
 #+end_src
 *** [[https://www.wireshark.org/][Wireshark]]
 #+begin_src sh
@@ -918,23 +993,46 @@ sudo pacman -S openttd
 sudo pacman -S openttd-opengfx
 sudo pacman -S openttd-opensfx
 #+end_src
+*** [[https://steampowered.com/][Steam]]
+#+begin_src sh
+{
+  echo ""
+  echo "[multilib]"
+  echo "Include = /etc/pacman.d/mirrorlist"
+} | sudo tee -a /etc/pacman.conf
+sudo pacman -Syu
+sudo pacman -S lib32-nvidia-utils
+sudo pacman -S steam
+#+end_src
 *** [[http://www.wesnoth.org/][The Battle for Wesnoth]]
 #+begin_src sh
 sudo pacman -S wesnoth
 #+end_src
+*** [[https://www.widelands.org/][Widelands]]
+#+begin_src sh
+sudo pacman -S widelands
+#+end_src
 
 * Clean
 #+begin_src sh
-sudo paccache -rk0
+sudo pacman   -Syu
 sudo pacman   -Rns "$(pacman -Qtdq)"
 sudo pacman   -Scc
-sudo pacman   -Syu
+sudo paccache -rk0
+
 if [ -f /usr/bin/paru ]; then
   paru -Sua
   paru -c && paru -Sc
 fi
-clear && echo "Update system db ..."
-sudo updatedb && clear
+
+if [ -f /usr/bin/opam ]; then
+  opam update  --all         --jobs=4
+  opam upgrade --all --fixup --jobs=4
+fi
+
+if [ -f /usr/bin/rustup ]; then
+  rustup update
+fi
 #+end_src
 
 * Enable normal user account to use KVM
@@ -942,9 +1040,13 @@ sudo updatedb && clear
 sudo systemctl start  libvirtd.service
 sudo systemctl enable libvirtd.service
 
-echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
-echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
-sudo usermod -aG libvirt "$(whoami)"
+{
+  echo ''
+  echo 'unix_sock_group = "libvirt"'
+  echo 'unix_sock_rw_perms = "0770"'
+} | sudo tee -a /etc/libvirt/libvirtd.conf
+
 newgrp libvirt
+sudo usermod -aG libvirt "$(whoami)"
 sudo systemctl restart libvirtd.service
 #+end_src

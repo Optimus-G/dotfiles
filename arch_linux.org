@@ -6,44 +6,52 @@
 #+TITLE: Arch Linux
 
 * Installation Guide
-** Verify the boot mode
+** Base system
+*** 01. Verify the boot mode
 #+begin_src sh :tangle no
 ls /sys/firmware/efi/efivars
 #+end_src
-** Connect to the internet
+*** 02. Connect to the internet
 #+begin_src sh :tangle no
+# Wi-Fi: authenticate to the wireless network
+#      $ iwctl
+# [iwd]# device list
+# [iwd]# station `device` scan
+# [iwd]# station `device` get-networks
+# [iwd]# station `device` connect SSID
 ping -c 5 archlinux.org
 #+end_src
-** Update the system clock
+*** 03. Update the system clock
 #+begin_src sh :tangle no
 timedatectl set-ntp true
 #+end_src
-** Delete disks
+*** 04. Delete disks
 #+begin_src sh :tangle no
 lsblk -f
 wipefs --all --force /dev/sd**
 #+end_src
-** Partition the disks (fdisk)
-| NUMBER | DISK | MOUNT POINT | PARTITION SIZE | FILE SYSTEM | COMMANDS             |
-|--------+------+-------------+----------------+-------------+----------------------|
-|      1 | NVME | /           | +150G          | ext4        | mkfs.ext4, mount     |
-|        |      | /boot       | +1G            | ext4        | mkfs.ext4, mount     |
-|        |      | /boot/efi   | +512M          | FAT32       | mkfs.fat -F32, mount |
-|--------+------+-------------+----------------+-------------+----------------------|
-|      2 | SSD  | /home       | +100G          | ext4        | mkfs.ext4, mount     |
-|        |      | /var        | +42G           | ext4        | mkfs.ext4, mount     |
-|        |      | SWAP        | +8G            | swap        | mkswap, swapon       |
-|--------+------+-------------+----------------+-------------+----------------------|
-|      3 | HDD  | /backup     | +100G          | ext4        | mkfs.ext4, mount     |
-|        |      | /data       | +...G          | ext4        | mkfs.ext4, mount     |
-** Install essential packages
+*** 05. Partition the disks (fdisk)
+| NUMBER | DISK       | MOUNT POINT | PARTITION SIZE | FILE SYSTEM | COMMANDS             |
+|--------+------------+-------------+----------------+-------------+----------------------|
+|      1 | NVME       | /           | +150G          | ext4        | mkfs.ext4, mount     |
+|        |            | /boot       | +1G            | ext4        | mkfs.ext4, mount     |
+|        |            | /boot/efi   | +512M          | FAT32       | mkfs.fat -F32, mount |
+|--------+------------+-------------+----------------+-------------+----------------------|
+|      2 | SSD        | /home       | +100G          | ext4        | mkfs.ext4, mount     |
+|        |            | /var        | +42G           | ext4        | mkfs.ext4, mount     |
+|        |            | SWAP        | +8G            | swap        | mkswap, swapon       |
+|--------+------------+-------------+----------------+-------------+----------------------|
+|      3 | HDD 500 GB | /backup     | ALL            | ext4        | mkfs.ext4, mount     |
+|--------+------------+-------------+----------------+-------------+----------------------|
+|      4 | HDD   2 TB | /data       | +1T            | ext4        | mkfs.ext4, mount     |
+|        |            | /game       | ...            | ext4        | mkfs.ext4, mount     |
+*** 06. Install essential packages
 #+begin_src sh :tangle no
 pacstrap /mnt amd-ucode
 pacstrap /mnt base
 pacstrap /mnt base-devel
 pacstrap /mnt linux-firmware
 pacstrap /mnt linux-lts
-pacstrap /mnt linux-lts-docs
 pacstrap /mnt linux-lts-headers
 pacstrap /mnt linux-tools
 pacstrap /mnt r8168-lts
@@ -52,17 +60,17 @@ pacstrap /mnt git
 pacstrap /mnt openresolv
 pacstrap /mnt subversion
 #+end_src
-** Fstab
+*** 07. Fstab
 #+begin_src sh :tangle no
 genfstab -U /mnt >> /mnt/etc/fstab
 #+end_src
-** Chroot
+*** 08. Chroot
 #+begin_src sh :tangle no
 arch-chroot /mnt
 git clone https://gitlab.com/karlkorp/dotfiles.git /tmp/dotfiles
 #+end_src
-** Time zone
-#+begin_src sh :tangle pre_installation.sh
+*** 09. Time zone
+#+begin_src sh :tangle base_system.sh
 #!/bin/bash
 echo "HOST NAME:"
 read -r hostname
@@ -77,48 +85,58 @@ fi
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 hwclock --systohc
 #+end_src
-** Localization
-#+begin_src sh :tangle pre_installation.sh
+*** 10. Localization
+#+begin_src sh :tangle base_system.sh
 {
-  echo "en_US ISO-8859-1"
+  echo ""
+  echo "en_GB.UTF-8 UTF-8"
   echo "en_US.UTF-8 UTF-8"
   echo "ru_RU.UTF-8 UTF-8"
 } >> /etc/locale.gen
+
+{
+  echo ""
+  echo "FONT=cyr-sun16"
+  echo "KEYMAP=us"
+} >> /etc/vconsole.conf
+
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+
 locale-gen
-echo "KEYMAP=us"         >> /etc/vconsole.conf
-echo "FONT=cyr-sun16"    >> /etc/vconsole.conf
-echo "LANG=ru_RU.UTF-8"  >> /etc/locale.conf
 #+end_src
-** Network configuration
-#+begin_src sh :tangle pre_installation.sh
-echo "$hostname"                                 >> /etc/hostname
+*** 11. Network configuration
+#+begin_src sh :tangle base_system.sh
+echo "$hostname" >> /etc/hostname
 {
   echo "127.0.0.1 localhost"
   echo "::1       localhost"
   echo "127.0.1.1 $hostname.localdomain $hostname"
 } >> /etc/hosts
 #+end_src
-** Initramfs
-#+begin_src sh :tangle pre_installation.sh
+*** 12. Initramfs
+#+begin_src sh :tangle base_system.sh
 mkinitcpio -P
 #+end_src
-** Root password
-#+begin_src sh :tangle pre_installation.sh
-echo "SET THE ROOT PASSWORD:"
+*** 13. Root password
+#+begin_src sh :tangle base_system.sh
+echo "SET THE ROOT PASSWORD"
 passwd
 #+end_src
-** New user
-#+begin_src sh :tangle pre_installation.sh
+*** 14. New user
+#+begin_src sh :tangle base_system.sh
 echo "NEW USER: $username"
 useradd -m -s /bin/bash "$username"
 usermod -aG audio,disk,kvm,lp,optical,scanner,storage,video,wheel "$username"
-echo "SET THE $username PASSWORD:"
+echo "SET THE $username PASSWORD"
 passwd "$username"
 pacman -S sudo
-echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+{
+  echo ""
+  echo "%wheel ALL=(ALL) ALL"
+} >> /etc/sudoers
 #+end_src
-** Core
-#+begin_src sh :tangle pre_installation.sh
+*** 15. Core
+#+begin_src sh :tangle base_system.sh
 pacman -S acpi
 pacman -S acpi_call-lts
 pacman -S acpid
@@ -131,23 +149,32 @@ pacman -S cloc
 pacman -S dbus
 pacman -S dhcpcd
 pacman -S dialog
+pacman -S discount
 pacman -S dosfstools
+pacman -S e2fsprogs
 pacman -S efibootmgr
-pacman -S exfat-utils
+pacman -S exfatprogs
+pacman -S ext4magic
 pacman -S f2fs-tools
+pacman -S fatresize
+pacman -S file
 pacman -S gpart
 pacman -S grub
 pacman -S hwinfo
-pacman -S inetutils
 pacman -S iproute2
+pacman -S iptables-nft
 pacman -S iw
 pacman -S iwd
+pacman -S jack2
+pacman -S jack2-dbus
 pacman -S jfsutils
 pacman -S libpwquality
+pacman -S lnav
 pacman -S lsb-release
 pacman -S mkinitcpio
 pacman -S mtools
 pacman -S nano
+pacman -S nano-syntax-highlighting
 pacman -S ncdu
 pacman -S netctl
 pacman -S network-manager-sstp
@@ -167,9 +194,9 @@ pacman -S parallel
 pacman -S parted
 pacman -S plocate
 pacman -S polkit
+pacman -S qjackctl
 pacman -S reiserfsprogs
 pacman -S rp-pppoe
-pacman -S sysfsutils
 pacman -S sysstat
 pacman -S systemd
 pacman -S udftools
@@ -177,34 +204,38 @@ pacman -S util-linux
 pacman -S which
 pacman -S wireless_tools
 pacman -S wpa_supplicant
+pacman -S xfsprogs
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo     "Base installation was finished!"
 read -rp "Press 'enter' to exit..."
-
 sleep 5 && exit
 #+end_src
-** End of installation
+*** 16. End of base installation
 #+begin_src sh :tangle no
 umount -l /mnt
 reboot
 #+end_src
-** Network manager
-#+begin_src sh :tangle no
-# if Wi-Fi: nmtui
-sudo systemctl start  NetworkManager
-sudo systemctl enable NetworkManager
 
+** User system
+*** Network manager
+#+begin_src sh :tangle no
 sudo systemctl start  dhcpcd.service
 sudo systemctl enable dhcpcd.service
 
+sudo systemctl start  iwd.service
+sudo systemctl enable iwd.service
+
+sudo systemctl start  NetworkManager
+sudo systemctl enable NetworkManager
+
 ping -c 5 archlinux.org
-git clone https://gitlab.com/karlkorp/dotfiles.git "$HOME"/dotfiles
+git clone https://gitlab.com/karlkorp/dotfiles.git /tmp/dotfiles
 #+end_src
-** [[https://github.com/Morganamilo/paru][Paru]]
-#+begin_src sh :tangle post_installation.sh
+*** Set system type
+#+begin_src sh :tangle user_system.sh
 #!/bin/bash
 echo "SYSTEM TYPE: main/test (default: test)"
 read -r system_type
@@ -212,260 +243,79 @@ if [ -z "$system_type" ] || [ "$system_type" != "main" ]; then
   system_type="test"
 fi
 echo "SYSTEM TYPE: $system_type"
-
-git clone https://aur.archlinux.org/paru.git
-cd paru || return
-makepkg -si
-cd .. && rm -rf paru/
-paru -c && paru -Sc
 #+end_src
-** Fonts
-#+begin_src sh :tangle post_installation.sh
+*** System utilities
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S binutils
+sudo pacman -S coreutils
+sudo pacman -S dateutils
+sudo pacman -S diffutils
+sudo pacman -S elfutils
+sudo pacman -S findutils
+sudo pacman -S inetutils
+sudo pacman -S iputils
+sudo pacman -S moreutils
+sudo pacman -S plotutils
+sudo pacman -S psutils
+sudo pacman -S sysfsutils
+sudo pacman -S usbutils
+#+end_src
+*** [[https://flatpak.org/][Flatpak]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S flatpak
+#+end_src
+*** Fonts
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S adobe-source-code-pro-fonts
-sudo pacman -S adobe-source-sans-pro-fonts
-sudo pacman -S adobe-source-serif-pro-fonts
+sudo pacman -S adobe-source-sans-fonts
+sudo pacman -S adobe-source-serif-fonts
 sudo pacman -S cantarell-fonts
 sudo pacman -S fontconfig
 sudo pacman -S freetype2
 sudo pacman -S gnu-free-fonts
+sudo pacman -S libertinus-font
 sudo pacman -S noto-fonts
 sudo pacman -S noto-fonts-cjk
 sudo pacman -S noto-fonts-emoji
 sudo pacman -S noto-fonts-extra
+sudo pacman -S otf-cascadia-code
+sudo pacman -S otf-fantasque-sans-mono
+sudo pacman -S otf-font-awesome
 sudo pacman -S otf-hermit
 sudo pacman -S pango
 sudo pacman -S terminus-font
+sudo pacman -S ttc-iosevka
 sudo pacman -S ttf-anonymous-pro
 sudo pacman -S ttf-carlito
 sudo pacman -S ttf-croscore
 sudo pacman -S ttf-dejavu
 sudo pacman -S ttf-droid
-sudo pacman -S ttf-fantasque-sans-mono
 sudo pacman -S ttf-fira-code
-sudo pacman -S ttf-font-awesome
 sudo pacman -S ttf-jetbrains-mono
 sudo pacman -S ttf-liberation
-sudo pacman -S ttf-linux-libertine
+sudo pacman -S ttf-monoid
 sudo pacman -S ttf-nerd-fonts-symbols
 sudo pacman -S ttf-opensans
 sudo pacman -S ttf-roboto
 sudo pacman -S ttf-roboto-mono
 #+end_src
-** Drivers
-*** [[http://www.bluez.org/][BlueZ]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S bluez
-sudo pacman -S bluez-cups
-sudo pacman -S bluez-utils
+*** Drivers
+**** [[https://alsa-project.org/wiki/Main_Page][ALSA]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S alsa-firmware
+sudo pacman -S alsa-lib
+sudo pacman -S alsa-plugins
+sudo pacman -S alsa-tools
+sudo pacman -S alsa-utils
 #+end_src
-*** [[https://www.cups.org/][CUPS]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S cups
-sudo pacman -S cups-pdf
-sudo pacman -S cups-pk-helper
-sudo pacman -S foomatic-db-gutenprint-ppds
-sudo pacman -S gutenprint
-sudo pacman -S pappl
-sudo pacman -S print-manager
-sudo pacman -S skanlite
-sudo pacman -S system-config-printer
-
-sudo systemctl start  org.cups.cupsd.service
-sudo systemctl enable org.cups.cupsd.service
-#+end_src
-*** Graphics driver [NVIDIA]
-#+begin_src sh :tangle post_installation.sh
-if [ "$system_type" = "test" ]; then
-  sudo pacman -S xf86-video-fbdev # for QEMU/KVM
-else
-  sudo pacman -S nvidia-lts
-  sudo pacman -S nvidia-settings
-  sudo pacman -S nvidia-utils
-  sudo pacman -S opencl-nvidia
-fi
-#+end_src
-*** [[https://developer.nvidia.com/cuda-zone][CUDA]]
-#+begin_src sh :tangle post_installation.sh
-if [ "$system_type" = "main" ]; then
-  sudo pacman -S cuda
-  sudo pacman -S cuda-tools
-fi
-#+end_src
-*** [[https://wiki.gnome.org/Projects/gvfs][GVfs]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S gvfs
-sudo pacman -S gvfs-afc
-sudo pacman -S gvfs-goa
-sudo pacman -S gvfs-google
-sudo pacman -S gvfs-gphoto2
-sudo pacman -S gvfs-mtp
-sudo pacman -S gvfs-nfs
-sudo pacman -S gvfs-smb
-#+end_src
-*** [[https://jackaudio.org/][JACK]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S jack
-#+end_src
-*** [[https://www.freedesktop.org/wiki/Software/libinput/][libinput]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S libinput
-sudo pacman -S xf86-input-libinput
-sudo pacman -S xf86-input-synaptics
-#+end_src
-*** [[https://www.khronos.org/opencl/][OpenCL]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S ocl-icd
-sudo pacman -S opencl-clhpp
-sudo pacman -S opencl-headers
-sudo pacman -S opencl-mesa
-sudo pacman -S pocl
-#+end_src
-*** [[https://www.khronos.org/vulkan/][Vulkan]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S vulkan-extra-layers
-sudo pacman -S vulkan-extra-tools
-sudo pacman -S vulkan-headers
-sudo pacman -S vulkan-icd-loader
-sudo pacman -S vulkan-mesa-layers
-sudo pacman -S vulkan-tools
-sudo pacman -S vulkan-validation-layers
-#+end_src
-** [[https://www.x.org/wiki/][X Window System]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S xorg
-sudo pacman -S xorg-apps
-sudo pacman -S xorg-docs
-sudo pacman -S xorg-font-util
-sudo pacman -S xorg-fonts-100dpi
-sudo pacman -S xorg-fonts-75dpi
-sudo pacman -S xorg-fonts-alias-100dpi
-sudo pacman -S xorg-fonts-alias-75dpi
-sudo pacman -S xorg-fonts-alias-cyrillic
-sudo pacman -S xorg-fonts-alias-misc
-sudo pacman -S xorg-fonts-cyrillic
-sudo pacman -S xorg-fonts-encodings
-sudo pacman -S xorg-fonts-misc
-sudo pacman -S xorg-fonts-type1
-sudo pacman -S xorg-server
-sudo pacman -S xorg-setxkbmap
-sudo pacman -S xorg-xclipboard
-sudo pacman -S xorg-xdm
-sudo pacman -S xorg-xinit
-sudo pacman -S xorg-xman
-sudo pacman -S xorg-xmodmap
-sudo pacman -S xorg-xrandr
-sudo pacman -S xsettingsd
-#+end_src
-** [[https://xcb.freedesktop.org/][XCB]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S xcb-imdkit
-sudo pacman -S xcb-proto
-sudo pacman -S xcb-util
-sudo pacman -S xcb-util-cursor
-sudo pacman -S xcb-util-errors
-sudo pacman -S xcb-util-image
-sudo pacman -S xcb-util-keysyms
-sudo pacman -S xcb-util-renderutil
-sudo pacman -S xcb-util-wm
-sudo pacman -S xcb-util-xrm
-#+end_src
-** [[https://kde.org/][KDE]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S cronie
-sudo pacman -S packagekit-qt5
-sudo pacman -S phonon-qt5-gstreamer
-
-for i in {1..5}
-do
-  echo "=============================="
-  echo "$i KDE Plasma installation ..."
-  echo "=============================="
-  sudo pacman -S plasma-meta
-  sudo pacman -S plasma-integration
-  sudo pacman -S kde-system-meta
-done
-
-sudo pacman -S dolphin
-sudo pacman -S dolphin-plugins
-sudo pacman -S kate
-sudo pacman -S kcalc
-sudo pacman -S kcolorchooser
-sudo pacman -S kcron
-sudo pacman -S kdeconnect
-sudo pacman -S kfind
-sudo pacman -S konsole
-sudo pacman -S krunner
-sudo pacman -S spectacle
-
-sudo pacman -S sddm
-sudo pacman -S sddm-kcm
-sudo systemctl enable sddm.service
-#+end_src
-** xdg
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S xdg-desktop-portal
-sudo pacman -S xdg-desktop-portal-kde
-sudo pacman -S xdg-user-dirs
-sudo pacman -S xdg-utils
-xdg-user-dirs-update
-#+end_src
-** Themes
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S archlinux-wallpaper
-sudo pacman -S breeze
-sudo pacman -S breeze-grub
-sudo pacman -S breeze-gtk
-sudo pacman -S breeze-icons
-sudo pacman -S kvantum-qt5
-sudo pacman -S kvantum-theme-materia
-sudo pacman -S materia-gtk-theme
-sudo pacman -S materia-kde
-sudo pacman -S oxygen
-sudo pacman -S oxygen-icons
-sudo pacman -S oxygen-icons-svg
-sudo pacman -S papirus-icon-theme
-#+end_src
-** [[https://github.com/tmux/tmux/wiki][tmux]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S tmux
-#+end_src
-** [[https://www.gnu.org/software/ed/ed.html][GNU ed]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S ed
-#+end_src
-** [[https://www.gnu.org/software/emacs/][GNU Emacs]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S ecb
-sudo pacman -S emacs
-sudo pacman -S harfbuzz
-#+end_src
-** [[https://www.vim.org/][Vim]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S vi
-sudo pacman -S vim
-sudo pacman -S vim-spell-en
-sudo pacman -S vim-spell-ru
-#+end_src
-** [[https://www.qt.io/][Qt]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S qt5-base
-sudo pacman -S qt5-doc
-sudo pacman -S qt5-examples
-sudo pacman -S qt5-tools
-sudo pacman -S qt6-base
-sudo pacman -S qt6-doc
-sudo pacman -S qt6-examples
-sudo pacman -S qt6-tools
-#+end_src
-** Audio and video codecs
-#+begin_src sh :tangle post_installation.sh
+**** Audio and video codecs
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S a52dec
 sudo pacman -S celt
 sudo pacman -S faac
 sudo pacman -S faad2
 sudo pacman -S ffmpeg
 sudo pacman -S flac
-sudo pacman -S jasper
 sudo pacman -S lame
 sudo pacman -S libao
 sudo pacman -S libdca
@@ -490,28 +340,58 @@ sudo pacman -S wavpack
 sudo pacman -S x264
 sudo pacman -S xvidcore
 #+end_src
-** [[https://alsa-project.org/wiki/Main_Page][ALSA]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S alsa-firmware
-sudo pacman -S alsa-lib
-sudo pacman -S alsa-plugins
-sudo pacman -S alsa-tools
-sudo pacman -S alsa-utils
+**** [[http://www.bluez.org/][BlueZ]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S bluez
+sudo pacman -S bluez-cups
+sudo pacman -S bluez-utils
+
+sudo systemctl start  bluetooth.service
+sudo systemctl enable bluetooth.service
 #+end_src
-** [[https://www.freedesktop.org/wiki/Software/PulseAudio/][PulseAudio]]
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S libpulse
-sudo pacman -S pulseaudio
-sudo pacman -S pulseaudio-alsa
-sudo pacman -S pulseaudio-bluetooth
-sudo pacman -S pulseaudio-equalizer
-sudo pacman -S pulseaudio-jack
-sudo pacman -S pulseaudio-lirc
-sudo pacman -S pulseaudio-rtp
-sudo pacman -S pulseaudio-zeroconf
+**** [[https://www.cups.org/][CUPS]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S cups
+sudo pacman -S cups-pdf
+sudo pacman -S cups-pk-helper
+sudo pacman -S gutenprint
+sudo pacman -S pappl
+sudo pacman -S print-manager
+sudo pacman -S skanlite
+sudo pacman -S system-config-printer
+
+sudo systemctl start  cups.service
+sudo systemctl enable cups.service
 #+end_src
-** [[https://gstreamer.freedesktop.org/][GStreamer]]
-#+begin_src sh :tangle post_installation.sh
+**** [[https://wiki.linuxfoundation.org/openprinting/database/foomatic][Foomatic]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S foomatic-db
+sudo pacman -S foomatic-db-engine
+sudo pacman -S foomatic-db-gutenprint-ppds
+sudo pacman -S foomatic-db-nonfree
+sudo pacman -S foomatic-db-nonfree-ppds
+sudo pacman -S foomatic-db-ppds
+#+end_src
+**** Graphics driver [NVIDIA]
+#+begin_src sh :tangle user_system.sh
+if [ "$system_type" = "test" ]; then
+  sudo pacman -S xf86-video-fbdev # for QEMU/KVM
+else
+  sudo pacman -S nvidia-lts
+  sudo pacman -S nvidia-settings
+  sudo pacman -S nvidia-utils
+  sudo pacman -S opencl-nvidia
+fi
+#+end_src
+**** [[https://developer.nvidia.com/cuda-zone][CUDA]]
+#+begin_src sh :tangle user_system.sh
+if [ "$system_type" = "main" ]; then
+  sudo pacman -S cuda
+  sudo pacman -S cuda-tools
+fi
+#+end_src
+**** [[https://gstreamer.freedesktop.org/][GStreamer]]
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S gst-editing-services
 sudo pacman -S gst-libav
 sudo pacman -S gst-plugin-gtk
@@ -529,29 +409,196 @@ sudo pacman -S gst-plugins-ugly
 sudo pacman -S gstreamer
 sudo pacman -S gstreamermm
 #+end_src
-** [[https://pipewire.org/][PipeWire]]
-#+begin_src sh :tangle post_installation.sh
+**** [[https://wiki.gnome.org/Projects/gvfs][GVfs]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S gvfs
+sudo pacman -S gvfs-afc
+sudo pacman -S gvfs-goa
+sudo pacman -S gvfs-google
+sudo pacman -S gvfs-gphoto2
+sudo pacman -S gvfs-mtp
+sudo pacman -S gvfs-nfs
+sudo pacman -S gvfs-smb
+#+end_src
+**** [[https://www.freedesktop.org/wiki/Software/libinput/][libinput]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S libinput
+sudo pacman -S xf86-input-libinput
+sudo pacman -S xf86-input-synaptics
+#+end_src
+**** [[https://www.khronos.org/opencl/][OpenCL]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S ocl-icd
+sudo pacman -S opencl-clhpp
+sudo pacman -S opencl-headers
+sudo pacman -S opencl-mesa
+sudo pacman -S pocl
+#+end_src
+**** [[https://pipewire.org/][PipeWire]]
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S pipewire
 sudo pacman -S pipewire-alsa
-sudo pacman -S pipewire-docs
 sudo pacman -S pipewire-jack
 sudo pacman -S pipewire-media-session
+sudo pacman -S pipewire-pulse
 #+end_src
-** [[https://curl.haxx.se][curl]]
-#+begin_src sh :tangle post_installation.sh
+**** [[https://www.khronos.org/vulkan/][Vulkan]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S vulkan-extra-layers
+sudo pacman -S vulkan-extra-tools
+sudo pacman -S vulkan-headers
+sudo pacman -S vulkan-icd-loader
+sudo pacman -S vulkan-mesa-layers
+sudo pacman -S vulkan-tools
+sudo pacman -S vulkan-validation-layers
+#+end_src
+*** [[https://www.x.org/wiki/][X Window System]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S xorg
+sudo pacman -S xorg-apps
+sudo pacman -S xorg-font-util
+sudo pacman -S xorg-fonts-100dpi
+sudo pacman -S xorg-fonts-75dpi
+sudo pacman -S xorg-fonts-cyrillic
+sudo pacman -S xorg-fonts-encodings
+sudo pacman -S xorg-fonts-misc
+sudo pacman -S xorg-fonts-type1
+sudo pacman -S xorg-server
+sudo pacman -S xorg-server-devel
+sudo pacman -S xorg-setxkbmap
+sudo pacman -S xorg-xclipboard
+sudo pacman -S xorg-xdm
+sudo pacman -S xorg-xinit
+sudo pacman -S xorg-xman
+sudo pacman -S xorg-xmodmap
+sudo pacman -S xorg-xrandr
+sudo pacman -S xorg-xwayland
+sudo pacman -S xsettingsd
+#+end_src
+*** [[https://xcb.freedesktop.org/][XCB]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S xcb-imdkit
+sudo pacman -S xcb-proto
+sudo pacman -S xcb-util
+sudo pacman -S xcb-util-cursor
+sudo pacman -S xcb-util-errors
+sudo pacman -S xcb-util-image
+sudo pacman -S xcb-util-keysyms
+sudo pacman -S xcb-util-renderutil
+sudo pacman -S xcb-util-wm
+sudo pacman -S xcb-util-xrm
+#+end_src
+*** [[https://wayland.freedesktop.org/][Wayland]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S qt5-wayland
+sudo pacman -S qt6-wayland
+sudo pacman -S wayland
+# sudo pacman -S plasma-wayland-session
+#+end_src
+*** [[https://kde.org/][KDE]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S cronie
+sudo pacman -S packagekit-qt5
+sudo pacman -S phonon-qt5-gstreamer
+
+for i in {1..5}
+do
+  echo "=============================="
+  echo "$i KDE Plasma installation ..."
+  echo "=============================="
+  sudo pacman -S plasma-meta
+  sudo pacman -S plasma-integration
+  sudo pacman -S kde-system-meta
+done
+
+sudo pacman -S dolphin
+sudo pacman -S dolphin-plugins
+sudo pacman -S elisa
+sudo pacman -S kate
+sudo pacman -S kcalc
+sudo pacman -S kcolorchooser
+sudo pacman -S kcron
+sudo pacman -S kdeconnect
+sudo pacman -S kfind
+sudo pacman -S konsole
+sudo pacman -S krunner
+sudo pacman -S spectacle
+
+sudo pacman -S sddm
+sudo pacman -S sddm-kcm
+sudo systemctl enable sddm.service
+#+end_src
+*** xdg
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S xdg-desktop-portal
+sudo pacman -S xdg-desktop-portal-kde
+sudo pacman -S xdg-user-dirs
+sudo pacman -S xdg-utils
+xdg-user-dirs-update
+#+end_src
+*** Themes
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S archlinux-wallpaper
+sudo pacman -S breeze
+sudo pacman -S breeze-grub
+sudo pacman -S breeze-gtk
+sudo pacman -S breeze-icons
+#+end_src
+*** [[https://github.com/tmux/tmux/wiki][tmux]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S tmux
+#+end_src
+*** [[https://www.gnu.org/software/ed/ed.html][GNU ed]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S ed
+#+end_src
+*** [[https://www.gnu.org/software/emacs/][GNU Emacs]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S emacs
+#+end_src
+*** [[https://www.vim.org/][Vi/Vim]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S vi
+sudo pacman -S vim
+sudo pacman -S vim-spell-en
+sudo pacman -S vim-spell-ru
+#+end_src
+*** [[https://www.qt.io/][Qt]]
+**** Qt5
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S qt5-3d
+sudo pacman -S qt5-base
+sudo pacman -S qt5-imageformats
+sudo pacman -S qt5-tools
+#+end_src
+**** Qt6
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S qt6-3d
+sudo pacman -S qt6-base
+sudo pacman -S qt6-imageformats
+sudo pacman -S qt6-tools
+#+end_src
+*** [[https://curl.haxx.se][curl]]
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S curl
 #+end_src
-** [[https://www.gnu.org/software/wget/wget.html][GNU Wget]]
-#+begin_src sh :tangle post_installation.sh
+*** [[https://www.gnu.org/software/wget/wget.html][GNU Wget]]
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S wget
 #+end_src
-** Keyboard
-#+begin_src sh :tangle post_installation.sh
-sudo pacman -S xsel
+*** Keyboard
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S xclip
+sudo pacman -S xsel
 #+end_src
-** .Xresources
-#+begin_src sh :tangle post_installation.sh
+*** [[https://www.nongnu.org/man-db/][man-db]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S groff
+sudo pacman -S man-db
+sudo pacman -S man-pages
+#+end_src
+*** .Xresources
+#+begin_src sh :tangle user_system.sh
 {
   echo "Xft.antialias: true"
   echo "Xft.autohint:  false"
@@ -560,19 +607,18 @@ sudo pacman -S xclip
   echo "Xft.hintstyle: hintslight"
   echo "Xft.lcdfilter: lcddefault"
   echo "Xft.rgba:      rgb"
-} >> "$HOME"/.Xresources
+} > "$HOME"/.Xresources
 #+end_src
-** .xinitrc
-#+begin_src sh :tangle post_installation.sh
+*** .xinitrc
+#+begin_src sh :tangle user_system.sh
 {
   echo "xrdb -merge .Xresources"
   echo "export DESKTOP_SESSION=plasma"
   echo "exec startplasma-x11"
-} >> "$HOME"/.xinitrc
-
+} > "$HOME"/.xinitrc
 #+end_src
-** .inputrc
-#+begin_src sh :tangle post_installation.sh
+*** .inputrc
+#+begin_src sh :tangle user_system.sh
 {
   echo "\$include /etc/inputrc"
   echo "set bell-style                        none"
@@ -584,38 +630,52 @@ sudo pacman -S xclip
   echo "set completion-query-items              10"
   echo "set echo-control-characters            off"
   echo "set editing-mode                     emacs"
+  echo "set enable-keypad                       on"
+  echo "set expand-tilde                        on"
   echo "set horizontal-scroll-mode              on"
+  echo "set input-meta                          on"
   echo "set mark-directories                    on"
-  echo "set mark-modified-lines                 on"
+  echo "set mark-modified-lines                off"
   echo "set mark-symlinked-directories          on"
   echo "set match-hidden-files                  on"
+  echo "set output-meta                         on"
   echo "set show-all-if-ambiguous               on"
   echo "set show-all-if-unmodified              on"
   echo "set visible-stats                       on"
-} >> "$HOME"/.inputrc
+} > "$HOME"/.inputrc
 #+end_src
-** .profile
-#+begin_src sh :tangle post_installation.sh
+*** .profile
+#+begin_src sh :tangle user_system.sh
 {
   echo "if [ -z \"\${DISPLAY}\" ] && [ \"\${XDG_VTNR}\" -eq 1 ]"
   echo "then"
   echo "  exec startx"
   echo "fi"
-} >> "$HOME"/.profile
+} > "$HOME"/.profile
 #+end_src
-** [[https://www.clamav.net/][ClamAV]]
-#+begin_src sh :tangle post_installation.sh
+*** [[https://www.clamav.net/][ClamAV]]
+#+begin_src sh :tangle user_system.sh
 sudo pacman -S clamav
-sudo systemctl stop clamav-freshclam.service && sudo freshclam
-
-sudo systemctl start  clamav-freshclam.service
-sudo systemctl enable clamav-freshclam.service
+sudo systemctl stop clamav-freshclam.service
+sudo freshclam
 
 sudo systemctl start  clamav-daemon.service
 sudo systemctl enable clamav-daemon.service
+
+sudo systemctl start  clamav-freshclam.service
+sudo systemctl enable clamav-freshclam.service
 #+end_src
-** Configure
-#+begin_src sh :tangle post_installation.sh
+*** [[https://cockpit-project.org/][Cockpit]]
+#+begin_src sh :tangle user_system.sh
+sudo pacman -S cockpit
+sudo pacman -S cockpit-machines
+sudo pacman -S cockpit-pcp
+
+sudo systemctl start  cockpit.socket
+sudo systemctl enable cockpit.socket
+#+end_src
+*** Configure
+#+begin_src sh :tangle user_system.sh
 git config --global init.defaultBranch "main"
 git config --global user.email         "lispgod@gmail.com"
 git config --global user.name          "karlkorp"
@@ -623,18 +683,40 @@ git config --global user.name          "karlkorp"
 mkdir -p "$HOME"/.fonts
 mkdir -p "$HOME"/.icons
 mkdir -p "$HOME"/.themes
-mkdir -p "$HOME"/.tmp
 
-cp "$HOME"/dotfiles/.bashrc    "$HOME"
-cp "$HOME"/dotfiles/.emacs     "$HOME"
-cp "$HOME"/dotfiles/.emacs.org "$HOME"
-cp "$HOME"/dotfiles/.tmux.conf "$HOME"
-cp "$HOME"/dotfiles/.vimrc     "$HOME"
+sudo mkdir -p /opt/geant4
 
 sudo systemctl enable fstrim.timer
 
 sudo systemctl start  paccache.timer
 sudo systemctl enable paccache.timer
+
+sudo systemctl start  systemd-oomd.service
+sudo systemctl enable systemd-oomd.service
+
+sudo systemctl start  plocate-updatedb.timer
+sudo systemctl enable plocate-updatedb.timer
+
+mkdir -p "$HOME"/.config/nano
+cp /etc/nanorc "$HOME"/.config/nano/nanorc
+{
+  echo ""
+  echo "## User options ##"
+  echo "set autoindent"
+  echo "set constantshow"
+  echo "set cutfromcursor"
+  echo "set linenumbers"
+  echo "set smarthome"
+  echo "set tabsize 2"
+  echo "set tabstospaces"
+  echo "set unix"
+  echo "include \"/usr/share/nano/*.nanorc\""
+  echo "include \"/usr/share/nano-syntax-highlighting/*.nanorc\""
+} >> "$HOME"/.config/nano/nanorc
+
+if [ -d /game ]; then
+  sudo chown "$USER":"$USER" /game
+fi
 
 if [ -d /data ]; then
   sudo chown "$USER":"$USER" /data
@@ -642,17 +724,25 @@ if [ -d /data ]; then
   mkdir -p /data/projects
   mkdir -p /data/qemu
   mkdir -p /data/torrents
+
+  git clone https://gitlab.com/karlkorp/dotfiles.git /data/projects/dotfiles
+
+  ln -fsv /data/projects/dotfiles/.bashrc    "$HOME"/.bashrc
+  ln -fsv /data/projects/dotfiles/.emacs     "$HOME"/.emacs
+  ln -fsv /data/projects/dotfiles/.emacs.org "$HOME"/.emacs.org
+  ln -fsv /data/projects/dotfiles/.tmux.conf "$HOME"/.tmux.conf
+  ln -fsv /data/projects/dotfiles/.vimrc     "$HOME"/.vimrc
+else
+  cp /tmp/dotfiles/.bashrc    "$HOME"
+  cp /tmp/dotfiles/.emacs     "$HOME"
+  cp /tmp/dotfiles/.emacs.org "$HOME"
+  cp /tmp/dotfiles/.tmux.conf "$HOME"
+  cp /tmp/dotfiles/.vimrc     "$HOME"
 fi
 
 echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
 
-curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-git clone https://github.com/vinceliuice/Layan-kde.git "$HOME"/.tmp/Layan
-
 echo     "Configuration was done!"
 read -rp "Press 'enter' to reboot..."
-
 sleep 5 && reboot
 #+end_src
